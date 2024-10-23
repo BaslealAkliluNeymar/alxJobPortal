@@ -4,6 +4,7 @@ const users = require('./controllers/Users.js')
 const Login = require('./controllers/Login.js')
 const talentRoute = require('./controllers/Talent.js')
 const skillRoute = require('./controllers/Skill.js')
+const jobRouter = require('./controllers/jobs.js')
 const app = express()
 
 app.use(cors())
@@ -19,6 +20,7 @@ app.use('/login',Login)
 app.use('/signup',users)
 app.use('/talent',talentRoute)
 app.use('/skill',skillRoute)
+app.use('/jobs',jobRouter)
 
 
 module.exports = app 
