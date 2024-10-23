@@ -11,6 +11,7 @@ const Login = () => {
 
   const { user, login,logout } = useContext(AllContext)
 
+  
   const navigate = useNavigate()
   const handleChange = (e) =>{
     setCredential(() =>{
@@ -24,7 +25,6 @@ const Login = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault()
     const data = await LoginPost(credential)
-    console.log(data)
     login(data)
     navigate('/')
   }

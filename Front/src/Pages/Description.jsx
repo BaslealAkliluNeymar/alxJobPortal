@@ -29,9 +29,9 @@ const handleChange = async (e) =>{
 console.log(val)
   return (
     <div className='flex m-4'>
-      <div className="w-3/12 flex flex-wrap justify-center m-4 shadow-lg">
-        <div className='border-green-400 border-2 shadow-xl p-2 w-[90%] h-1/4 flex flex-col items-stretch justify-center'>
-          <select name="" id="" className='h-12 w-full focus:outline-green-400 p-2' onChange={handleChange}>
+      <div className="w-3/12 flex items-center flex-wrap justify-center m-4 shadow-lg">
+        <div className='flex flex-col justify-center items-center order-2 shadow-xl p-2  h-full w-full'>
+          <select name="" id="" className='h-12 w-full p-2' onChange={handleChange}>
             <option value="Front-End">Front-End</option>
             <option value="Back-End">Back-End</option>
             <option value="Data Science">Data Science</option>

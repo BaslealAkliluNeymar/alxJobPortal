@@ -31,7 +31,7 @@ const SignUp = () => {
       lastname:"",
       email:"",
       password:"",
-      role:""
+      role:"Employer"
     })
     const data = await signup(credential)
     console.log(data)
@@ -50,7 +50,7 @@ const SignUp = () => {
             <input placeholder='Last Name' type='text' name="lastname" value={credential.lastname} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
             <input placeholder='Email' type='email' name="email" value={credential.email} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
             <input placeholder='Password' type='password' name="password" value={credential.password} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
-            <select name="role" id="" className='h-12 w-40 focus:outline-green-400 p-2' onChange={handleChange}>
+            <select name="role" id="" className='h-12 w-40 focus:outline-green-400 p-2' onChange={handleChange} value="Employer">
               <option value="Employer">Employer</option>
               <option value="Professional">Professional</option>
             </select>

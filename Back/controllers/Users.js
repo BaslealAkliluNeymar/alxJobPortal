@@ -28,12 +28,11 @@ users.post('/', async(req,res) =>{
             ...req.body,
             password:hashPassword
         }
-        console.log(newObj)
         const created = await userModel.create(newObj);
     
         res.status(201).json({
             message: "User Credentials Successfully Saved!",
-            user: created
+            user: newObj
         });
     }catch (error){
          res.status(500).send('Error Found');

@@ -28,8 +28,10 @@ const Navbar = () => {
     }
   }
 
+
   const handleLogout = () =>{
-    localStorage.removeItem('token')
+    const removed = localStorage.removeItem('token')
+    console.log(removed)
     navigate('/')
     setLoggedin(false)
   }
@@ -59,10 +61,10 @@ const Navbar = () => {
                 </svg>
             </button>
             <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul className="font-medium flex flex-col p-6 pl-2 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 items-center justify-center">
                     <li>
                         <Link to="/talent">
-                            <p className='block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500' aria-current="page" >Hire Talent</p> 
+                            <p className='block py-2 px-3 text-white bg-green-700 rounded md:bg-transparent md:text-green-400 md:p-0 md:dark:text-green-500' aria-current="page" >Hire Talent</p> 
                         </Link>
                     </li>
                     <li>

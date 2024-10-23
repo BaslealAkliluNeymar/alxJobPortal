@@ -7,6 +7,7 @@ const BASE_URL_LOGIN = 'http://localhost:8000/login'
  
 export const LoginPost = async (credential) =>{
     const response = await axios.post(BASE_URL_LOGIN,credential)
+    console.log(response)
     return response.data
 }
 
