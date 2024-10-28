@@ -33,3 +33,5 @@ export const getSingle = async (id) =>{
     const response = await axios.get(newUrl,config)
     return response.data
 }
+
+

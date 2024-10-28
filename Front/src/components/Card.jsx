@@ -1,49 +1,59 @@
-import React from 'react'
-import SkillCard from './SkillCard'
-// import userImage from '../assets/user.jpg'
-import { Link } from 'react-router-dom'
-import { Send } from 'lucide-react'
-const Card = (props) => {
+import React from 'react';
+import SkillCard from './SkillCard';
+import { Link } from 'react-router-dom';
+import { Send } from 'lucide-react';
 
-  const {_id,name,position,experience, description,skills} = props.talent
+const Card = (props) => {
+  const { _id, name, position, experience, description, skills } = props.talent;
 
   return (
     <Link to={`/talent/${_id}`}>
-        <div className='flex flex-col space-y-2 w-[22rem] p-4 border-slate-300 border-2 relative rounded-lg shadow-lg m-2'>
-            <div className='flex gap-4 items-center'>
-                <img src="" alt="" className='w-16 h-16 rounded-full object-cover bg-slate-600'/>
-                <div className='bg-green-400 shadow-2xl w-4 h-4 rounded-full absolute left-16 top-16'></div>
-                <p className='text-xl font-bold'>{name}</p>
-                <Link to={`/chat/${_id}`}>
-                    {/* <div className='flex border-slate-900 border-2 gap-0 items-center'> */}
-                        <Send className='text-green-400 hover:underline-offset-1 hover:underline-green-400 ml-14'/>
-                        {/* <button className='text-green-400 hover:underline-offset-1 hover:underline-green-400'>Have a Chat</button> */}
-                    {/* </div> */}
-                </Link>
-            </div>
-            <h1 className='font-bold text-2xl'>{position}</h1>
-            <p className='text-green-400 text-xl font-medium'>{experience} Years experience</p>
-            <div>
-                <p>
-                    {description}
-                </p>
-            </div>
-            <hr />
-            <h2 className='font-bold text-2xl'>Skills</h2>
-            <div className='flex gap-2 flex-wrap'>
-                {
-                    skills.map((item,index) =>{
-                        return <SkillCard item={item} key={index}/>
-                    })
-                }
-            </div>
+      <div className="flex flex-col space-y-4 w-[22rem] p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative">
+        
+        {/* Profile Section */}
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <img
+              src="" 
+              alt="Profile"
+              className="w-16 h-16 rounded-full object-cover bg-slate-600 shadow-md"
+            />
+            <div className="bg-green-400 w-4 h-4 rounded-full absolute bottom-0 right-0 border-2 border-white"></div>
+          </div>
+          
+          <div className="flex-1">
+            <p className="text-xl font-semibold text-gray-800">{name}</p>
+            <h1 className="text-lg text-gray-500">{position}</h1>
+          </div>
 
-            <div>
-
-            </div>
+          {/* Chat Icon */}
+          <Link to={`/chat/${_id}`} className="text-green-400 hover:text-green-500">
+            <Send size={24} />
+          </Link>
         </div>
-    </Link>
-  )
-}
 
-export default Card
+        {/* Experience */}
+        <p className="text-green-500 font-medium text-lg">
+          {experience} Years of Experience
+        </p>
+
+        {/* Description */}
+        <div className="text-gray-600">
+          <p>{description}</p>
+        </div>
+
+        <hr className="border-t border-gray-300" />
+
+        {/* Skills Section */}
+        <h2 className="font-bold text-lg text-gray-800">Skills</h2>
+        <div className="flex gap-2 flex-wrap">
+          {skills.map((item, index) => (
+            <SkillCard item={item} key={index} />
+          ))}
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default Card;

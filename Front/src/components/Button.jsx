@@ -1,10 +1,12 @@
 import React from 'react'
 
 const Button = (props) => {
-  const color = props.name === 'Full-Time' ? 'text-secondary' : 'Marketing' ? 'text-yellow' : 'text-purple' 
+  let color = props.name === 'Full-Time' ? "#35fb37" :
+            props.name === 'Marketing' ? "#3d72d5" : "#202430"
   return (
     <div className='w-[90px] h-[34px] rounded-full font-semibold bg-buttonbg flex items-center justify-center' style={{
-        color:color
+        backgroundColor:color,
+        color:"#f6f1f5"
     }}>
         {props.name}
     </div>

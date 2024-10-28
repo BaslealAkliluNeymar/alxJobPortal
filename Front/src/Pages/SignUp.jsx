@@ -1,70 +1,108 @@
-import React,{ useState } from 'react'
-import { Link } from 'react-router-dom'
-import { signup } from '../services/login'
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { signup } from '../services/login';
 
 const SignUp = () => {
-  const [credential , setCredential] = useState({
-    firstname:"",
-    lastname:"",
-    email:"",
-    password:"",
-    role:""
-  })
+  const [credential, setCredential] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    role: 'Employer',
+  });
 
-  console.log(credential)
-  
-  const handleChange = (e) =>{
-    
-    setCredential(() =>{
-        return {
-            ...credential,
-            [e.target.name]: e.target.value
-        }
-    })
-  }
+  const handleChange = (e) => {
+    setCredential((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  const handleSubmit = async (e) =>{
-    e.preventDefault()
-    setCredential({
-      firstname:"",
-      lastname:"",
-      email:"",
-      password:"",
-      role:"Employer"
-    })
-    const data = await signup(credential)
-    console.log(data)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await signup(credential);
+      console.log(data);
+      setCredential({
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        role: 'Employer',
+      });
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
+  };
 
   return (
-    <section className='flex w-[80%] border-2 h-[640px]  mx-auto shadow-xl m-4'>
-        <div className='flex-1 bg-green-400 w-full h-full'></div>
-        <div className='flex-1 flex flex-col items-stretch space-y-10 justify-center h-full w-full'>
-            <div className='flex flex-col items-center'>
-                <h1 className='text-xl font-bold'>Welcome to </h1>
-                <span className='text-xl text-green-400 font-bold'>Your Future</span>
-            </div>
-          <form onSubmit={handleSubmit} className='flex flex-col space-y-2 items-center'>
-            <input placeholder='First Name' type='text' name="firstname" value={credential.firstname} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
-            <input placeholder='Last Name' type='text' name="lastname" value={credential.lastname} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
-            <input placeholder='Email' type='email' name="email" value={credential.email} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
-            <input placeholder='Password' type='password' name="password" value={credential.password} onChange={handleChange} className='w-[60%] border-slate-950 p-2 shadow-lg focus:outline-green-400 h-12'/>
-            <select name="role" id="" className='h-12 w-40 focus:outline-green-400 p-2' onChange={handleChange} value="Employer">
-              <option value="Employer">Employer</option>
-              <option value="Professional">Professional</option>
-            </select>
-            <button className='w-[40%] shadow-lg border-green-400 border-2 bg-green-200 h-12 mt-4'>Register</button>
-          </form>
+    <section className='flex w-[80%] h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4'>
+      {/* Left Section */}
+      <div className='flex-1 bg-green-400'></div>
 
-            <div className='flex gap-1 justify-center items-center'>
-                <p>Already have an account?</p>
-                <Link to ='/login'><span className='text-green-400'>Login</span></Link>
-            </div>
-           
+      {/* Right Section */}
+      <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-8 bg-white'>
+        <div className='text-center'>
+          <h1 className='text-2xl font-bold'>Welcome to</h1>
+          <span className='text-2xl text-green-500 font-bold'>Your Future</span>
         </div>
-    </section>
-  )
-}
 
-export default SignUp
+        <form onSubmit={handleSubmit} className='w-[60%] space-y-4'>
+          <input
+            type='text'
+            name='firstname'
+            value={credential.firstname}
+            onChange={handleChange}
+            placeholder='First Name'
+            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+          />
+          <input
+            type='text'
+            name='lastname'
+            value={credential.lastname}
+            onChange={handleChange}
+            placeholder='Last Name'
+            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+          />
+          <input
+            type='email'
+            name='email'
+            value={credential.email}
+            onChange={handleChange}
+            placeholder='Email'
+            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+          />
+          <input
+            type='password'
+            name='password'
+            value={credential.password}
+            onChange={handleChange}
+            placeholder='Password'
+            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+          />
+          <select
+            name='role'
+            value={credential.role}
+            onChange={handleChange}
+            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+          >
+            <option value='Employer'>Employer</option>
+            <option value='Professional'>Professional</option>
+          </select>
+          <button className='w-full p-3 bg-green-200 border-2 border-green-400 rounded-lg shadow-lg hover:bg-green-300'>
+            Register
+          </button>
+        </form>
+
+        <div className='flex gap-2'>
+          <p>Already have an account?</p>
+          <Link to='/login'>
+            <span className='text-green-500'>Login</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SignUp;
