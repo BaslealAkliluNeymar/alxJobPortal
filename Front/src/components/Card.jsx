@@ -8,7 +8,7 @@ const Card = (props) => {
 
   return (
     <Link to={`/talent/${_id}`}>
-      <div className="flex flex-col space-y-4 w-[22rem] p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative">
+      <div className="flex flex-col space-y-4 w-full p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative aspect-video">
         
         {/* Profile Section */}
         <div className="flex items-center gap-4">

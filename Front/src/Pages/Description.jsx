@@ -20,6 +20,14 @@ const Description = () => {
     fetchTalent();
   }, []);
 
+  useEffect(() =>{
+    const fetchFilteredTalent = async () =>{
+      setToken(token)
+      
+    }
+    fetchFilteredTalent()
+  },[role, location, jobType])
+
   // Handle filtering by role
   const handleRoleChange = async (e) => {
     setRole(e.target.value);

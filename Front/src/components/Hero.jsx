@@ -3,7 +3,7 @@ import HeroSearch from './HeroSearch';
 
 const Hero = () => {
   return (
-    <section className='hero flex flex-col mx-auto h-full bg-hero-pattern gap-6 px-6 py-12 lg:px-20'>
+    <section className='hero flex flex-col mx-auto h-full bg-hero-pattern gap-6 px-6 py-12 lg:px-20 relative'>
       <div className='container flex-1'>
         <div className='flex flex-col lg:flex-row items-center justify-between gap-8'>
           {/* Left Section */}
@@ -27,12 +27,12 @@ const Hero = () => {
             <p className='font-epilogue text-base md:text-lg text-gray-600 w-full md:w-[470px]'>
               Great platform for job seekers aiming for new career heights and passionate about startups.
             </p>
-            <HeroSearch className='z-[4]' />
-            <div className='mt-6'>
+            <HeroSearch className='z-[4] absolute bottom-24' />
+            {/* <div className='mt-6'>
               <p className='text-sm sm:text-base text-gray-500'>
                 Popular: UI Designer, UX Researcher, Android, Admin
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Section */}

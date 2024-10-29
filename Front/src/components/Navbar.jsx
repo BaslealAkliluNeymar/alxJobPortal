@@ -6,13 +6,16 @@ import { AllContext } from '../Context/AllContext';
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const { user } = useContext(AllContext);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setLoggedin(true);
     }
   }, [user]);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -53,7 +56,9 @@ const Navbar = () => {
             </div>
           ) : (
             <div className='flex items-center space-x-4'>
-              <img src='' alt='Profile' className='w-10 h-10 rounded-full' />
+              <Link to={`/1/profile`}>
+                <img src='' alt='Profile' className='w-10 h-10 rounded-full' />
+              </Link>
               <button 
                 className='bg-secondary text-white p-2 rounded' 
                 onClick={handleLogout}

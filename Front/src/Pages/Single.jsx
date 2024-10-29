@@ -1,15 +1,20 @@
 import { Building2, MapPin } from 'lucide-react'
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react'
 import SkillCard from '../components/SkillCard'
-import { getSingle } from '../services/talents'
+import { getSingle, setToken } from '../services/talents'
 import { useParams } from 'react-router-dom'
+import { AllContext } from '../Context/AllContext'
+
 const Single = () => {
   const [detail, setDetail] = useState({})
+  // const { user } = useContext(AllContext)
   const { id } = useParams()
-
+  // console.log(user)
   console.log(id)
   useEffect(() =>{
     const fetchSingle = async () =>{
+      const token = localStorage.getItem('token')
+      setToken(token)
       const data = await getSingle(id)
       setDetail(data)
     }
@@ -22,9 +27,9 @@ const Single = () => {
           <img src="" className='w-24 h-24 rounded-full bg-blue' alt="" />
           <div className='flex flex-col gap-2'>
             <div className='flex items-center justify-between gap-2'>
-              <h1 className='font-bold text-2xl'>detail[0].name</h1>
+              <h1 className='font-bold text-2xl'>{detail[0]?.name}</h1>
               <div className='bg-black w-1 h-8'></div>
-              <h1 className='font-bold text-2xl'>detail[0].position</h1>
+              <h1 className='font-bold text-2xl'>{detail[0]?.position}</h1>
             </div>
             <div className='flex items-center justify-start gap-2'>
               <MapPin />

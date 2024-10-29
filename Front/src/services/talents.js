@@ -19,6 +19,15 @@ export const getAll = async () =>{
 }
 
 
+export const getByCountry = async (country) =>{
+    const config = {
+        headers:{'Authorization' :token}
+    }
+    const response = await axios.get(`${BASE_URL}/search?country=${country}`,config)
+    return response.data
+}
+
+
 export const getByRole = async (role) =>{
     const response = await axios.get('/role',config)
     return response.data

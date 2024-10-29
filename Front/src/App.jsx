@@ -11,6 +11,7 @@ import Chat from './Pages/Chat.jsx'
 import Single from './Pages/Single.jsx'
 import { AllContextProvider } from './Context/AllContext.jsx'
 import Test from './Pages/Test.jsx'
+import Profile from './Pages/Profile.jsx'
 const App = () => {
   return (
     
@@ -23,11 +24,12 @@ const App = () => {
               <Route path='/' element={<Home />}/>
               <Route path='/login' element={<Login />}/>
               <Route path = '/sign-up' element={<SignUp/>} />
-              <Route path ='/browse' element={<Browse />}/>
+              <Route path ='/talent/search' element={<Browse />}/>
               <Route path='/talent' element={<Description />} />
               <Route path='/talent/:id' element={<Single />} />
               <Route path='/chat/:id' element={<Chat />} />
               <Route path='/test' element={<Test />}/>
+              <Route path ='/:id/profile' element={<Profile />} />
           </Routes>
           <Footer />
         </div>
