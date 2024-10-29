@@ -5,6 +5,7 @@ const validateEmail = function(email) {
     return re.test(email)
 };
 
+
 const userSchema = new mongo.Schema({
     firstname:{
         type:String,
@@ -35,7 +36,9 @@ const userSchema = new mongo.Schema({
     talent:{
         type:mongo.Schema.Types.ObjectId,
         ref:'Talent'
-    }
+    },
+    jobsPosted:[{type:mongo.Schema.Types.ObjectId ,ref:'jobs'}],
+        
 })
 
 const userModel = new mongo.model('users',userSchema)

@@ -15,6 +15,10 @@ const Navbar = () => {
     }
   }, [user]);
 
+  const handleLogin = () =>{
+    navigate('/')
+    // setLoggedin(true)
+  }
 
 
   const handleLogout = () => {
@@ -43,7 +47,7 @@ const Navbar = () => {
               <Link to='/login'>
                 <button 
                   className='bg-white text-black p-2 rounded'
-                  onClick={() => setLoggedin(true)}
+                  onClick={handleLogin}
                 >
                   Login
                 </button>

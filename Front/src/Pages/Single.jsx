@@ -22,7 +22,7 @@ const Single = () => {
   },[])
   console.log(detail)
   return (
-      <section className='h-full'>
+      <section className='h-full container'>
         <div className='h-[250px] w-full bg-red-200 flex items-center p-4 justify-start gap-8'>
           <img src="" className='w-24 h-24 rounded-full bg-blue' alt="" />
           <div className='flex flex-col gap-2'>

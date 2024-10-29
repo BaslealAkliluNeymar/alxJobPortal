@@ -1,9 +1,22 @@
 const mongo = require('mongoose');
-
+const userModel = require('./Users')
 const jobSchema = new mongo.Schema({
-    position: {
+    postedBy:{
+        type:mongo.Schema.Types.ObjectId,
+        ref:'users'
+    },
+    jobTitle: {
         type: String,
         required: true
+    },
+    company:{
+        type:String,
+        required:true
+    },
+    experience:{
+        type:String,
+        enum:['Senior','Junior','Entry'],
+        required:true,
     },
     type:{
         type:String,
@@ -13,6 +26,17 @@ const jobSchema = new mongo.Schema({
     location:{
         type:String,
         required:true
+    },
+    description:{
+        type:[String],
+        required:true
+    },
+    responsibilities:{
+        type:[String],
+        required:true
+    },
+    qualifications:{
+        type:[String]
     },
     logo:{
         type:String
