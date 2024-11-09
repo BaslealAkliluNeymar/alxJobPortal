@@ -30,6 +30,7 @@ const App = () => {
               <Route path='/chat/:id' element={<Chat />} />
               <Route path='/test' element={<Test />}/>
               <Route path ='/:id/profile' element={<Profile />} />
+              <Route path ='/browse' element={<Browse />} />
           </Routes>
           <Footer />
         </div>

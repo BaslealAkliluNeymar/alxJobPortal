@@ -33,9 +33,10 @@ talentRoute.get('/',async (req,res) =>{
 })
 
 talentRoute.get('/search',async(req,res) =>{
-    const { position } = req.query
-
-    const positionsFound = await talentModel.find({ position: position})
+    const { position,location } = req.query
+    console.log(position)
+    console.log(location)
+    const positionsFound = await talentModel.find({ position: position, location: location})
 
     res.send(positionsFound)
 

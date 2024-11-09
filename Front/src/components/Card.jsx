@@ -26,10 +26,10 @@ const Card = (props) => {
             <h1 className="text-lg text-gray-500">{position}</h1>
           </div>
 
-          {/* Chat Icon */}
+          {/* Chat Icon
           <Link to={`/chat/${_id}`} className="text-green-400 hover:text-green-500">
             <Send size={24} />
-          </Link>
+          </Link> */}
         </div>
 
         {/* Experience */}

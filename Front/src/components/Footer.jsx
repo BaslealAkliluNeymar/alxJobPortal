@@ -39,13 +39,13 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex items-center justify-between pt-6 text-sm">
-          <p className="text-gray-400">2021 @ JobHuntly. All rights reserved.</p>
+          <p className="text-gray-400">2024 @ alxJobPortal. All rights reserved.</p>
           <div className="flex gap-3">
             <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
-            <img src="src/assets/Twitter.png" alt="Twitter" className="h-6 w-6"/>
-            <img src="src/assets/LinkedIn.png" alt="LinkedIn" className="h-6 w-6"/>
-            <img src="src/assets/Instagram.png" alt="Instagram" className="h-6 w-6"/>
-            <img src="src/assets/YouTube.png" alt="YouTube" className="h-6 w-6"/>
+            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
+            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
+            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
+            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
           </div>
         </div>
       </div>

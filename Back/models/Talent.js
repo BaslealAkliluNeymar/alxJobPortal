@@ -21,6 +21,10 @@ const talentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    location:{
+        type:String,
+        enum:['Kigali','Addis Ababa','Accra','Casablanca','Cairo','Lagos','Nairobi','Johannesberg']
+    },
     skills: [{
         type: String
     }],

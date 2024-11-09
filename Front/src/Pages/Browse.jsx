@@ -17,16 +17,20 @@ const Browse = () => {
   const [talents, setTalents] = useState([]);
   const {path,location,search ,pathname} = locate.state || {}
 
+  console.log(locate.state)
+
+
+  
   const [data, setData] = useState([])
   useEffect(() =>{
     const fetchData = async() =>{
       const token = localStorage.getItem('token')
       setToken(token)
-      const found = await getJobs()
+      const found = await getJobs(locate.state)
       setTalents(found)
     }
     fetchData()
-  },[])
+  },[locate.state])
   return (
     <div className='min-h-screen relative container'>
       {/* <HeroSearch className='sticky top-0 z-10' /> */}
