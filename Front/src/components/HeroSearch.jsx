@@ -33,16 +33,15 @@ const HeroSearch = () => {
   },[value.title])
  
 
-  console.log(searchResult)
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/browse', { state: value });
   };
 
   const handleTitleChange = (e) => {
-    
     setValue({ ...value,title:e.target.value });
   };
+
 
   return (
     <div className="absolute w-[80%] z-10 bottom-[9.5rem]">
@@ -73,7 +72,7 @@ const HeroSearch = () => {
                   <div className='flex flex-col h-auto  gap-2 w-96 p-2 absolute top-20 left-52 bg-white'>
                     {
                       searchResult.map((item, index) =>{
-                          return <div key={index} className='rounded-lg text-centershadow-lg cursor-pointer h-10 w-auto border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white'>
+                          return <div key={index} value={item.item} className='rounded-lg text-centershadow-lg cursor-pointer h-10 w-auto border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white' onClick={() => setValue({...value, title:item.item})}>
                                     {item.item}
                                 </div>
                         })
