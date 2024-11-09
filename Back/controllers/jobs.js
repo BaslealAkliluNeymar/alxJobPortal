@@ -13,7 +13,7 @@ jobRouter.get('/', async (req,res) =>{
         const user = await userModel.findOne({email:found.email})
 
         console.log(user)
-        const jobs = await Job.find({}).populate('postedBy')
+        const jobs = await Job.find({}).populate("postedBy")
         console.log(jobs)
         res.send(jobs)
 
@@ -27,7 +27,8 @@ jobRouter.get('/', async (req,res) =>{
 
 
 jobRouter.post('/', async (req,res) =>{
-    try{
+    try
+    {
 
         const auth = req.headers.authorization.split(' ')[1]
     

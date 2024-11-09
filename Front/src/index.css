@@ -9,6 +9,25 @@
     box-sizing: border-box;
 }
 
+/* HTML: <div class="loader"></div> */
+.loader {
+    color: #6cee6c;
+    width: 35px;
+    aspect-ratio: 2;
+    --_g: no-repeat radial-gradient(circle closest-side,#6cee6c 90%,#0000);
+    background: 
+      var(--_g) 0%   50%,
+      var(--_g) 50%  50%,
+      var(--_g) 100% 50%;
+    background-size: calc(100%/3) 50%;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {
+      20%{background-position:0%   0%, 50%  50%,100%  50%}
+      40%{background-position:0% 100%, 50%   0%,100%  50%}
+      60%{background-position:0%  50%, 50% 100%,100%   0%}
+      80%{background-position:0%  50%, 50%  50%,100% 100%}
+  }
 
 
 @media screen and (max-width:640px) {
@@ -61,4 +80,6 @@
     .main-container{
         width:screen;
     }
+    /* HTML: <div class="loader"></div> */
+
 }

@@ -40,7 +40,7 @@ const HeroSearch = () => {
           <MapPin className="text-slate-500" />
           <CitySelector func={setValue} value={value} />
         </div>
-        <button className="bg-secondary text-white font-bold p-3 rounded-md w-40 hover:bg-secondary-dark transition-colors">
+        <button className="bg-secondary text-white font-bold p-3 rounded-md w-56 hover:bg-secondary-dark transition-colors">
           Search Positions
         </button>
       </form>

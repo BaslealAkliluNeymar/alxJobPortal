@@ -1,10 +1,19 @@
 import axios from 'axios'
 const BASE_URL = 'http://localhost:8000/jobs'
 
+let token = ''
+export const setToken = (signature) =>{
+    token =`Bearer ${signature}`
+}
+
+
 
 export const getJobs = async () =>{
-    const response = await axios.get(BASE_URL)
-
+    const config = {
+        headers:{'Authorization' :token}
+    }
+    const response = await axios.get('http://localhost:8000/jobs',config)
     console.log(response)
     return response.data
 }
+

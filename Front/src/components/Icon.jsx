@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Icon = (props) => {
-  // console.log(props.path)
   return (
     <svg width="48" height="48" viewBox="0 0 48 48" fill={props.color.fill} xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_54_1714)">

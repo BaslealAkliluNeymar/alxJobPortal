@@ -7,16 +7,16 @@ const Hero = () => {
       <div className='container flex-1'>
         <div className='flex flex-col lg:flex-row items-center justify-between gap-8'>
           {/* Left Section */}
-          <div className="left flex flex-col flex-1 gap-6 border-l-4 border-green-400 pl-6 h-[300px] lg:h-auto">
+          <div className="left flex flex-col flex-1 gap-4 border-l-4 border-green-400 pl-6 h-[300px] lg:h-auto">
             <p className='font-semibold text-4xl md:text-5xl text-gray-800 leading-snug'>
               Discover more than
             </p>
-            <span className='text-secondary font-revalia text-4xl md:text-5xl text-green-500'>
+            <span className='text-secondary font-revalia text-4xl md:text-5xl'>
               5000+ prospects
             </span>
             <svg
               width="455"
-              height="40"
+              height="20"
               viewBox="0 0 455 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

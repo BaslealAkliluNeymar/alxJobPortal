@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 talentRoute.get('/',async (req,res) =>{
-    // const talent = await talentModel.find({})
-    // res.send(talent)
+
     try {
         const str = req.headers.authorization.split(' ')[1]
     
@@ -45,7 +44,6 @@ talentRoute.get('/search',async(req,res) =>{
 talentRoute.get('/:id',async (req,res) =>{
     const { id } = req.params
 
-    console.log(id)
     console.log(req.headers.authorization)
 
     const str = req.headers.authorization.split(' ')[1]

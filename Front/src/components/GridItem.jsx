@@ -16,9 +16,9 @@ const GridItem = ({ items }) => {
   return (
     <Link to={`/talent/search?position=${title}`}>
       <div 
-        className="griditem-sm w-[250px] h-[190px] border-[#D6DDEB] border-2 p-2 hover:bg-secondary flex flex-col gap-3 justify-center items-start pl-5"
-        onMouseEnter={() => setState({ fill: "#09F53D", stroke: "white" })}
-        onMouseLeave={() => setState({ fill: "white", stroke: "#09F53D" })}
+        className="griditem-sm w-[250px] h-[190px] border-[#D6DDEB] border-2 p-2 hover:bg-secondary hover:text-slate-50 flex flex-col gap-3 justify-center items-start pl-5"
+        // onMouseEnter={() => setState({ fill: "#09F53D", stroke: "white" })}
+        // onMouseLeave={() => setState({ fill: "white", stroke: "#09F53D" })}
       >
         <Icon color={state} path={path} className="griditem-icon" />
         <h1 className="font-poppins text-[1.5rem] font-bold">{title}</h1>

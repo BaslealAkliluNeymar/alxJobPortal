@@ -24,8 +24,8 @@ const CitySelector = (props) => {
     >
       <option value="" disabled>Select City</option>
       {countries.map((item, index) => (
-        <option key={index} value={item.city}>
-          {item.city}, {item.country}
+        <option key={index} value={item.city} >
+          <p className='rounded-lg border-green-300 border-2 hover:bg-green-300 hover:text-slate-50'>{item.city}, {item.country}</p>
         </option>
       ))}
     </select>

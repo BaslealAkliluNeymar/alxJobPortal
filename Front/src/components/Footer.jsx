@@ -32,8 +32,8 @@ const Footer = () => {
                 The latest job news and articles sent to your inbox weekly.
               </p>
               <form className="flex mt-3">
-                <input type="email" className="h-10 w-[60%] p-2 outline-none rounded-l-md text-gray-700" placeholder="Your Email"/>
-                <button className="h-10 w-[40%] bg-secondary text-fontColor rounded-r-md font-extrabold">Subscribe</button>
+                <input type="email" className="h-12 w-[65%] p-4 outline-none rounded-l-md text-gray-700" placeholder="Your Email"/>
+                <button className="h-12 w-[35%] bg-secondary text-fontColor rounded-r-md font-extrabold">Subscribe</button>
               </form>
             </div>
           </div>
