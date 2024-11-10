@@ -11,7 +11,7 @@ const Card = (props) => {
     <Link to={`/talent/${_id}`}>
       <div className="flex flex-col space-y-4 w-full p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative aspect-video">
         
-        {/* Profile Section */}
+        
         <div className="flex items-center gap-4">
           <div className="relative">
             <img
@@ -24,7 +24,9 @@ const Card = (props) => {
           
           <div className="flex-1">
             <p className="text-xl font-semibold text-gray-800">{name}</p>
-            <h1 className="text-lg text-gray-500">{position}</h1>
+            <a href="https://www.alxafrica.com/programme/data-science/">
+              <h1 className="text-lg text-gray-500">{position}</h1>
+            </a>
           </div>
 
           {/* Chat Icon

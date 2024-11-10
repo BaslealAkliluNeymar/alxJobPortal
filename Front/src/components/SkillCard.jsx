@@ -22,7 +22,7 @@ const SkillCard = (props) => {
 
   return (
     <div 
-      className='rounded-xl w-20 h-8 p-[1.25rem] flex justify-center items-center text-white' 
+      className='rounded-xl w-auto h-8 p-[1.25rem] flex justify-center items-center text-white shadow-sm' 
       style={{ backgroundColor }}
     >
       <p>{props.item}</p>

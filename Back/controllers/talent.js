@@ -46,11 +46,11 @@ talentRoute.get('/search',async(req,res) =>{
 
 talentRoute.post('/search',async(req,res) =>{
     try{
-        const {role, experience, location , jobType}  = req.body
+        const { role, experience, location , jobType }  = req.body
         const query = {}
         console.log(req.body)
         if (role) query.position = role
-        // if (experience) query.experience = experience
+        if (experience) query.experience = experience
         if (location) query.location = location
         // if (jobType) query.
         if (role == "" && experience == "" && location == "" && jobType == ""){

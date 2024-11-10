@@ -86,8 +86,8 @@ const Description = () => {
             name="role"
           >
             {/* <option value="">Select Role</option> */}
-            <option value="Front-End">Front-End</option>
-            <option value="Back-End">Back-End</option>
+            <option value="Front-End Developer">Front-End</option>
+            <option value="Back-End Developer">Back-End</option>
             <option value="Data Scientist">Data Science</option>
             <option value="Data Analyst">Data Analyst</option>
             <option value="Software Engineer">Software Engineer</option>
@@ -115,6 +115,7 @@ const Description = () => {
             <option value="Casablanca">Casablanca</option>
             <option value="Accra">Accra</option>
             <option value="Nairobi">Nairobi</option>
+            {/* <option defaultValue='' placeholder="City"></option> */}
           </select>
 
           <select
