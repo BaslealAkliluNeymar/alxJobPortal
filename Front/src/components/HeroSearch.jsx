@@ -89,7 +89,7 @@ const HeroSearch = () => {
           <CitySelector func={setValue} value={value} />
         </div>
         <button className="bg-secondary text-white font-bold p-3 rounded-md w-56 hover:bg-secondary-dark transition-colors">
-          Search Positions
+          Search Talent
         </button>
       </form>
     </div>

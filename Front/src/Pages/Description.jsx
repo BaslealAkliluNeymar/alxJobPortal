@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Card from '../components/Card';
-import { getAll, getByRole, setToken } from '../services/talents.js';
+import { getAll, setToken,getFiltered} from '../services/talents.js';
 
 const Description = () => {
   const [talents, setTalents] = useState([]);
-  const [role, setRole] = useState('');
-  const [experience, setExperience] = useState('');
-  const [location, setLocation] = useState('');
-  const [jobType, setJobType] = useState('');
+  const [select, setSelect] = useState({
+    role:'',
+    experience:'',
+    location:'',
+    jobType:''
+  })
+  const isMounted = useRef(false)
 
-  // Fetch all talents on component mount
+
   useEffect(() => {
     const fetchTalent = async () => {
       const token = localStorage.getItem('token');
@@ -20,54 +23,92 @@ const Description = () => {
     fetchTalent();
   }, []);
 
-  useEffect(() =>{
-    const fetchFilteredTalent = async () =>{
-      setToken(token)
+
+  console.log(talents)
+  // useEffect(() =>{
+  //   const fetchFilteredTalent = async () =>{
+  //     const token = localStorage.getItem('token');
+  //     setToken(token)
       
+  //   }
+  //   fetchFilteredTalent()
+  // },[role, location, jobType])
+
+
+  useEffect(() =>{
+    if(!isMounted.current){
+      isMounted.current = true
+      return;
     }
-    fetchFilteredTalent()
-  },[role, location, jobType])
+
+    const fetchFilteredData = async () =>{
+      const token = localStorage.getItem('token');
+      setToken(token);
+      const filteredData = await getFiltered(select)
+      setTalents(filteredData)
+      return filteredData
+    }
+
+    
+    fetchFilteredData(select)
+    // const filtered = select.role.length > 0 ? talents.filter((item) => item.position === select?.role) : talents
+    // console.log(filtered)
+    // setTalents(filtered)
+  },[select])
 
   // Handle filtering by role
   const handleRoleChange = async (e) => {
-    setRole(e.target.value);
-    const data = await getByRole(e.target.value);
-    setTalents(data);
+   
+    // const {name, value} = e.target
+    // const data = await getJobs(e.target.value);
+    // setTalents(data);
+    setSelect(() =>{
+      return {
+        ...select,
+        [e.target.name]:e.target.value
+      }
+    })
   };
 
-  // Rendered Component
+  console.log(select)
+ 
   return (
     <div className="flex gap-8 p-8 bg-gray-50 min-h-screen">
       
-      {/* Sidebar Filters */}
+      
       <div className="w-3/12 p-6 shadow-md rounded-lg bg-white">
         <div className="flex flex-col gap-6">
           
           <select
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={role}
+            value={select.role}
             onChange={handleRoleChange}
+            name="role"
           >
-            <option value="">Select Role</option>
+            {/* <option value="">Select Role</option> */}
             <option value="Front-End">Front-End</option>
             <option value="Back-End">Back-End</option>
-            <option value="Data Science">Data Science</option>
-            <option value="ML-Engineer">ML-Engineer</option>
+            <option value="Data Scientist">Data Science</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Software Engineer">Software Engineer</option>
             <option value="Product Designer">Product Designer</option>
+            <option defaultValue=''></option>
           </select>
 
           <input
             type="number"
             placeholder="Years of Experience"
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={experience}
-            onChange={(e) => setExperience(e.target.value)}
+            value={select.experience}
+            onChange={handleRoleChange}
+            name="experience"
           />
 
           <select
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={select.location}
+            onChange={handleRoleChange}
+            name="location"
           >
             <option value="">Select Location</option>
             <option value="Addis Ababa">Addis Ababa</option>
@@ -78,8 +119,9 @@ const Description = () => {
 
           <select
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={jobType}
-            onChange={(e) => setJobType(e.target.value)}
+            value={select.jobType}
+            onChange={handleRoleChange}
+            name="jobType"
           >
             <option value="">Select Job Type</option>
             <option value="Full-time">Full-time</option>

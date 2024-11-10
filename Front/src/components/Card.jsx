@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { Send } from 'lucide-react';
 
 const Card = (props) => {
-  const { _id, name, position, experience, description, skills } = props.talent;
+  const { _id, name, position, description, skills,workHistory } = props.talent;
+
 
   return (
     <Link to={`/talent/${_id}`}>
@@ -34,7 +35,7 @@ const Card = (props) => {
 
         {/* Experience */}
         <p className="text-green-500 font-medium text-lg">
-          {experience} Years of Experience
+          {workHistory[0].years} - Years of Experience
         </p>
 
         {/* Description */}
