@@ -50,7 +50,7 @@ talentRoute.post('/search',async(req,res) =>{
         const query = {}
         console.log(req.body)
         if (role) query.position = role
-        if (experience) query.experience = experience
+        // if (experience) query.experience = experience
         if (location) query.location = location
         // if (jobType) query.
         if (role == "" && experience == "" && location == "" && jobType == ""){
