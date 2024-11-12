@@ -6,9 +6,8 @@ const Description = () => {
   const [talents, setTalents] = useState([]);
   const [select, setSelect] = useState({
     role:'',
-    experience:'',
-    location:'',
-    jobType:''
+    totalYearsExperience:'',
+    location:''
   })
   const isMounted = useRef(false)
 
@@ -99,9 +98,9 @@ const Description = () => {
             type="number"
             placeholder="Years of Experience"
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={select.experience}
+            value={select.totalYearsExperience}
             onChange={handleRoleChange}
-            name="experience"
+            name="totalYearsExperience"
           />
 
           <select
@@ -110,15 +109,16 @@ const Description = () => {
             onChange={handleRoleChange}
             name="location"
           >
-            <option value="">Select Location</option>
-            <option value="Addis Ababa">Addis Ababa</option>
-            <option value="Casablanca">Casablanca</option>
-            <option value="Accra">Accra</option>
-            <option value="Nairobi">Nairobi</option>
-            {/* <option defaultValue='' placeholder="City"></option> */}
+            {
+              ['Kigali','Addis Ababa','Accra','Casablanca','Cairo','Lagos','Nairobi','Johannesberg'].map((item,index) =>{
+                return (
+                  <option value={item} key={index}>{item}</option>
+                )
+              })
+            }
           </select>
 
-          <select
+          {/* <select
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
             value={select.jobType}
             onChange={handleRoleChange}
@@ -129,7 +129,7 @@ const Description = () => {
             <option value="Part-time">Part-time</option>
             <option value="Hybrid">Hybrid</option>
             <option value="Remote">Remote</option>
-          </select>
+          </select> */}
         </div>
       </div>
 

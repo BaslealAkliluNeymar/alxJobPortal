@@ -92,7 +92,14 @@ const talentSchema = new mongoose.Schema({
             type: Date
         }
     }]
-});
+},{toJSON:{virtuals:true}});
+
+talentSchema.virtual('totalYearsExperience').get(function () {
+    return this.workHistory.reduce((total, job) => {
+      const years = job.dateTo ? (job.dateTo.getFullYear() - job.dateFrom.getFullYear()) : 0;
+      return total + years;
+    }, 0);
+  });
 
 const Talent = mongoose.model('Talent', talentSchema);
 

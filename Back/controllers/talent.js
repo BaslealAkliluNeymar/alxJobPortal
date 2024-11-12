@@ -49,19 +49,25 @@ talentRoute.get('/search',async(req,res) =>{
 
 talentRoute.post('/search',async(req,res) =>{
     try{
-        const { role, experience, location , jobType }  = req.body
-        const query = {}
         console.log(req.body)
+        const { role, totalYearsExperience, location }  = req.body
+        const query = {}
+        
+        console.log(typeof(+experience))
         if (role) query.position = role
         // if (experience) query.experience = experience
         if (location) query.location = location
         // if (jobType) query.
-        if (role == "" && experience == "" && location == "" && jobType == ""){
+        if (totalYearsExperience) query.totalYearsExperience = Number(totalYearsExperience)
+
+        console.log(experience)
+        if (query.role === "" && query.totalYearsExperience === "" && query.location === ""){
             const data =  await talentModel.find({})
             res.send(data)
         }
         else{
             const allData = await talentModel.find(query)
+            console.log(allData)
             res.send(allData)
         }
         
