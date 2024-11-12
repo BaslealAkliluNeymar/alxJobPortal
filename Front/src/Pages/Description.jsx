@@ -50,17 +50,12 @@ const Description = () => {
 
     
     fetchFilteredData(select)
-    // const filtered = select.role.length > 0 ? talents.filter((item) => item.position === select?.role) : talents
-    // console.log(filtered)
-    // setTalents(filtered)
   },[select])
 
-  // Handle filtering by role
+
   const handleRoleChange = async (e) => {
    
-    // const {name, value} = e.target
-    // const data = await getJobs(e.target.value);
-    // setTalents(data);
+    
     setSelect(() =>{
       return {
         ...select,
@@ -69,7 +64,7 @@ const Description = () => {
     })
   };
 
-  console.log(select)
+
  
   return (
     <div className="flex gap-8 p-8 bg-gray-50 min-h-screen">
@@ -84,7 +79,7 @@ const Description = () => {
             onChange={handleRoleChange}
             name="role"
           >
-            {/* <option value="">Select Role</option> */}
+           
             <option value="Front-End Developer">Front-End</option>
             <option value="Back-End Developer">Back-End</option>
             <option value="Data Scientist">Data Science</option>
@@ -133,7 +128,7 @@ const Description = () => {
         </div>
       </div>
 
-      {/* Talent Cards Grid */}
+ 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
         {talents.length > 0 ? (
           talents.map((talent, index) => <Card talent={talent} key={index} />)

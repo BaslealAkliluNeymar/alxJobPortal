@@ -33,7 +33,7 @@ const Browse = () => {
   },[locate.state])
   return (
     <div className='min-h-screen relative container'>
-      {/* <HeroSearch className='sticky top-0 z-10' /> */}
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-10 aspect-square">
         {talents.length > 0 ? (
           talents.map((talent, index) => <Card talent={talent} key={index} className="aspect-video h-16 w-full" />)

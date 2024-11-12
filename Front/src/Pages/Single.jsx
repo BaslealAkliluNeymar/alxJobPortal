@@ -7,10 +7,10 @@ import { AllContext } from '../Context/AllContext'
 
 const Single = () => {
   const [detail, setDetail] = useState({})
-  // const { user } = useContext(AllContext)
+  const { user } = useContext(AllContext)
   const { id } = useParams()
   // console.log(user)
-  console.log(id)
+  // console.log(id)
   useEffect(() =>{
     const fetchSingle = async () =>{
       const token = localStorage.getItem('token')
@@ -20,20 +20,20 @@ const Single = () => {
     }
     fetchSingle()
   },[])
-  console.log(detail)
+  console.log(detail.skills)
   return (
       <section className='h-full container'>
         <div className='h-[250px] w-full bg-red-200 flex items-center p-4 justify-start gap-8'>
           <img src="" className='w-24 h-24 rounded-full bg-blue' alt="" />
           <div className='flex flex-col gap-2'>
             <div className='flex items-center justify-between gap-2'>
-              <h1 className='font-bold text-2xl'>{detail[0]?.name}</h1>
+              <h1 className='font-bold text-2xl'>{detail.name}</h1>
               <div className='bg-black w-1 h-8'></div>
-              <h1 className='font-bold text-2xl'>{detail[0]?.position}</h1>
+              <h1 className='font-bold text-2xl'>{detail?.position}</h1>
             </div>
             <div className='flex items-center justify-start gap-2'>
               <MapPin />
-              <p>Addis Ababa, Ethiopia</p>
+              <p>{detail?.location}</p>
             </div>
           </div>
          
@@ -61,11 +61,14 @@ const Single = () => {
 
         <div className='w-full p-5'>
           <h1 className='font-bold text-2xl text-left mb-5'>Skills</h1>
-          <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
-            
-                <SkillCard item={"item"} />
-            
-            
+          <div className='shadow-2xl  border-slate-200 border-2 p-4 rounded-lg'>
+            <div className='w-auto flex gap-2'>
+                {/* {
+                  detail?.skills.map((item,index) =>{
+                    return <SkillCard item={item} key={index}/>
+                  })
+                }  */}
+            </div>
           </div>
           
         </div>
@@ -73,130 +76,116 @@ const Single = () => {
 
         <div className='w-full p-5'>
           <h1 className='font-bold text-2xl text-left mb-5'>Work History</h1>
-          <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
+          {
+            detail?.workHistory.map((item,index) => {
+              return (
+                <div key={index} className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
             
-            <div className='flex gap-2'>
-             <Building2 />
-              <div className='flex flex-col gap-2'>
-                <div className='flex items-center justify-start gap-2'>
-                  <h1 className='font-bold text-2xl'>Basleal Aklilu</h1>
-                  <div className='bg-black w-1 h-8'></div>
-                  <h1 className='font-bold text-2xl'>Front-End Developer</h1>
-                </div>
-                <div className='flex items-center justify-start gap-2'>
-                  <p>Sand Tech Inc.</p>
-                  <div className='flex items-center gap-2'>
-                    <p>June, 2024</p>
-                    <p>September, 2025</p>
+                  <div className='flex gap-2'>
+                  <Building2 />
+                    <div className='flex flex-col gap-2'>
+                      <div className='flex items-center justify-start gap-2'>
+                        <h1 className='font-bold text-2xl'>{detail?.name}</h1>
+                        <div className='bg-black w-1 h-8'></div>
+                        <h1 className='font-bold text-2xl'>{item.position}</h1>
+                      </div>
+                      <div className='flex items-center justify-start gap-2'>
+                        <p>{item.placeofWork}.</p>
+                        <div className='flex items-center gap-2'>
+                          <p>June, 2024</p>
+                          <p>September, 2025</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p>{item.summary}</p>
+                      </div>
+                      <div className='flex gap-2'>
+                        {
+                          item.technologies.map((tech, index) =>{
+                            return (
+                              <SkillCard item={tech} key={index} />
+                            )
+                          })
+                        }
+              
+
+                      </div>
                   </div>
+                  </div>
+                  
                 </div>
-
-                <div>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, corrupti commodi ex ipsam delectus
-                    illum officiis et laudantium. Delectus dolore laudantium nulla culpa, et id quibusdam recusandae
-                    possimus aliquam ducimus aperiam aut eius minima tempora quis asperiores neque esse? Culpa quibusdam,
-                    amet nam sed dolorem iste in aliquam tempore delectus illo, iusto laboriosam error, quo quaerat fugit
-                    tenetur placeat. Rerum hic at eveniet sed fugiat repellendus error, distinctio officia ullam facere,
-                    doloremque reiciendis. Iure et sed incidunt sequi delectus aspernatur hic aliquam numquam eveniet 
-                    soluta sit eum error nihil, expedita vitae consequatur. Nulla facilis quasi natus sapiente 
-                    inventore ducimus iusto, facere eaque nisi voluptatibus maiores ipsam ea impedit repudiandae 
-                    temporibus? Ab odio placeat laboriosam,
-                     corporis, aliquam magni laborum, iusto molestias animi rem et. Vel quaerat similique nesciunt ullam.</p>
-                </div>
-                <div className='flex gap-2'>
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-
-                </div>
-            </div>
-            </div>
-            
-          </div>
+              )
+            })
+          }
+          
           
         </div>
         <div className='w-full p-5'>
           <h1 className='font-bold text-2xl text-left mb-5'>Projects</h1>
           <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
-            
-            <div className='flex gap-2'>
-             <Building2 />
-              <div className='flex flex-col gap-2'>
-                <div className='flex items-center justify-start gap-2'>
-                  <h1 className='font-bold text-2xl'>Basleal Aklilu</h1>
-                  <div className='bg-black w-1 h-8'></div>
-                  <h1 className='font-bold text-2xl'>Front-End Developer</h1>
-                </div>
-                <div className='flex items-center justify-start gap-2'>
-                  <p>Sand Tech Inc.</p>
-                  <div className='flex items-center gap-2'>
-                    <p>June, 2024</p>
-                    <p>September, 2025</p>
-                  </div>
-                </div>
-
-                <div>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, corrupti commodi ex ipsam delectus
-                    illum officiis et laudantium. Delectus dolore laudantium nulla culpa, et id quibusdam recusandae
-                    possimus aliquam ducimus aperiam aut eius minima tempora quis asperiores neque esse? Culpa quibusdam,
-                    amet nam sed dolorem iste in aliquam tempore delectus illo, iusto laboriosam error, quo quaerat fugit
-                    tenetur placeat. Rerum hic at eveniet sed fugiat repellendus error, distinctio officia ullam facere,
-                    doloremque reiciendis. Iure et sed incidunt sequi delectus aspernatur hic aliquam numquam eveniet 
-                    soluta sit eum error nihil, expedita vitae consequatur. Nulla facilis quasi natus sapiente 
-                    inventore ducimus iusto, facere eaque nisi voluptatibus maiores ipsam ea impedit repudiandae 
-                    temporibus? Ab odio placeat laboriosam,
-                     corporis, aliquam magni laborum, iusto molestias animi rem et. Vel quaerat similique nesciunt ullam.</p>
-                </div>
-                <div className='flex gap-2'>
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-                  <SkillCard item={"HTML"} />
-
-                </div>
-            </div>
-            </div>
-            
+            {
+              detail?.projects.map((item,index) =>{
+                  return(<div className='flex gap-2'>
+                    <Building2 />
+                     <div className='flex flex-col gap-2'>
+                       <div className='flex items-center justify-start gap-2'>
+                         <h1 className='font-bold text-2xl'>{item?.nameofProject}</h1>
+                         <div className='bg-black w-1 h-8'>{item?.durationofProject}</div>
+                         <h1 className='font-bold text-2xl'>Front-End Developer</h1>
+                       </div>
+                       <div className='flex items-center justify-start gap-2'>
+                         <p>Sand Tech Inc.</p>
+                         <div className='flex items-center gap-2'>
+                           <p>June, 2024</p>
+                           <p>September, 2025</p>
+                         </div>
+                       </div>
+       
+                       <div>
+                         <p>{item?.summary}</p>
+                       </div>
+                       <div className='flex gap-2'>
+                        {
+                          item?.technologies?.map((item,index) =>{
+                            return (
+                              <SkillCard item={item} key={index} />
+                            )
+                          })
+                        }
+                        
+                       </div>
+                   </div>
+                   </div>
+                  )
+              })
+            }
           </div>
-          
         </div>
         <div className='w-full p-5'>
           <h1 className='font-bold text-2xl text-left mb-5'>Resume</h1>
           <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
             <SkillCard item={"React"} />
-          </div>
-
-
-          
-          
+          </div> 
         </div>
-
-
         <div className='w-full p-8'>
           <h1 className='font-bold text-2xl text-left mb-5'>Education</h1>
           <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
-            <div className='flex flex-col justify-center gap-2 mb-2 border-b-2 border-slate-400 pb-2'>
-              <h1 className='font-bold text-2xl'>Bachelor's Degree in Electrical and Computer Engineering</h1>
-              <p>AAU</p>
-              <div className='flex gap-2 items-center'>
-                <p>June,2016</p>
-                <p>June,2021</p>
-              </div>
-            </div>
-
-            <div className='flex flex-col justify-center gap-2 border-b-2 border-slate-400 pb-2'>
-              <h1 className='font-bold text-2xl'>Bachelor's Degree in Electrical and Computer Engineering</h1>
-              <p>AAU</p>
-              <div className='flex gap-2 items-center'>
-                <p>June,2016</p>
-                <p>June,2021</p>
-              </div>
-            </div>
+            {
+              item?.education.map((item,index) =>{
+                return (
+                  <div className='flex flex-col justify-center gap-2 mb-2 border-b-2 border-slate-400 pb-2'>
+                    <h1 className='font-bold text-2xl'>{item?.nameofDegree}</h1>
+                    <p>{item?.placeofEducation}</p>
+                    <div className='flex gap-2 items-center'>
+                      <p>June,2016</p>
+                      <p>June,2021</p>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
-
-         
-          
         </div>
       </section>
 

@@ -43,7 +43,7 @@ export const getSingle = async (id) =>{
     }
     const newUrl = BASE_URL + `/${id}`
     const response = await axios.get(newUrl,config)
-    return response.data
+    return response.data[0]
 }
 
 
