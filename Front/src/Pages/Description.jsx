@@ -6,7 +6,7 @@ const Description = () => {
   const [talents, setTalents] = useState([]);
   const [select, setSelect] = useState({
     role:'',
-    totalYearsExperience:'',
+    experience:'',
     location:''
   })
   const isMounted = useRef(false)
@@ -98,9 +98,9 @@ const Description = () => {
             type="number"
             placeholder="Years of Experience"
             className="h-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-green-400"
-            value={select.totalYearsExperience}
+            value={select.experience}
             onChange={handleRoleChange}
-            name="totalYearsExperience"
+            name="experience"
           />
 
           <select

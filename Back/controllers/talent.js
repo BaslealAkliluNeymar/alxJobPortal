@@ -35,11 +35,10 @@ talentRoute.get('/',async (req,res) =>{
 talentRoute.get('/search',async(req,res) =>{
     const { position,location } = req.query
     
-
     console.log(position)
     const newPosition = new RegExp(position, "i")
     
-    const positionsFound = (location === 'ALL') ?await talentModel.find({position:newPosition}):
+    const positionsFound = (location === 'ALL') ? await talentModel.find({position:newPosition}):
      await talentModel.find({ position: newPosition, location: location})
 
     res.send(positionsFound)
@@ -48,33 +47,34 @@ talentRoute.get('/search',async(req,res) =>{
 
 
 talentRoute.post('/search',async(req,res) =>{
-    try{
-        console.log(req.body)
-        const { role, totalYearsExperience, location }  = req.body
-        const query = {}
-        
-        console.log(typeof(+experience))
-        if (role) query.position = role
-        // if (experience) query.experience = experience
-        if (location) query.location = location
-        // if (jobType) query.
-        if (totalYearsExperience) query.totalYearsExperience = Number(totalYearsExperience)
 
-        console.log(experience)
-        if (query.role === "" && query.totalYearsExperience === "" && query.location === ""){
+    try
+    {
+        const { role, experience, location }  = req.body
+        const query = {}
+        console.log(`This is the second console ${query}`)
+        if (Object.keys(req.body).length === 0){
             const data =  await talentModel.find({})
             res.send(data)
         }
         else{
+            if (role) query.position = role
+            if (location) query.location = location
+            // if (totalYearsExperience && !isNaN(totalYearsExperience)) query.totalYearsExperience = Number(totalYearsExperience);
+
             const allData = await talentModel.find(query)
-            console.log(allData)
-            res.send(allData)
+
+            const filtered = experience ? allData.filter((item) =>{
+                return item.totalYearsExperience === Number(experience)
+            }) : allData
+            
+            res.send(filtered)
         }
         
 
     }
     catch(err){
-        res.send(err)
+        res.status(500).send({ error: err.message });
     }
 })
 
