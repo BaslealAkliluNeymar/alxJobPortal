@@ -3,6 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 
 export default function Profile() {
   const { register, handleSubmit, control } = useForm();
+  
   const { fields: workHistoryFields, append: addWorkHistory } = useFieldArray({
     control,
     name: "workHistory",

@@ -18,7 +18,6 @@ export const getAll = async () =>{
     return response.data
 }
 
-
 export const getByCountry = async (country) =>{
     const config = {
         headers:{'Authorization' :token}
