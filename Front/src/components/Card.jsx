@@ -37,7 +37,7 @@ const Card = (props) => {
 
         {/* Experience */}
         <p className="text-green-500 font-medium text-lg">
-          {workHistory[0].years} - Years of Experience
+          {workHistory[0]?.years} - Years of Experience
         </p>
 
         {/* Description */}
