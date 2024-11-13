@@ -1,9 +1,11 @@
-import React from "react";
+import React,{useState , useEffect }from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import { getProfile, setToken } from "../services/talents";
 
 export default function Profile() {
   const { register, handleSubmit, control } = useForm();
-  
+  const [profile, setProfile]  = useState({})
+  const [value, setValue] = useState({})
   const { fields: workHistoryFields, append: addWorkHistory } = useFieldArray({
     control,
     name: "workHistory",
@@ -17,8 +19,21 @@ export default function Profile() {
     name: "education",
   });
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem('token')
+      setToken(token)
+      const found = await getProfile(profile)
+      console.log(found)
+    };
+    fetchProfile();
+  }, [profile]);
+  console.log(profile)
+
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data)
+    setProfile(data)
+
   };
 
   return (

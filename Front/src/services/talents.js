@@ -57,3 +57,13 @@ export const getFiltered = async (data) =>{
     return response.data
 }
 
+export const getProfile = async (data) =>{
+    const config = {
+        headers:{'Authorization' :token}
+    }
+    console.log(data)
+
+    const response = await axios.post(BASE_URL,data,config)
+    return response.data
+}
+

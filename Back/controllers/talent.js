@@ -55,6 +55,11 @@ talentRoute.post('/',async(req,res) =>{
         res.send(savedObj)
         
     }
+    else{
+        res.status(500).send({
+            message:"Frame the Question differently"
+        })
+    }
 })
 
 talentRoute.get('/search',async(req,res) =>{
