@@ -12,6 +12,8 @@ import Single from './Pages/Single.jsx'
 import { AllContextProvider } from './Context/AllContext.jsx'
 import Test from './Pages/Test.jsx'
 import Profile from './Pages/Profile.jsx'
+import Admin from './Pages/Admin.jsx'
+import RequiredAuth from './components/RequiredAuth.jsx'
 const App = () => {
   return (
     
@@ -31,6 +33,10 @@ const App = () => {
               <Route path='/test' element={<Test />}/>
               <Route path ='/:id/profile' element={<Profile />} />
               <Route path ='/browse' element={<Browse />} />
+              <Route element = {<RequiredAuth />}>
+                <Route path = '/admin' element={<Admin />} />
+              </Route>
+              <Route path ='*' element={<Browse />} />
           </Routes>
           <Footer />
         </div>

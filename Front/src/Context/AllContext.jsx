@@ -1,24 +1,31 @@
-import { createContext,useState } from 'react'
+import { createContext,useRef,useState } from 'react'
 
 export const AllContext = createContext()
 
 
 export const AllContextProvider = ({ children }) =>{
-    const [user , setUser] = useState(null)
+    // const user = useRef({})
 
+    
     const login = (userData) =>{
         localStorage.setItem('token',userData.token)
-        setUser(userData)
+        localStorage.setItem('user',JSON.stringify({
+            user:userData.user,
+            email:userData.email,
+            role:userData.role
+        }))
+        
     }
 
+    // console.log(user)
 
     const logout = () =>{
         localStorage.removeItem('token')
-        setUser()
+        localStorage.removeItem('user')
     }
 
     return (
-        <AllContext.Provider value={{ user, login, logout}}>
+        <AllContext.Provider value={{ login, logout}}>
             {children}
         </AllContext.Provider>
     )
