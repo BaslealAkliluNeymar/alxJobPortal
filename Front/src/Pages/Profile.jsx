@@ -21,7 +21,7 @@ export default function Profile() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto p-6 bg-white rounded-lg shadow-lg container">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">Talent Profile</h2>
 
       <label className="block text-gray-700">Image URL</label>
@@ -173,7 +173,7 @@ export default function Profile() {
       <button
         type="button"
         onClick={() => addProject({})}
-        className="w-40 mb-6 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+        className="w-full mb-6 px-4 py-2 text-white bg-red-500 rounded-md hover:bg-blue-600"
       >
         Add Project
       </button>
@@ -211,20 +211,22 @@ export default function Profile() {
           />
         </div>
       ))}
-      <button
-        type="button"
-        onClick={() => addEducation({})}
-        className="w-40 mb-6 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-      >
-        Add Education
-      </button>
+      <div className="flex flex-col gap-1">
+        <button
+          type="button"
+          onClick={() => addEducation({})}
+          className="w-full mb-6 px-4 py-2 text-white bg-purple-500 rounded-md hover:bg-blue-600"
+        >
+          Add Education
+        </button>
 
-      <button
-        type="submit"
-        className="w-40 px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
-      >
-        Submit
-      </button>
+        <button
+          type="submit"
+          className="w-40 px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
+        >
+          Submit
+        </button>
+      </div>  
     </form>
   );
 }
