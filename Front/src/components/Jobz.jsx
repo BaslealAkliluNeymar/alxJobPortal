@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { getUserJobs, saveJob, setToken } from "../services/jobs";
+import Job from "./Job";
 
 const Jobz = () => {
   const [modal, setModal] = useState(false);
@@ -184,16 +185,19 @@ const Jobz = () => {
       </div>
 
 
-      {/* <div className="analytics">
-        <div className="flex justify-between items-center">
-          <div className="text-gray-700 font-medium">
-            <span>Analytics</span>
-          </div>
-          <div className="text-gray-700 font-medium">
-            <span>View Analytics</span>
-          </div>
+      <div className="analytics flex flex-wrap gap-1 w-full">
+        {
+          jobs?.jobsPosted?.map((items,index) =>{
+            return (
+              <>
+                 <div className="w-6 h-6 bg-green-500 rounded-full flex justify-center items-center">{items.students.length}</div>
+                <Job item={items} key={index}/>
+              </>
+            ) 
+          })
+        }
+        
       </div>
-    </div> */}
     </section>
   );
 };
