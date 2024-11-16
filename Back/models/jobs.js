@@ -41,9 +41,12 @@ const jobSchema = new mongo.Schema({
     logo:{
         type:String
     },
-    students:{
-        type:[String]
-    },
+    students:[
+       {
+        type:mongo.Schema.Types.ObjectId,
+        ref:'users'
+       }
+    ],
 });
 
 

@@ -29,7 +29,7 @@ users.post('/', async(req,res) =>{
             password:hashPassword
         }
         const created = await userModel.create(newObj);
-    
+        
         res.status(201).json({
             message: "User Credentials Successfully Saved!",
             user: newObj
