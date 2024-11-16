@@ -14,6 +14,13 @@ import Test from './Pages/Test.jsx'
 import Profile from './Pages/Profile.jsx'
 import Admin from './Pages/Admin.jsx'
 import RequiredAuth from './components/RequiredAuth.jsx'
+import Jobs from './Pages/Jobs.jsx'
+import Dashboard from './components/Dashboard.jsx'
+
+import Jobz from './components/Jobz.jsx'
+import Talents from './components/Talents.jsx'
+import Chats from './components/Chats.jsx'
+import Users from './components/Users.jsx'
 const App = () => {
   return (
     
@@ -33,9 +40,16 @@ const App = () => {
               <Route path='/test' element={<Test />}/>
               <Route path ='/:id/profile' element={<Profile />} />
               <Route path ='/browse' element={<Browse />} />
-              <Route element = {<RequiredAuth />}>
-                <Route path = '/admin' element={<Admin />} />
-              </Route>
+              <Route path ='/jobs' element={<Jobs />} />
+              {/* <Route element = {<RequiredAuth />}> */}
+                <Route path = '/admin' element={<Admin />} >
+                  <Route path='/admin/dashboard' element={<Dashboard />} />
+                  <Route path='/admin/users' element={<Users/>} />
+                  <Route path='/admin/jobs' element={<Jobz />} />
+                  <Route path='/admin/talents' element={<Talents />} />
+                  <Route path='/admin/chats' element={<Chats />} />
+                </Route>  
+              {/* </Route> */}
               <Route path ='*' element={<Browse />} />
           </Routes>
           <Footer />

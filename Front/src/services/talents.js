@@ -36,12 +36,14 @@ export const getByRole = async (role) =>{
 }
 
 
-export const getSingle = async (id) =>{
+export const getSingle = async (id) => {
+
+    console.log(id)
     const config = {
         headers:{'Authorization' :token}
     }
-    const newUrl = BASE_URL + `/${id}`
-    const response = await axios.get(newUrl,config)
+    // const newUrl = BASE_URL + `/${id}`
+    const response = await axios.get(`http://localhost:8000/talent/${id}`,config)
    
     return response.data[0]
 }

@@ -5,10 +5,9 @@ import { AllContext } from '../Context/AllContext';
 
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
-  const { login,user } = useContext(AllContext);
+  const { login } = useContext(AllContext);
   const navigate = useNavigate();
 
-  console.log(user)
   const handleChange = (e) => {
     setCredential((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

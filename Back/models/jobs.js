@@ -40,7 +40,10 @@ const jobSchema = new mongo.Schema({
     },
     logo:{
         type:String
-    }
+    },
+    students:{
+        type:[String]
+    },
 });
 
 

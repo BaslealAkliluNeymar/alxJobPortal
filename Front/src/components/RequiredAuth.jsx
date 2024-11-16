@@ -1,10 +1,9 @@
 import React from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-// import { useContext } from 'react'
-// import { AllContext } from '../Context/AllContext'
+
 
 const RequiredAuth = () => {
-//   const { user } = useContext(AllContext)
+
   
 
   const User = localStorage.getItem('user')

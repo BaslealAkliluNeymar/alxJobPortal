@@ -10,18 +10,18 @@ const Single = () => {
   const { user } = useContext(AllContext)
   const { id } = useParams()
  
-  useEffect(() =>{
-    const fetchSingle = async () =>{
-      const token = localStorage.getItem('token')
-      setToken(token)
-      const data = await getSingle(id)
-      console.log(data)
-      setDetail(data)
-    }
-
-
-    fetchSingle()
-  },[])
+  useEffect(() => {
+    const fetchSingle = async () => {
+      const token = localStorage.getItem('token');
+      setToken(token);
+      const data = await getSingle(id);
+      setDetail(data);
+    };
+  
+    fetchSingle();
+  }, [id]);
+  
+  console.log(detail)
   
   return (
       <section className='h-full container'>
@@ -79,7 +79,7 @@ const Single = () => {
         <div className='w-full p-5'>
           <h1 className='font-bold text-2xl text-left mb-5'>Work History</h1>
           {
-            detail?.workHistory.map((item,index) => {
+            detail?.workHistory?.map((item,index) => {
               return (
                 <div key={index} className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
             
@@ -104,7 +104,7 @@ const Single = () => {
                       </div>
                       <div className='flex gap-2'>
                         {
-                          item.technologies.map((tech, index) =>{
+                          item?.technologies?.map((tech, index) =>{
                             return (
                               <SkillCard item={tech} key={index} />
                             )
@@ -127,7 +127,7 @@ const Single = () => {
           <h1 className='font-bold text-2xl text-left mb-5'>Projects</h1>
           <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
             {
-              detail?.projects?.map((item,index) =>{
+              detail?.projects?.map((item) =>{
                   return(<div className='flex gap-2'>
                     <Building2 />
                      <div className='flex flex-col gap-2'>
@@ -149,9 +149,9 @@ const Single = () => {
                        </div>
                        <div className='flex gap-2'>
                         {
-                          item?.technologies?.map((item,index) =>{
+                          item?.technologies?.map((items,index) =>{
                             return (
-                              <SkillCard item={item} key={index} />
+                              <SkillCard item={items} key={index} />
                             )
                           })
                         }
@@ -174,11 +174,11 @@ const Single = () => {
           <h1 className='font-bold text-2xl text-left mb-5'>Education</h1>
           <div className='shadow-2xl border-slate-200 border-2 p-4 rounded-lg'>
             {
-              item?.education?.map((item,index) =>{
+              detail?.education?.map((itemz,index) =>{
                 return (
                   <div className='flex flex-col justify-center gap-2 mb-2 border-b-2 border-slate-400 pb-2'>
-                    <h1 className='font-bold text-2xl'>{item?.nameofDegree}</h1>
-                    <p>{item?.placeofEducation}</p>
+                    <h1 className='font-bold text-2xl'>{itemz?.nameofDegree}</h1>
+                    <p>{itemz?.placeofEducation}</p>
                     <div className='flex gap-2 items-center'>
                       <p>June,2016</p>
                       <p>June,2021</p>
@@ -187,8 +187,8 @@ const Single = () => {
                 )
               })
             }
-          </div>
-        </div>
+          </div> 
+       </div>
       </section>
 
   )

@@ -19,6 +19,7 @@ const Card = (props) => {
               alt="Profile"
               className="w-16 h-16 rounded-full object-cover bg-slate-600 shadow-md"
             />
+          
             <div className="bg-green-400 w-4 h-4 rounded-full absolute bottom-0 right-0 border-2 border-white"></div>
           </div>
           
