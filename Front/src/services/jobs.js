@@ -30,7 +30,7 @@ export const getUserJobs = async () =>{
         headers:{'Authorization' :token}
     }
     const response = await axios.get(`http://localhost:8000/admin/jobs`,config)
-    console.log(response)
+
     return response.data
 }
 
@@ -39,7 +39,12 @@ export const ApplyJob = async (id) =>{
     const config = {
         headers:{'Authorization' :token}
     }
-    const response = await axios.post(`http://localhost:8000/jobs/${id}/apply`,config)
-    console.log(response.data)
+
+    console.log(id)
+
+    console.log(config)
+    
+    const response = await axios.post(`http://localhost:8000/jobs/${id}/apply`,{},config)
+
     return response.data
 }

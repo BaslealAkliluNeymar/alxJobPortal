@@ -6,6 +6,7 @@ import Job from '../components/Job'
 import Button from '../components/Button'
 import PopOver from '../components/PopOver'
 import { ListFilter } from 'lucide-react'
+import Error from '../components/Error'
 
 const Jobs = () => {
     const locate = useLocation()
@@ -13,10 +14,10 @@ const Jobs = () => {
     const [pop,setPop] =  useState(false)
     const [popData,setpopData] = useState({})
     const [search,setSearch] = useState('')
-    // const {path,location,search ,pathname} = locate.state || {}
+    const [errors , setError] = useState({})
   
-    // console.log(locate.state)
-  
+
+    console.log(errors)
     const handlePopOver = (item) =>{
       setpopData(item)
       setPop(!pop)
@@ -36,18 +37,19 @@ const Jobs = () => {
     const handleChange = (e) =>{
       setSearch(e.target.value)
     }
-    console.log(jobs)
+
     return (
       <div className='min-h-screen relative container'>
-        <div className='flex justify-end items-center gap-2 mt-10 w-full'>
-            <input type="text" className='outline-none border-2 border-slate-400 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 flex-auto' placeholder='Search jobs' onChange={handleChange}/>
-            <ListFilter className='text-green-400 hover:text-green-500 text-4xl' />
+        { errors && <Error item={errors}/>}
+        <div className='flex justify-between items-center gap-2 mt-10 w-full'>
+            <input type="text" className='outline-none  border-4 border-green-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 ' placeholder='Search jobs' onChange={handleChange}/>
+            <ListFilter className='text-green-400 hover:text-green-500 text-8xl w-10 h-10 cursor-pointerpointer' />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 w-full mt-10 aspect-square p-2">
           
            {jobs.length > 0 ? (
             jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
-              console.log(item)
+             
               return (
                 <div className='flex gap-4 justify-start items-start h-[150px] w-full bg-white p-6 shadow-md' onClick={() => handlePopOver(item)} >
                   <div className='flex flex-col justify-center items-center h-full border-2 border-slate-200 flex-1'>
@@ -74,7 +76,7 @@ const Jobs = () => {
           )}
 
           {
-            pop && <PopOver PopOver={pop} setPop={setPop} item={popData} />
+            pop && <PopOver PopOver={pop} setPop={setPop} item={popData} setError={setError}/>
           }
          </div>       
          

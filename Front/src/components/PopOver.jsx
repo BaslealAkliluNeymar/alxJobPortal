@@ -1,23 +1,30 @@
 import React,{useEffect, useState} from 'react';
 import { ApplyJob, setToken } from '../services/jobs';
 
-const PopOver = ({ PopOver, setPop, item }) => {
+const PopOver = ({ PopOver, setPop, item, setError }) => {
   if (!PopOver) return null;
-  const [initial,setInitial] = useState('')
-
+  const [initial,setInitial] = useState({})
+  const [apply, setApply] = useState(false)
   const handleClose =  () => setPop(false);
 
   
-    const handleApply = async (id) =>{
-        const token = localStorage.getItem('token')
-        console.log(token)
-        setToken(token)
-        const response = await ApplyJob(id)
-        setInitial(response.message)
-        // alert('Applied successfully!'); 
-    };
+  const handleApply = async (id) =>{
+    const found = localStorage.getItem('token')
+    setToken(found)
 
-    console.log(initial)
+    const response = await ApplyJob(id)
+    console.log(response)
+    if(response.type === 'Success'){
+      setInitial(response.message)
+    }
+    else{
+      setError(response.message)
+    }
+
+    setPop(true)
+    handleClose()
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg w-[90%] md:w-[50%] lg:w-[40%] p-6 relative">
