@@ -1,10 +1,12 @@
 import React, { useState,useEffect } from "react";
 import { getUserJobs, saveJob, setToken } from "../services/jobs";
 import Job from "./Job";
+import Button from "./Button";
 
 const Jobz = () => {
   const [modal, setModal] = useState(false);
   const [jobs, setJobs] = useState();
+  const [jobModal, setJobModal] = useState(false);
   const [data, setData] = useState({
     jobTitle: "",
     company: "",
@@ -30,7 +32,12 @@ const Jobz = () => {
 
 
   console.log(jobs)
-
+  const handleJobModal = () => {
+    setJobModal(true)
+  }
+  const handleJobModalClose = () => {
+    setJobModal(false)
+  }
   const handleChange = (e) => {
     setData({
       ...data,
@@ -185,14 +192,28 @@ const Jobz = () => {
       </div>
 
 
-      <div className="analytics flex flex-wrap gap-1 w-full">
+      <div className="analytics flex flex-wrap gap-4 p-4 w-full">
         {
           jobs?.jobsPosted?.map((items,index) =>{
+            console.log(items)
             return (
-              <>
-                 <div className="w-6 h-6 bg-green-500 rounded-full flex justify-center items-center">{items.students.length}</div>
-                <Job item={items} key={index}/>
-              </>
+              <div className="border-2 border-slate-200 w-auto h-auto rounded-lg shadow-lg " onClick={() => setJobModal(items)}>
+                 <div className="w-6 h-6 p-4 bg-green-500 rounded-full absolute flex justify-center items-center">{items.students.length}</div>
+                 {/* <div className='flex gap-4 justify-start items-start h-[150px] w-[35%] bg-white p-6 shadow-md'> */}
+                  <div className='flex justify-center items-center h-full border-2 border-slate-200 flex-1 rounded-lg p-4'>
+                      <img src={items.logo} className="w-24 h-24 rounded-full object-contain flex justify-center items-center" alt="logo" />
+                  {/* </div> */}
+                  <div className='flex flex-col gap-[0.15rem] justify-between h-full flex-auto'>
+                      <h1 className='font-bold font-poppins'>{items.jobTitle}</h1>
+                      <p className='font-epilogue flex justify-start gap-[0.25rem] text-[#515B6F] items-center'>Nomad <span className='bg-[#515B6F] h-1 w-1 rounded-full flex justify-center items-center'></span>{items.location}</p>
+                      <div className='flex gap-2'>
+                          <Button name="Business" />
+                          <Button name="Marketing" />
+                          <Button name="Design" />
+                      </div>
+                  </div>
+                </div>
+              </div>
             ) 
           })
         }

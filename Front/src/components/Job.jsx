@@ -2,10 +2,11 @@ import React from 'react'
 import Button from './Button'
 
 const Job = (props) => {
-  const {position , type, location , logo } = props.item
+  const {position , type, location , logo} = props.item
+  const {width} = props
   
   return (
-    <div className='flex gap-4 justify-start items-start h-[150px] w-[49%] bg-white p-6 shadow-md'>
+    <div className='flex gap-4 justify-start items-start h-[150px] w-[49%] bg-white p-6 shadow-md' style={{width:width}}>
         <div className='flex flex-col justify-center items-center h-full border-2 border-slate-200 flex-1'>
             <img src={logo} alt="logo" />
         </div>
