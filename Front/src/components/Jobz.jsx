@@ -192,16 +192,16 @@ const Jobz = () => {
       </div>
 
 
-      <div className="analytics flex flex-wrap gap-4 p-4 w-full">
+      <div className="analytics flex flex-wrap gap-4 p-4 w-full ">
         {
           jobs?.jobsPosted?.map((items,index) =>{
             console.log(items)
             return (
-              <div className="border-2 border-slate-200 w-auto h-auto rounded-lg shadow-lg " onClick={() => setJobModal(items)}>
-                 <div className="w-6 h-6 p-4 bg-green-500 rounded-full absolute flex justify-center items-center">{items.students.length}</div>
+              <div className="border-2 border-slate-200 w-auto h-auto rounded-lg shadow-lg cursor-pointer relative" onClick={() => setJobModal(items)}>
+                 <div className="w-6 h-6 p-4 bg-green-500 rounded-full  flex justify-center items-center right-0 bottom-[-6] absolute">{items.students.length}</div>
                  {/* <div className='flex gap-4 justify-start items-start h-[150px] w-[35%] bg-white p-6 shadow-md'> */}
                   <div className='flex justify-center items-center h-full border-2 border-slate-200 flex-1 rounded-lg p-4'>
-                      <img src={items.logo} className="w-24 h-24 rounded-full object-contain flex justify-center items-center" alt="logo" />
+                      <img src={items.logo} className="w-full h-full rounded-full object-contain flex justify-center items-center" alt="logo" />
                   {/* </div> */}
                   <div className='flex flex-col gap-[0.15rem] justify-between h-full flex-auto'>
                       <h1 className='font-bold font-poppins'>{items.jobTitle}</h1>

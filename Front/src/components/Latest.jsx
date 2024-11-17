@@ -37,7 +37,7 @@ const Latest = () => {
     <div className="container flex flex-wrap gap-5 w-full py-4">
       {/* {error && <p className="text-red-500">{error}</p>} */}
       {jobs.length > 0 ? (
-        jobs.map((item) => <Job item={item} key={item.id || item.title}  />)
+        jobs.filter((item) => item.experience === "Entry").map((item) => <Job item={item} key={item.id || item.title}  />)
       ) : (
         <div className='flex gap-2 justify-center items-center w-full h-96'>
           <p>Loading jobs</p>

@@ -26,35 +26,39 @@ jobRouter.get('/', async (req,res) =>{
 })
 
 
-jobRouter.post('/', async (req,res) =>{
-    try
-    {
-        console.log(req.body)
-        const auth = req.headers.authorization.split(' ')[1]
+jobRouter.post('/:id/apply', async (req,res) =>{
+    // try
+    // {
+        console.log(req.headers.authorization)
+        const id = req.params.id
+        const auth = req?.headers?.authorization?.split(' ')[1]
     
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
         const user = await userModel.findOne({email:found.email})
-    
-        // console.log(user)
+        const jobs = await Job.findOne({_id:id})
        
-        // if (user.role !== 'Employer') return res.send({message:"Only Employers Allowed In Here!"})
-    
-    
-        const newObj = {
-            postedBy:user._id,
-            ...req.body
-        }
-        console.log(newObj)
-        const savedJob = await Job.create(newObj)
-        console.log(savedJob)
-        user.jobsPosted.push(savedJob._id)
-        res.send(savedJob)
-    }
-    catch(error){
+        // if (user.role === 'Employer') return res.send({message:"Only Students can apply for jobs"})
+        if (jobs.students.includes(user._id)) return res.send({message:"You have already applied for this job"})
+        jobs.students.push(user._id)
+        
+        await jobs.save()
+        // const newObj = {
+        //     ...jobs,
+        //     students:jobs.students.push(user._id)
+        // }
+        // console.log(jobs)
+        
         res.send({
-            message:error.message
-        })
-    }
+                message:"Succesfully Applied"
+            }
+        )
+    // }
+    // catch(error){
+    //     res.send({
+    //         message:error.message,
+    //         message2:"its not working"
+    //     })
+    // }
 })
 
 module.exports = jobRouter

@@ -1,13 +1,23 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
+import { ApplyJob, setToken } from '../services/jobs';
 
 const PopOver = ({ PopOver, setPop, item }) => {
   if (!PopOver) return null;
+  const [initial,setInitial] = useState('')
 
-  const handleClose = () => setPop(false);
-  const handleApply = () => {
-    alert('Applied successfully!'); // Replace with actual apply functionality
-  };
+  const handleClose =  () => setPop(false);
 
+  
+    const handleApply = async (id) =>{
+        const token = localStorage.getItem('token')
+        console.log(token)
+        setToken(token)
+        const response = await ApplyJob(id)
+        setInitial(response.message)
+        // alert('Applied successfully!'); 
+    };
+
+    console.log(initial)
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg w-[90%] md:w-[50%] lg:w-[40%] p-6 relative">
@@ -84,7 +94,7 @@ const PopOver = ({ PopOver, setPop, item }) => {
             Close
           </button>
           <button
-            onClick={handleApply}
+            onClick={() => handleApply(item._id)}
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
           >
             Apply

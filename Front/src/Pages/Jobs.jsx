@@ -5,12 +5,14 @@ import { getJobs, setToken } from '../services/jobs'
 import Job from '../components/Job'
 import Button from '../components/Button'
 import PopOver from '../components/PopOver'
+import { ListFilter } from 'lucide-react'
 
 const Jobs = () => {
     const locate = useLocation()
     const [jobs, setJobs] = useState([]);
     const [pop,setPop] =  useState(false)
     const [popData,setpopData] = useState({})
+    const [search,setSearch] = useState('')
     // const {path,location,search ,pathname} = locate.state || {}
   
     // console.log(locate.state)
@@ -30,13 +32,21 @@ const Jobs = () => {
       }
       fetchData()
     },[])
+
+    const handleChange = (e) =>{
+      setSearch(e.target.value)
+    }
     console.log(jobs)
     return (
       <div className='min-h-screen relative container'>
+        <div className='flex justify-end items-center gap-2 mt-10 w-full'>
+            <input type="text" className='outline-none border-2 border-slate-400 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 flex-auto' placeholder='Search jobs' onChange={handleChange}/>
+            <ListFilter className='text-green-400 hover:text-green-500 text-4xl' />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 w-full mt-10 aspect-square p-2">
-
+          
            {jobs.length > 0 ? (
-            jobs.map((item, index) => {
+            jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
               console.log(item)
               return (
                 <div className='flex gap-4 justify-start items-start h-[150px] w-full bg-white p-6 shadow-md' onClick={() => handlePopOver(item)} >
