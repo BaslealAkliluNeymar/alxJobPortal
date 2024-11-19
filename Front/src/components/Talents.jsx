@@ -6,33 +6,26 @@ const Talents = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
 
-  // Simulate fetching talents
+  
   useEffect(() => {
-    // Replace this with your API call
+   
     const fetchTalents = async () => {
-      const fakeData = [
-        {
-          id: 1,
-          name: "John Doe",
-          skills: ["React", "Node.js", "MongoDB"],
-          location: "Remote",
-          status: "Approved",
-          resume: "https://example.com/resume/johndoe.pdf",
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:8000/admin/talents", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          id: 2,
-          name: "Jane Smith",
-          skills: ["Python", "Data Analysis", "SQL"],
-          location: "Hybrid",
-          status: "Pending",
-          resume: "https://example.com/resume/janesmith.pdf",
-        },
-      ];
-      setTalents(fakeData);
+      });
+      const data = await response.json();
+      setTalents(data);
+        
     };
 
     fetchTalents();
   }, []);
+
+
 
   const handleViewProfile = (talent) => {
     setSelectedTalent(talent);
@@ -56,12 +49,15 @@ const Talents = () => {
     setSelectedTalent(null);
   };
 
+
+
   const filteredTalents = talents.filter(
     (talent) =>
       talent.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (filter ? talent.status === filter : true)
   );
 
+  console.log(filteredTalents)  
   return (
     <section className="p-6 bg-gray-50">
       <h1 className="text-2xl font-bold mb-6 text-center">Talent Management</h1>
@@ -89,7 +85,8 @@ const Talents = () => {
 
       {/* Talent List */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {filteredTalents.map((talent) => (
+        {filteredTalents?.map((talent) => (
+
           <div
             key={talent.id}
             className="border border-gray-200 bg-white rounded-lg shadow-lg p-4 flex flex-col items-center"
@@ -97,7 +94,7 @@ const Talents = () => {
             <h2 className="text-lg font-bold mb-2">{talent.name}</h2>
             <p className="text-gray-500 mb-2">{talent.location}</p>
             <p className="text-sm font-medium text-gray-600 mb-2">
-              Skills: {talent.skills.join(", ")}
+              Skills: {talent?.skills?.join(", ")}
             </p>
             <p
               className={`text-sm font-medium ${

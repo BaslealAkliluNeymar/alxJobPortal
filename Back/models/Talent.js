@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const talentSchema = new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',  // Reference to the users collection
+        ref: 'users',  
         required: true
     },
     image: {
@@ -16,6 +16,11 @@ const talentSchema = new mongoose.Schema({
     },
     name: {
         type: String
+    },
+    status: {
+        type: String,
+        enum: ['active', 'rejected', 'pending'],
+        default: 'pending'
     },
     position: {
         type: String,

@@ -44,7 +44,7 @@ const jobSchema = new mongo.Schema({
     students:[
        {
         type:mongo.Schema.Types.ObjectId,
-        ref:'users'
+        ref:'Talent'
        }
     ],
 });
