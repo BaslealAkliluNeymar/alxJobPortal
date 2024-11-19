@@ -73,6 +73,7 @@ admin.get('/talents',async (req,res) =>{
         const auth = req.headers.authorization.split(' ')[1]
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
         const tal  = await Job.find({postedBy:found._id}).populate('students')
+        res.send(tal)
         const arr  = []
         for(let item of tal){
             if (item.students.length > 0){
@@ -98,6 +99,35 @@ admin.get('/talents',async (req,res) =>{
     }
   
 })
+
+
+admin.get('/dashboard',async(req,res)=>{  
+    try{
+        const auth = req.headers.authorization.split(' ')[1]
+        const found = jwt.verify(auth, process.env.TOKEN_KEY)
+        const tal  = await Job.find({postedBy:found._id}).populate('students')
+       
+
+        const data = tal.reduce((acc,job) => acc.concat(job.students),[])
+
+
+        const newData = {
+            totalStudents:data.length,
+            totalPending:data.reduce((acc,start) => start.status === 'pending' && acc++,0),
+            totalApproved:data.reduce((acc,start) => start.status === 'active' && acc++,0),
+            totalRejected:data.reduce((acc,start) => start.status === 'rejected' && acc++,0),
+            totalJobs:tal.length
+        }
+        
+        res.send(newData)
+    }
+    catch(err){
+        res.send({
+            message:err.message
+            })
+    }
+
+ })
 
 
 module.exports = admin

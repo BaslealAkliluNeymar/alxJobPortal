@@ -1,25 +1,44 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { Analytics, setToken } from "../services/jobs";
+
 
 const Dashboard = () => {
-  const stats = [
-    { title: "Total Users", value: 1200, icon: "👤", bgColor: "bg-blue-100", textColor: "text-blue-500" },
-    { title: "Jobs Posted", value: 450, icon: "📄", bgColor: "bg-green-100", textColor: "text-green-500" },
-    { title: "Pending Talents", value: 34, icon: "🌟", bgColor: "bg-yellow-100", textColor: "text-yellow-500" },
-    { title: "Messages", value: 124, icon: "✉️", bgColor: "bg-purple-100", textColor: "text-purple-500" },
-  ];
+  const [stats,setStats] = useState([
+    { title: "Total Users", value:  0, icon: "👤", bgColor: "bg-blue-100", textColor: "text-blue-500" },
+    { title: "Jobs Posted", value:  0, icon: "📄", bgColor: "bg-green-100", textColor: "text-green-500" },
+    { title: "Pending Talents", value: 0, icon: "🌟", bgColor: "bg-yellow-100", textColor: "text-yellow-500" },
+    
+  ])
 
-  const recentActivities = [
-    { user: "John Doe", action: "Applied for Software Engineer role", time: "2 hours ago" },
-    { user: "Jane Smith", action: "Uploaded resume", time: "4 hours ago" },
-    { user: "Company ABC", action: "Posted a new job: Data Scientist", time: "1 day ago" },
-    { user: "John Doe", action: "Updated profile details", time: "2 days ago" },
-  ];
+  // const [dummy , setDummy] = useState({})
+
+ 
+
+  useEffect(() =>{
+    const fetchAdminJobs = async () =>{
+      const token = localStorage.getItem('token')
+      setToken(token)
+      const data = await Analytics()
+        
+      setStats(prevStat => 
+          (prevStat.map(stat => {
+            if (stat.title === 'Total Users')  return {...stat, value: data.totalStudents || 0} 
+            if (stat.title === 'Jobs Posted')  return {...stat, value: data.totalJobs || 0} 
+            if (stat.title === 'Pending Talents')  return {...stat, value: data.totalPending || 0}
+          })
+      )
+  )}
+
+    fetchAdminJobs()
+  },[])
+
+
+
 
   return (
     <section className="p-6 bg-gray-50">
       <h1 className="text-2xl font-bold mb-6 text-center">Admin Dashboard</h1>
 
-      {/* Statistics Section */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6">
         {stats.map((stat, index) => (
           <div
@@ -39,7 +58,7 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Recent Activities Section */}
+      {/* Recent Activities Section
       <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
         <h2 className="text-xl font-bold mb-4">Recent Activities</h2>
         <ul className="divide-y divide-gray-200">
@@ -53,7 +72,7 @@ const Dashboard = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
 
       {/* Quick Actions Section */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-3">

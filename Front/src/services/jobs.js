@@ -48,3 +48,15 @@ export const ApplyJob = async (id) =>{
 
     return response.data
 }
+
+
+export const Analytics = async () =>{
+    const config = {
+        headers:{'Authorization' :token}
+    }
+    
+    const response = await axios.get(`http://localhost:8000/admin/dashboard`,config)
+
+    console.log(response)
+    return response.data
+}
