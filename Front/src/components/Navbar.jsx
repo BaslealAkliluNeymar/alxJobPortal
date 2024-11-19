@@ -5,25 +5,29 @@ import { AllContext } from '../Context/AllContext';
 
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
-  const { user } = useContext(AllContext);
-
+  const { user,login,logout } = useContext(AllContext);
+  const [daz,setDaz] = useState({})
+  console.log(user)
   const navigate = useNavigate();
   
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setLoggedin(true);
+      setDaz(user)
     }
   }, [user]);
 
   const handleLogin = () =>{
     navigate('/')
     // setLoggedin(true)
+    login()
   }
 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setLoggedin(false);
+    logout()
     navigate('/');
   };
 

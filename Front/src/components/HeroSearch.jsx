@@ -39,7 +39,9 @@ const HeroSearch = () => {
   };
 
   const handleTitleChange = (e) => {
-    setValue({ ...value,title:e.target.value });
+    setValue(
+      { ...value,title:e.target.value }
+    );
   };
 
 

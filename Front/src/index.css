@@ -7,9 +7,16 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
-}
-
-/* HTML: <div class="loader"></div> */
+    }
+    @keyframes slideInOut {
+        0% { transform: translateX(100%); opacity: 0; } /* Start off-screen */
+        20% { transform: translateX(0); opacity: 1; }  /* Slide in */
+        80% { transform: translateX(0); opacity: 1; }  /* Stay visible */
+        100% { transform: translateX(100%); opacity: 0; } /* Slide out */
+      }
+      .animate-slide-in-out {
+        animation: slideInOut 4s ease-in-out forwards; /* 4 seconds total duration */
+      }
 .loader {
     color: #6cee6c;
     width: 35px;

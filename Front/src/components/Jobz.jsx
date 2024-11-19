@@ -31,7 +31,7 @@ const Jobz = () => {
   },[])
 
 
-  console.log(jobs)
+
   const handleJobModal = () => {
     setJobModal(true)
   }
@@ -74,10 +74,10 @@ const Jobz = () => {
       </div>
       <div className="flex flex-col gap-2">
         {modal && (
-          <div className="bg-transparent flex h-auto w-3/5 flex-col gap-6 items-center m-auto border border-gray-300 bg-white rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-1/2">
+          <div className="flex h-auto z-50 w-3/5 flex-col gap-6 items-center m-auto border border-gray-300 bg-white rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-1/2">
             <div className="border border-gray-200 bg-gray-50 rounded-lg p-6 w-full">
               <div className="flex flex-wrap gap-2 w-full">
-                {/* Job Title */}
+
                 <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
                   <label className="text-gray-700 font-medium mb-1">Job Title</label>
                   <input
@@ -89,7 +89,7 @@ const Jobz = () => {
                     className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
                   />
                 </div>
-                {/* Company */}
+
                 <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
                   <label className="text-gray-700 font-medium mb-1">Company</label>
                   <input
@@ -101,14 +101,14 @@ const Jobz = () => {
                     className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
                   />
                 </div>
-                {/* Experience */}
+
                 <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
                   <label className="text-gray-700 font-medium mb-1">Experience</label>
                   <select
                     name="experience"
                     value={data.experience}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    className="border border-gray-300  p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
                   >
                     <option value="Entry">Entry</option>
                     <option value="Junior">Junior</option>
@@ -192,33 +192,52 @@ const Jobz = () => {
       </div>
 
 
-      <div className="analytics flex flex-wrap gap-4 p-4 w-full ">
+      <div className="analytics flex flex-wrap gap-4 p-4 w-full">
         {
           jobs?.jobsPosted?.map((items,index) =>{
             console.log(items)
             return (
-              <div className="border-2 border-slate-200 w-auto h-auto rounded-lg shadow-lg cursor-pointer relative" onClick={() => setJobModal(items)}>
-                 <div className="w-6 h-6 p-4 bg-green-500 rounded-full  flex justify-center items-center right-0 bottom-[-6] absolute">{items.students.length}</div>
-                 {/* <div className='flex gap-4 justify-start items-start h-[150px] w-[35%] bg-white p-6 shadow-md'> */}
-                  <div className='flex justify-center items-center h-full border-2 border-slate-200 flex-1 rounded-lg p-4'>
-                      <img src={items.logo} className="w-full h-full rounded-full object-contain flex justify-center items-center" alt="logo" />
-                  {/* </div> */}
-                  <div className='flex flex-col gap-[0.15rem] justify-between h-full flex-auto'>
-                      <h1 className='font-bold font-poppins'>{items.jobTitle}</h1>
-                      <p className='font-epilogue flex justify-start gap-[0.25rem] text-[#515B6F] items-center'>Nomad <span className='bg-[#515B6F] h-1 w-1 rounded-full flex justify-center items-center'></span>{items.location}</p>
-                      <div className='flex gap-2'>
-                          <Button name="Business" />
-                          <Button name="Marketing" />
-                          <Button name="Design" />
-                      </div>
-                  </div>
-                </div>
+              <div
+          className="border border-gray-300 rounded-xl shadow-lg cursor-pointer relative transition-transform transform hover:scale-105 hover:shadow-2xl p-4 bg-white"
+          onClick={() => setJobModal(items)}
+        >
+          {/* Badge */}
+          <div className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 bg-green-500 text-white text-sm font-bold rounded-full shadow-md">
+            {items.students.length}
+          </div>
+
+          {/* Logo Section */}
+          <div className="flex justify-center items-center h-20 w-20 mx-auto rounded-full border border-gray-200 overflow-hidden bg-gray-50">
+            <img
+              src={items.logo}
+              alt="logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+
+          {/* Job Info */}
+          <div className="mt-4 flex flex-col items-center text-center gap-2">
+            <h1 className="text-lg font-bold text-gray-800">{items.jobTitle}</h1>
+            <p className="text-sm text-gray-500 flex items-center gap-1">
+              {items.company} 
+              <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
+              {items.location}
+            </p>
+
+            {/* Tags */}
+            <div className="flex gap-2 mt-2">
+              <Button name="Business" />
+              <Button name="Marketing" />
+              <Button name="Design" />
+            </div>
+          </div>
+        </div>
+
+                    ) 
+                  })
+                }
+                
               </div>
-            ) 
-          })
-        }
-        
-      </div>
     </section>
   );
 };

@@ -5,19 +5,18 @@ export const AllContext = createContext()
 
 export const AllContextProvider = ({ children }) =>{
     // const user = useRef({})
-
+    const [user, setUser] = useState({})
     
     const login = (userData) =>{
         localStorage.setItem('token',userData.token)
-        localStorage.setItem('user',JSON.stringify({
+        const user  = localStorage.setItem('user',JSON.stringify({
             user:userData.user,
             email:userData.email,
             role:userData.role
         }))
+        setUser(user)
         
     }
-
-    // console.log(user)
 
     const logout = () =>{
         localStorage.removeItem('token')
@@ -25,7 +24,7 @@ export const AllContextProvider = ({ children }) =>{
     }
 
     return (
-        <AllContext.Provider value={{ login, logout}}>
+        <AllContext.Provider value={{ user,login, logout}}>
             {children}
         </AllContext.Provider>
     )

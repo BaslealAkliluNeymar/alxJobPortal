@@ -16,6 +16,7 @@ const Jobs = () => {
     const [search,setSearch] = useState('')
     const [errors , setError] = useState({})
   
+    console.log(errors)
 
     console.log(errors)
     const handlePopOver = (item) =>{
@@ -40,7 +41,7 @@ const Jobs = () => {
 
     return (
       <div className='min-h-screen relative container'>
-        { errors && <Error item={errors}/>}
+        {/* <Error item={errors} /> */}
         <div className='flex justify-between items-center gap-2 mt-10 w-full'>
             <input type="text" className='outline-none  border-4 border-green-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 ' placeholder='Search jobs' onChange={handleChange}/>
             <ListFilter className='text-green-400 hover:text-green-500 text-8xl w-10 h-10 cursor-pointerpointer' />

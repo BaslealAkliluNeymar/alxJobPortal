@@ -14,13 +14,8 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
 
     const response = await ApplyJob(id)
     console.log(response)
-    if(response.type === 'Success'){
-      setInitial(response.message)
-    }
-    else{
-      setError(response.message)
-    }
-
+    setInitial(response)
+    setError(response)
     setPop(true)
     handleClose()
   };

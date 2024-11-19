@@ -66,5 +66,39 @@ admin.post('/jobs',async (req,res) =>{
     }
 })
 
+admin.get('/talents',async (req,res) =>{
+    // try
+    // {
+        // console.log(req.body)
+        const auth = req.headers.authorization.split(' ')[1]
+        
+        const found = jwt.verify(auth, process.env.TOKEN_KEY)
+        const user = await userModel.findOne({email:found.email})
+        
+        const job = await Job.find({postedBy:user._id})
+
+       
+        console.log(job)
+    //     const newObj = {
+    //         postedBy:user._id,
+    //         ...req.body
+    //     }
+
+    //     const savedJob = await Job.create(newObj)
+
+    //     user.jobsPosted.push(savedJob._id)
+
+    //     await user.save()
+
+    //     console.log(user)
+    //     res.send(savedJob)
+    // }
+    // catch(error){
+    //     res.send({
+    //         message:error.message
+    //     })
+    // }
+})
+
 
 module.exports = admin

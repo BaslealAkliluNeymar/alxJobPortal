@@ -1,5 +1,6 @@
 import React from 'react'
 const Error = ({ item }) => {
+  console.log(item)
   const styles = {
     success: {
       color: "green",
@@ -35,8 +36,9 @@ const Error = ({ item }) => {
   const style = styles[type] || styles.default;
 
   return (
-    <div style={style} className='w-96 h-14 flex justify-center items-center'>
-      {message}
+    <div style={item.type === 'success' ? styles.success : styles.failed} className='fixed top-5 right-0 w-80 p-4 bg-red-500 text-white rounded-md shadow-md 
+            animate-slide-in-out animate-pop-in-out'>
+      {item.message}
     </div>
   );
 };
