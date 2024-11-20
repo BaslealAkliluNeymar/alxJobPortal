@@ -27,6 +27,8 @@ const Talents = () => {
 
 
 
+  console.log(talents)
+
   const handleViewProfile = (talent) => {
     setSelectedTalent(talent);
   };
@@ -62,7 +64,6 @@ const Talents = () => {
     <section className="p-6 bg-gray-50">
       <h1 className="text-2xl font-bold mb-6 text-center">Talent Management</h1>
 
-      {/* Search and Filter Section */}
       <div className="flex flex-wrap gap-4 items-center mb-6">
         <input
           type="text"
@@ -83,7 +84,7 @@ const Talents = () => {
         </select>
       </div>
 
-      {/* Talent List */}
+      
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredTalents?.map((talent) => (
 
@@ -117,7 +118,7 @@ const Talents = () => {
         ))}
       </div>
 
-      {/* Profile Modal */}
+     
       {selectedTalent && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl w-3/4 max-w-2xl p-6">

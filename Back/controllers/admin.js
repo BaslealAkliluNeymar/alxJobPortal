@@ -73,7 +73,7 @@ admin.get('/talents',async (req,res) =>{
         const auth = req.headers.authorization.split(' ')[1]
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
         const tal  = await Job.find({postedBy:found._id}).populate('students')
-        res.send(tal)
+       
         const arr  = []
         for(let item of tal){
             if (item.students.length > 0){
