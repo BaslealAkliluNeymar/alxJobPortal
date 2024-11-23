@@ -34,8 +34,7 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container flex flex-wrap gap-5 w-full py-4">
-      {/* {error && <p className="text-red-500">{error}</p>} */}
+    <div className="container grid grid-cols-2 gap-2 w-full py-2 border-2 border-red-50-">
       {jobs.length > 0 ? (
         jobs.filter((item) => item.experience === "Entry").map((item) => <Job item={item} key={item.id || item.title}  />)
       ) : (

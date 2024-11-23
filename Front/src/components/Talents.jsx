@@ -25,9 +25,28 @@ const Talents = () => {
     fetchTalents();
   }, []);
 
+  useEffect(() => {
+    const changeStatus = async () => {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:8000/admin/talents/${selectedTalent.id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status: selectedTalent.status,
+          }),
+        }
+      );
+    }
+
+    
+    changeStatus();
+  }, [selectedTalent]);
 
 
-  console.log(talents)
 
   const handleViewProfile = (talent) => {
     setSelectedTalent(talent);

@@ -23,7 +23,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg w-[90%] md:w-[50%] lg:w-[40%] p-6 relative">
-        {/* Header */}
+
         <div className="flex items-center justify-between border-b pb-4">
           <div className="flex items-center gap-4">
             <img
@@ -44,7 +44,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </button>
         </div>
 
-        {/* Job Details */}
+
         <div className="mt-4 space-y-3">
           <p className="text-sm text-gray-600">
             <strong>Type:</strong> {item.type}
@@ -57,7 +57,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </p>
         </div>
 
-        {/* Description */}
+
         <div className="mt-6">
           <h3 className="text-md font-semibold text-gray-800">Description</h3>
           <ul className="list-disc pl-5 text-sm text-gray-600">
@@ -67,7 +67,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </ul>
         </div>
 
-        {/* Responsibilities */}
+
         <div className="mt-6">
           <h3 className="text-md font-semibold text-gray-800">Responsibilities</h3>
           <ul className="list-disc pl-5 text-sm text-gray-600">
@@ -77,7 +77,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </ul>
         </div>
 
-        {/* Qualifications */}
+        
         <div className="mt-6">
           <h3 className="text-md font-semibold text-gray-800">Qualifications</h3>
           <ul className="list-disc pl-5 text-sm text-gray-600">
@@ -87,7 +87,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </ul>
         </div>
 
-        {/* Footer */}
+        
         <div className="mt-6 flex justify-between items-center">
           <button
             onClick={handleClose}

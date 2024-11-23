@@ -6,6 +6,10 @@ const talentSchema = new mongoose.Schema({
         ref: 'users',  
         required: true
     },
+    summary: {
+        type: String,
+        required: true
+    },
     image: {
         type: String,
         required: true

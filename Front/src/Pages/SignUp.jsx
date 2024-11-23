@@ -36,8 +36,8 @@ const SignUp = () => {
   };
 
   return (
-    <section className='flex w-[80%] h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4'>
-      <div className='flex-1 bg-green-400'></div>
+    <section className='flex w-1/2 justify-center items-center bg-gradient-to-r from-blue-500  to-white transition-shadow delay-100 h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4'>
+      {/* <div className='flex-1 bg-green-400'></div> */}
 
 
       <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-8 bg-white'>

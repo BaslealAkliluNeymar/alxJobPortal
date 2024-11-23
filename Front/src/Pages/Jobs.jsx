@@ -16,7 +16,7 @@ const Jobs = () => {
     const [search,setSearch] = useState('')
     const [errors , setError] = useState({})
   
-    console.log(errors)
+    console.log(jobs)
 
     console.log(errors)
     const handlePopOver = (item) =>{
@@ -52,21 +52,45 @@ const Jobs = () => {
             jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
              
               return (
-                <div className='flex gap-4 justify-start items-start h-[150px] w-full bg-white p-6 shadow-md' onClick={() => handlePopOver(item)} >
-                  <div className='flex flex-col justify-center items-center h-full border-2 border-slate-200 flex-1'>
-                      <img src={item.logo} alt="logo" />
-                  </div>
-                  <div className='flex flex-col gap-[0.15rem] justify-between h-full flex-auto'>
-                      <h1 className='font-bold font-poppins'>{item.position}</h1>
-                      <p className='font-epilogue flex justify-start gap-[0.25rem] text-[#515B6F] items-center'>Nomad <span className='bg-[#515B6F] h-1 w-1 rounded-full flex justify-center items-center'></span>{item.location}</p>
-                      <div className='flex gap-2'>
-                          <Button name={item.type} />
-                          <Button name="Marketing" />
-                          <Button name="Design" />
-                      </div>
+                <div 
+                className="flex gap-4 justify-start items-start h-auto w-full bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer" 
+                onClick={() => handlePopOver(item)}
+              >
+                {/* Logo Section */}
+                <div className="flex justify-center items-center h-[120px] w-[120px] bg-white border-2 border-gray-200 rounded-md">
+                  {item?.logo ? (
+                    <img src={item.logo} alt="logo" className="h-full w-full object-contain rounded-md" />
+                  ) : (
+                    <span className="text-gray-400">No Logo</span>
+                  )}
+                </div>
+              
+               
+                <div className="flex flex-col gap-2 justify-between flex-auto">
+                 
+                  <h1 className="font-bold font-poppins text-lg text-gray-800">{item?.position}</h1>
+                
+                  <p className="font-epilogue text-sm text-gray-600 flex items-center gap-2">
+                    <span>{item?.company}</span>
+                    <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
+                    <span>{item?.location}</span>
+                  </p>
+                 
+                  <p className='font-bold w-full'>{item?.jobTitle}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+                      {item?.type}
+                    </span>
+                    <span className="px-3 py-1 bg-green-100 text-green-600 text-sm font-medium rounded-full">
+                      {item?.experience}
+                    </span>
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-600 text-sm font-medium rounded-full">
+                      Design
+                    </span>
                   </div>
                 </div>
-               
+              </div>
+              
               );
             })
          

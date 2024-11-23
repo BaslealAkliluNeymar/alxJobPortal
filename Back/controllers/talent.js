@@ -63,16 +63,31 @@ talentRoute.post('/',async(req,res) =>{
 })
 
 talentRoute.get('/search',async(req,res) =>{
+    
     const { position,location } = req.query
-    
-    console.log(position)
     const newPosition = new RegExp(position, "i")
+    if(position === "" && location === '') {
+        const all = await talentModel.find({})
+        res.send(all)
+    }
+    else if(position === "" || location === "") {
+       const correct = {}
+       for (const [key, value] of Object.entries(req.query)){
+            if(req.query[key] === ""){
+                delete req.query[key]
+            }
+            else{
+                correct[key] = req.query[key]
+            }
+       }
+       const found = await talentModel.find(correct)
+       res.send(found)
+    }
+    else{
+        const positionsFound = await talentModel.find({ position: newPosition, location: location})
+        res.send(positionsFound)
+    }
     
-    const positionsFound = (location === 'ALL') ? await talentModel.find({position:newPosition}):
-     await talentModel.find({ position: newPosition, location: location})
-
-    res.send(positionsFound)
-
 })
 
 

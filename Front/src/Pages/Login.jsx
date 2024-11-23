@@ -20,12 +20,12 @@ const Login = () => {
   };
 
   return (
-    <section className='flex w-[80%] h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4'>
+    <section className='flex justify-center items-center w-[33%] h-[640px] mx-auto shadow-xl bg-gradient-to-br from-blue-50 to-white rounded-lg overflow-hidden m-4 transition-shadow duration-300'>
       {/* Left Section */}
-      <div className='flex-1 bg-green-400'></div>
+      {/* <div className='flex-1 bg-green-400'></div> */}
 
       {/* Right Section */}
-      <div className='flex-1 flex flex-col items-center space-y-8 justify-center p-8 bg-white'>
+      <div className='flex flex-col items-center space-y-8 justify-center p-8  '>
         <div className='text-center'>
           <h1 className='text-2xl font-bold'>Welcome to</h1>
           <span className='text-2xl text-green-500 font-bold'>Your Future</span>
