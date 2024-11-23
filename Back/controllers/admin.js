@@ -74,22 +74,21 @@ admin.get('/talents',async (req,res) =>{
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
         const tal  = await Job.find({postedBy:found._id}).populate('students')
        
-        const arr  = []
-        for(let item of tal){
-            if (item.students.length > 0){
-                for (let i = 0; i < item.students.length; i++) {
-                    arr.push({
-                        id:item.students[i]._id,
-                        jobTitle:item.jobTitle,
-                        name:item.students[i].name,
-                        skills:item.students[i].skills,
-                        status:item.students[i].status,
-                        resume:item.students[i].resume,
-                        location:item.students[i].location,
-                    })
-                }
-            }
-        }
+
+        const arr = tal.flatMap(item =>
+            item.students.length > 0
+                ? item.students.map(student => ({
+                      id: student._id,
+                      jobTitle: item.jobTitle,
+                      name: student.name,
+                      skills: student.skills,
+                      status: student.status,
+                      resume: student.resume,
+                      location: student.location,
+                  }))
+                : []
+        );
+        
         res.send(arr)
     }
     catch(err){

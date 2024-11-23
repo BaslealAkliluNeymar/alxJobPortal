@@ -1,7 +1,7 @@
 import React,{useState , useEffect }from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { getProfile, setToken } from "../services/talents";
-
+import { Upload } from 'lucide-react'
 export default function Profile() {
   const { register, handleSubmit, control } = useForm();
   const [profile, setProfile]  = useState({})
@@ -36,6 +36,10 @@ export default function Profile() {
 
   };
 
+
+  const handleUpload = () =>{
+    console.log('upload')
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto p-6 bg-white rounded-lg shadow-lg container">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">Talent Profile</h2>
@@ -53,6 +57,13 @@ export default function Profile() {
         placeholder="Resume URL"
         className="w-full mb-4 px-3 py-2 border rounded-md"
       />
+
+      <div className="w-32 h-20 border-2 p-2 gap-2 border-slate-300 flex justify-between items-center rounded-md focus:bg-slate-300 cursor-pointer" onClick={handleUpload}>
+        <Upload />
+        <p>Upload Resume</p>
+      </div>
+
+      
 
       <label className="block text-gray-700">Name</label>
       <input
