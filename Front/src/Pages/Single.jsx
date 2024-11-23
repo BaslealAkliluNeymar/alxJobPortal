@@ -25,7 +25,7 @@ const Single = () => {
   
   return (
     <section className="container mx-auto py-8">
-    <div className="bg-red-200 p-4 rounded-lg flex items-center gap-8">
+    <div className="bg-gradient-to-r h-44 from-blue-50 to-white p-4 rounded-lg flex items-center gap-8">
       <img
         src=""
         className="w-24 h-24 rounded-full bg-blue-500"

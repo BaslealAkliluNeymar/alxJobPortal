@@ -15,7 +15,7 @@ const Jobs = () => {
     const [popData,setpopData] = useState({})
     const [search,setSearch] = useState('')
     const [errors , setError] = useState({})
-  
+    const [visible ,setVisible] = useState(12)
     console.log(jobs)
 
     console.log(errors)
@@ -39,21 +39,28 @@ const Jobs = () => {
       setSearch(e.target.value)
     }
 
+    const handlePrevious = () =>{
+      setVisible((prev) => prev + 2)
+    }
+
+    console.log(visible)
+
     return (
       <div className='min-h-screen relative container'>
-        {/* <Error item={errors} /> */}
+  
         <div className='flex justify-between items-center gap-2 mt-10 w-full'>
             <input type="text" className='outline-none  border-4 border-green-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 ' placeholder='Search jobs' onChange={handleChange}/>
             <ListFilter className='text-green-400 hover:text-green-500 text-8xl w-10 h-10 cursor-pointerpointer' />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 w-full mt-10 aspect-square p-2">
+        <div className="flex flex-wrap justify-center  gap-2  mt-10 aspect-square p-2 h-auto container">
           
            {jobs.length > 0 ? (
-            jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
+            jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).splice(0,visible).map((item, index) => {
              
               return (
+                
                 <div 
-                className="flex gap-4 justify-start items-start h-auto w-full bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer" 
+                className="flex gap-4 justify-start items-start h-44 w-[45%] bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer" 
                 onClick={() => handlePopOver(item)}
               >
                 {/* Logo Section */}
@@ -90,7 +97,7 @@ const Jobs = () => {
                   </div>
                 </div>
               </div>
-              
+             
               );
             })
          
@@ -99,7 +106,9 @@ const Jobs = () => {
               No Jobs found.
             </p>
           )}
-
+          <div className='flex justify-center items-center gap-2 bg-blue-300 mt-10 w-1/2 p-4 rounded-lg'>
+            <button onClick={handlePrevious}>Load More</button>
+          </div>
           {
             pop && <PopOver PopOver={pop} setPop={setPop} item={popData} setError={setError}/>
           }

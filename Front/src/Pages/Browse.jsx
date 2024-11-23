@@ -16,7 +16,7 @@ const Browse = () => {
   const locate = useLocation()
   const [talents, setTalents] = useState([]);
   const {path,location,search ,pathname} = locate.state || {}
-
+  const [visible ,setVisible] = useState(8)
   console.log(locate.state)
 
 
@@ -31,17 +31,25 @@ const Browse = () => {
     }
     fetchData()
   },[locate.state])
+
+  const handlePrevious = () =>{
+    setVisible((prev) => prev + 2)
+  }
+
   return (
     <div className='min-h-screen relative container'>
      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-10 aspect-square">
         {talents.length > 0 ? (
-          talents.map((talent, index) => <Card talent={talent} key={index} className="aspect-video h-16 w-full" />)
+          talents.slice(0,visible).map((talent, index) => <Card talent={talent} key={index} className="aspect-video h-16 w-full" />)
         ) : (
           <p className="text-gray-500 text-center col-span-full">
             No talents found.
           </p>
         )}
+
+        <button className='flex justify-center items-center gap-2 bg-blue-300 mt-10 w-1/2 p-4 rounded-lg' onClick={handlePrevious}>Load More</button>
+
       </div>
   </div>
   
