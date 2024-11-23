@@ -71,7 +71,7 @@ const HeroSearch = () => {
                     value={value.title}
                     onChange={handleTitleChange}
                   />
-                  <div className='flex flex-col h-auto  gap-2 w-96 p-2 absolute top-20 left-52 bg-white'>
+                  <div className='flex flex-col h-auto gap-2 w-96 p-2 absolute top-20 left-52 bg-white'>
                     {
                       searchResult.map((item, index) =>{
                           return <div key={index} value={item.item} className='rounded-lg text-centershadow-lg cursor-pointer h-10 w-auto border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white' onClick={() => setValue({...value, title:item.item})}>

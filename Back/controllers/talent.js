@@ -35,25 +35,19 @@ talentRoute.get('/',async (req,res) =>{
 talentRoute.post('/',async(req,res) =>{
     
     const data = req.body
-
-    // console.log(data)
     const user = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
-
-    console.log(user)
     const found = await talentModel.find({_id:user._id})
 
     console.log(found)
     if(found.length === 0){
+
         const profileObj = {
             _id: user._id,
             ...data
         }
 
-        console.log(profileObj)
         const savedObj = await talentModel.create(profileObj)
-        console.log(savedObj)
         res.send(savedObj)
-        
     }
     else{
         res.status(500).send({

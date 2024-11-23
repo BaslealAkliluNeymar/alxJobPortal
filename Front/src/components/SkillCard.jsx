@@ -22,10 +22,13 @@ const SkillCard = (props) => {
 
   return (
     <div 
-      className='rounded-xl w-auto h-8 p-[1.25rem] flex justify-center items-center text-white shadow-sm' 
-      style={{ backgroundColor }}
+      className='px-3 py-1 bg-blue-100 grayscale-0  text-sm font-medium rounded-full' 
+      style={{ backgroundColor}}
     >
-      <p>{props.item}</p>
+      <p className='brightness-100' style={{
+        filter: 'brightness(0.9)',
+        color: 'huerotate(120deg)'
+      }}>{props.item}</p>
     </div>
   );
 }
