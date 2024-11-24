@@ -21,6 +21,7 @@ import Jobz from './components/Jobz.jsx'
 import Talents from './components/Talents.jsx'
 import Chats from './components/Chats.jsx'
 import Users from './components/Users.jsx'
+import NotFoundPage from './Pages/NotFoundPage.jsx'
 const App = () => {
   return (
     
@@ -47,10 +48,10 @@ const App = () => {
                   {/* <Route path='/admin/users' element={<Users/>} /> */}
                   <Route path='/admin/jobs' element={<Jobz />} />
                   <Route path='/admin/talents' element={<Talents />} />
-                  <Route path='/admin/chats' element={<Chats />} />
+                  {/* <Route path='/admin/chats' element={<Chats />} /> */}
                 </Route>  
               {/* </Route> */}
-              <Route path ='*' element={<Browse />} />
+              <Route path ='*' element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </div>

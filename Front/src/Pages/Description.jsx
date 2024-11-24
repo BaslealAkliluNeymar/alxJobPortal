@@ -57,9 +57,9 @@ const Description = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-2  bg-gray-50">
-    <div className="flex gap-8 p-8 min-h-screen">
-      {/* Sidebar (Collapsible for mobile) */}
+    <div className="flex flex-col justify-center items-center p-2 overflow-x-hidden bg-gray-50">
+    <div className="flex gap-8 p-8 min-h-screen w-screen overflow-x-hidden">
+
       <div
         className={`${
           filterVisible ? "block" : "hidden lg:block"
@@ -176,7 +176,7 @@ const Description = () => {
       </div>
     </div>
       <button
-        className="flex justify-center font-extrabold leading-3 space-x-1 items-center gap-2 bg-blue-300 mt-10 w-44 h-16 p-2 rounded-lg"
+        className="flex justify-center font-extrabold leading-3 space-x-1 items-center gap-2 bg-blue-300 mt-10 w-36 h-12 p-2 rounded-3xl"
         onClick={handlePrevious}
       >
         Load More

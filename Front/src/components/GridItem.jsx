@@ -18,7 +18,7 @@ const GridItem = ({ items }) => {
   });
 
   const handleClick = () =>{
-    navigate(`/talent/search?position=${title}&location=ALL`,{state:value})
+    navigate(`/talent/search?position=${title}&location=`,{state:value})
   }
 
   return (

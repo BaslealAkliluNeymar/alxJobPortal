@@ -8,10 +8,11 @@ export const setToken = (signature) =>{
 
 
 export const getJobs = async (data) =>{
-    console.log(data)
+    console.log(data.location)
     const config = {
         headers:{'Authorization' :token}
     }
+    // console.log(`http://localhost:8000/talent/search?position=${data.title}&location=${data.location}`)
     const response = await axios.get(`http://localhost:8000/talent/search?position=${data.title}&location=${data.location}`,config)
     return response.data
 }

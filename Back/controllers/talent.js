@@ -78,7 +78,7 @@ talentRoute.get('/search',async(req,res) =>{
        res.send(found)
     }
     else{
-        const positionsFound = await talentModel.find({ position: newPosition, location: location})
+        const positionsFound = await talentModel.find({ position: newPosition})
         res.send(positionsFound)
     }
     
