@@ -38,7 +38,7 @@ talentRoute.post('/',async(req,res) =>{
     const user = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
     const found = await talentModel.find({_id:user._id})
 
-    console.log(found)
+    
     if(found.length === 0){
 
         const profileObj = {
@@ -99,7 +99,7 @@ talentRoute.post('/search',async(req,res) =>{
         else{
             if (role) query.position = role
             if (location) query.location = location
-            // if (totalYearsExperience && !isNaN(totalYearsExperience)) query.totalYearsExperience = Number(totalYearsExperience);
+            
 
             const allData = await talentModel.find(query)
 
@@ -117,16 +117,15 @@ talentRoute.post('/search',async(req,res) =>{
     }
 })
 
-talentRoute.get('/search',async(req,res) =>{
-    const {position, location} = req.query
-    console.log(position)
-    console.log(location)
+// talentRoute.get('/search',async(req,res) =>{
+//     const {position, location} = req.query
 
-})
+
+// })
 talentRoute.get('/:id',async (req,res) =>{
     const { id } = req.params
 
-    console.log(req.headers.authorization)
+   
 
     const str = req.headers.authorization.split(' ')[1]
 

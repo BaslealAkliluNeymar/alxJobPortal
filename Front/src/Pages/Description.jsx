@@ -78,7 +78,7 @@ const Description = () => {
           Filter Candidates
         </h2>
         <div className="flex flex-col gap-6">
-          {/* Role Selector */}
+
           <div className="flex flex-col">
             <label className="text-gray-600 mb-2 font-medium">Role</label>
             <select
@@ -99,7 +99,6 @@ const Description = () => {
             </select>
           </div>
 
-          {/* Experience Input */}
           <div className="flex flex-col">
             <label className="text-gray-600 mb-2 font-medium">
               Years of Experience
@@ -114,7 +113,6 @@ const Description = () => {
             />
           </div>
 
-          {/* Location Selector */}
           <div className="flex flex-col">
             <label className="text-gray-600 mb-2 font-medium">Location</label>
             <select
@@ -143,14 +141,13 @@ const Description = () => {
             </select>
           </div>
 
-          {/* Apply Button */}
           <button className="bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition">
             Apply Filters
           </button>
         </div>
       </div>
 
-      {/* Filter Toggle Button (For mobile) */}
+     
       {!filterVisible && (
         <button
           onClick={() => setFilterVisible(true)}
@@ -160,7 +157,7 @@ const Description = () => {
         </button>
       )}
 
-      {/* Main Content */}
+  
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
         {talents.length > 0 ? (
           talents

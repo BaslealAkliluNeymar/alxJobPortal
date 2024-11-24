@@ -5,7 +5,6 @@ import 'react-loading-skeleton/dist/skeleton.css';
 const SkeletonCard = () => {
   return (
     <div className="flex flex-col space-y-4 w-auto p-6 border border-gray-300 rounded-lg shadow-lg m-4 bg-white relative aspect-video">
-      {/* Profile Section */}
       <div className="flex items-center gap-4">
         <div className="relative">
           <Skeleton circle={true} width={64} height={64} />
