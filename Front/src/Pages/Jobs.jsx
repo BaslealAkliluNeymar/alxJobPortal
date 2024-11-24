@@ -7,6 +7,7 @@ import Button from '../components/Button'
 import PopOver from '../components/PopOver'
 import { ListFilter } from 'lucide-react'
 import Error from '../components/Error'
+import SkeletonJobCard from '../components/SkeletonJobCard'
 
 const Jobs = () => {
     const locate = useLocation()
@@ -102,9 +103,9 @@ const Jobs = () => {
             })
          
           ) : (
-            <p className="text-gray-500 text-center col-span-full">
-              No Jobs found.
-            </p>
+            Array.from({ length: 10 }).map((_, index) => (
+              <SkeletonJobCard />
+            ))
           )}
           <div className='flex justify-center items-center gap-2 bg-blue-300 mt-10 w-1/2 p-4 rounded-lg'>
             <button onClick={handlePrevious}>Load More</button>

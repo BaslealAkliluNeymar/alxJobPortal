@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import { Analytics, setToken } from "../services/jobs";
+import DashboardVis from "./DashboardVis";
 
 
 const Dashboard = () => {
@@ -7,12 +8,10 @@ const Dashboard = () => {
     { title: "Total Users", value:  0, icon: "👤", bgColor: "bg-blue-100", textColor: "text-blue-500" },
     { title: "Jobs Posted", value:  0, icon: "📄", bgColor: "bg-green-100", textColor: "text-green-500" },
     { title: "Pending Talents", value: 0, icon: "🌟", bgColor: "bg-yellow-100", textColor: "text-yellow-500" },
-    
+    {title : "Rejected Talents", value: 0, icon: "🌟", bgColor: "bg-red-100", textColor: "text-red-500"},
+    {title : "Approved Talents", value: 0, icon: "🌟", bgColor: "bg-green-100", textColor: "text-green-500"},
   ])
 
-  // const [dummy , setDummy] = useState({})
-
- 
 
   useEffect(() =>{
     const fetchAdminJobs = async () =>{
@@ -25,6 +24,8 @@ const Dashboard = () => {
             if (stat.title === 'Total Users')  return {...stat, value: data.totalStudents || 0} 
             if (stat.title === 'Jobs Posted')  return {...stat, value: data.totalJobs || 0} 
             if (stat.title === 'Pending Talents')  return {...stat, value: data.totalPending || 0}
+            if (stat.title === 'Rejected Talents')  return {...stat, value: data.totalRejected || 0}
+            if (stat.title === 'Approved Talents')  return {...stat, value: data.totalApproved || 0}
           })
       )
   )}
@@ -36,7 +37,7 @@ const Dashboard = () => {
 
 
   return (
-    <section className="p-6 bg-gray-50">
+    <section className="p-6 bg-gray-50 flex flex-col gap-2">
       <h1 className="text-2xl font-bold mb-6 text-center">Admin Dashboard</h1>
 
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6">
@@ -73,6 +74,8 @@ const Dashboard = () => {
           ))}
         </ul>
       </div> */}
+      <DashboardVis data={stats} />
+
 
       {/* Quick Actions Section */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-3">

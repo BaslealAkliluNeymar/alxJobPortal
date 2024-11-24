@@ -13,6 +13,5 @@ export const getJobs = async (data) =>{
         headers:{'Authorization' :token}
     }
     const response = await axios.get(`http://localhost:8000/talent/search?position=${data.title}&location=${data.location}`,config)
-    console.log(response)
     return response.data
 }

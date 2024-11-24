@@ -28,7 +28,7 @@ export default function Profile() {
     };
     fetchProfile();
   }, [profile]);
-  console.log(profile)
+
 
   const onSubmit = (data) => {
     console.log(data)
@@ -36,10 +36,15 @@ export default function Profile() {
 
   };
 
+  const handleChange = (e) => {
+    const formdata = new FormData();
+    formdata.append("file", e.target.files[0]);
 
-  const handleUpload = () =>{
-    console.log('upload')
+    console.log(formdata)
+    setProfile( (prev) => ({...prev, resume:formdata}))
   }
+
+  console.log(profile)
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-auto p-6 bg-white rounded-lg shadow-lg container">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">Talent Profile</h2>
@@ -58,9 +63,9 @@ export default function Profile() {
         className="w-full mb-4 px-3 py-2 border rounded-md"
       />
 
-      <div className="w-32 h-20 border-2 p-2 gap-2 border-slate-300 flex justify-between items-center rounded-md focus:bg-slate-300 cursor-pointer" onClick={handleUpload}>
+      <div className="w-32 h-20 border-2 p-2 gap-2 border-slate-300 flex justify-between items-center rounded-md focus:bg-slate-300 cursor-pointer">
         <Upload />
-        <p>Upload Resume</p>
+        <input type="file" name="Resume"  onChange={(e) =>handleChange(e)} />
       </div>
 
       
@@ -86,7 +91,6 @@ export default function Profile() {
         className="w-full mb-6 px-3 py-2 border rounded-md"
       />
 
-      {/* Work History Section */}
       <h3 className="text-xl font-semibold mb-2 text-gray-800">Work History</h3>
       {workHistoryFields.map((item, index) => (
         <div key={item.id} className="mb-4 p-4 border rounded-md bg-gray-50">
@@ -149,7 +153,6 @@ export default function Profile() {
         Add Work History
       </button>
 
-      {/* Projects Section */}
       <h3 className="text-xl font-semibold mb-2 text-gray-800">Projects</h3>
       {projectFields.map((item, index) => (
         <div key={item.id} className="mb-4 p-4 border rounded-md bg-gray-50">
@@ -205,7 +208,7 @@ export default function Profile() {
         Add Project
       </button>
 
-      {/* Education Section */}
+      
       <h3 className="text-xl font-semibold mb-2 text-gray-800">Education</h3>
       {educationFields.map((item, index) => (
         <div key={item.id} className="mb-4 p-4 border rounded-md bg-gray-50">

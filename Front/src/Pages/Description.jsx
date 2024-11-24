@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "../components/Card";
 import { getAll, setToken, getFiltered } from "../services/talents.js";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+import SkeletonCard from "../components/SkeletonCard.jsx";
 
 const Description = () => {
   const [talents, setTalents] = useState([]);
@@ -53,7 +57,8 @@ const Description = () => {
   };
 
   return (
-    <div className="flex gap-8 p-8 bg-gray-50 min-h-screen">
+    <div className="flex flex-col justify-center items-center p-2  bg-gray-50">
+    <div className="flex gap-8 p-8 min-h-screen">
       {/* Sidebar (Collapsible for mobile) */}
       <div
         className={`${
@@ -162,17 +167,20 @@ const Description = () => {
             .slice(0, visible)
             .map((talent, index) => <Card talent={talent} key={index} />)
         ) : (
-          <p className="text-gray-500 text-center col-span-full">
-            No talents found.
-          </p>
+          
+            Array.from({ length: 10 }).map((_, index) => (
+              <SkeletonCard />
+            ))
+         
         )}
-        <button
-          className="flex justify-center font-extrabold leading-3 space-x-1 items-center gap-2 bg-blue-300 mt-10 w-44 h-16 p-4 rounded-lg"
-          onClick={handlePrevious}
-        >
-          Load More
-        </button>
       </div>
+    </div>
+      <button
+        className="flex justify-center font-extrabold leading-3 space-x-1 items-center gap-2 bg-blue-300 mt-10 w-44 h-16 p-2 rounded-lg"
+        onClick={handlePrevious}
+      >
+        Load More
+      </button>
     </div>
   );
 };
