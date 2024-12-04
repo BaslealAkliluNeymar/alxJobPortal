@@ -60,6 +60,14 @@ const Talents = () => {
     );
     setSelectedTalent(null);
   };
+  const handlePendingTalent = (id) => {
+    setTalents((prev) =>
+      prev.map((talent) =>
+        talent.id === id ? { ...talent, status: "Approved" } : talent
+      )
+    );
+    setSelectedTalent(null);
+  };
 
   const handleRejectTalent = (id) => {
     setTalents((prev) =>
@@ -80,7 +88,7 @@ const Talents = () => {
 
   console.log(filteredTalents)  
   return (
-    <section className="p-6 bg-gray-50">
+    <section className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-2xl font-bold mb-6 text-center">Talent Management</h1>
 
       <div className="flex flex-wrap gap-4 items-center mb-6">
@@ -97,9 +105,9 @@ const Talents = () => {
           className="border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-400"
         >
           <option value="">All Statuses</option>
-          <option value="Approved">Approved</option>
-          <option value="Pending">Pending</option>
-          <option value="Rejected">Rejected</option>
+          <option value="approved">Approved</option>
+          <option value="pending">Pending</option>
+          <option value="rejected">Rejected</option>
         </select>
       </div>
 

@@ -7,16 +7,8 @@ const Job = require('../models/jobs')
 
 jobRouter.get('/', async (req,res) =>{
     try{
-        // const auth = req.headers.authorization.split(' ')[1]
-    
-        // const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        // const user = await userModel.findOne({email:found.email})
-
-        // console.log(user)
         const jobs = await Job.find({}).populate("postedBy")
-        console.log(jobs)
         res.send(jobs)
-
     }
     catch(error){
         res.send({
@@ -29,7 +21,6 @@ jobRouter.get('/', async (req,res) =>{
 jobRouter.post('/:id/apply', async (req,res) =>{
     try
     {
-
         const { id }= req.params
 
         const auth = req?.headers?.authorization?.split(' ')[1]

@@ -6,6 +6,7 @@ export default function Profile() {
   const { register, handleSubmit, control } = useForm();
   const [profile, setProfile]  = useState({})
   const [value, setValue] = useState({})
+  const [file,setFile] = useState({})
   const { fields: workHistoryFields, append: addWorkHistory } = useFieldArray({
     control,
     name: "workHistory",
@@ -39,9 +40,9 @@ export default function Profile() {
   const handleChange = (e) => {
     const formdata = new FormData();
     formdata.append("file", e.target.files[0]);
-
-    console.log(formdata)
-    setProfile( (prev) => ({...prev, resume:formdata}))
+    setFile(e.target.files[0])
+    console.log(file)
+    setProfile((prev) => ({...prev, resume:formdata}))
   }
 
   console.log(profile)

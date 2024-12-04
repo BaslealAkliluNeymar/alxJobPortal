@@ -5,7 +5,9 @@ import { AllContext } from '../Context/AllContext';
 
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
-  const { user,login,logout } = useContext(AllContext);
+  const { user ,login,logout } = useContext(AllContext);
+
+  console.log(user)
   const [daz,setDaz] = useState({})
   console.log(user)
   const navigate = useNavigate();
@@ -19,7 +21,6 @@ const Navbar = () => {
 
   const handleLogin = () =>{
     navigate('/')
-    // setLoggedin(true)
     login()
   }
 
@@ -61,7 +62,7 @@ const Navbar = () => {
               <Link to='/login'>
                 <button 
                   className='bg-white text-black p-2 rounded w-20' 
-                  onClick={handleLogin}
+                  onClick={() => login()}
                 >
                   Login
                 </button>

@@ -21,7 +21,7 @@ const Single = () => {
     fetchSingle();
   }, [id]);
   
-  console.log(detail)
+  
   
   return (
     <section className="container mx-auto py-8">

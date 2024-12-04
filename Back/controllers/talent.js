@@ -22,7 +22,6 @@ talentRoute.get('/',async (req,res) =>{
                 message:"talent"
             })
         }
-
     }
     catch(error){
         res.status(501).send({
@@ -86,7 +85,6 @@ talentRoute.get('/search',async(req,res) =>{
 
 
 talentRoute.post('/search',async(req,res) =>{
-
     try
     {
         const { role, experience, location }  = req.body

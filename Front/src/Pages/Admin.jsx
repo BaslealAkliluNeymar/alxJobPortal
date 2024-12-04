@@ -4,7 +4,7 @@ import { Outlet,Link } from 'react-router-dom'
 const Admin = () => {
   return (
     <section className=''>
-      <div className='main flex gap-2 h-screen'>
+      <div className='main flex gap-2 min-h-screen'>
         <div className='sidebar flex-1 border-2 border-slate-400 rounded-lg w-1/5'>
         <div className="flex flex-col gap-6 bg-gray-50 shadow-md rounded-lg p-6 w-full max-w-md mx-auto">
             <h1 className="text-3xl font-extrabold text-center text-green-600 border-b-2 pb-4">Admin Panel</h1>

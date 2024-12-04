@@ -24,9 +24,7 @@ admin.get('/jobs',async (req,res) =>{
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
         const user = await userModel.findOne({email:found.email}).populate("jobsPosted")
         
-        // const jobs = await Job.find({}).populate("postedBy")
         
-        console.log(user)
         res.send(user)
     }
     catch(error){
@@ -38,11 +36,11 @@ admin.get('/jobs',async (req,res) =>{
 admin.post('/jobs',async (req,res) =>{
     try
     {
-        // console.log(req.body)
+        
         const auth = req.headers.authorization.split(' ')[1]
         
         const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const user = await userModel.findOne({email:found.email})
+        const user = await userModel.findOne({ email:found.email })
         
         
         const newObj = {
