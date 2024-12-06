@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import Card from '../components/Card'
 import { useLocation } from 'react-router-dom'
-import { getJobs, setToken } from '../services/jobs'
+import { getJobs } from '../services/jobs'
 import Job from '../components/Job'
 import Button from '../components/Button'
 import PopOver from '../components/PopOver'
@@ -28,8 +28,8 @@ const Jobs = () => {
     const [data, setData] = useState([])
     useEffect(() =>{
       const fetchData = async() =>{
-        const token = localStorage.getItem('token')
-        setToken(token)
+        // const token = localStorage.getItem('token')
+        // setToken(token)
         const found = await getJobs()
         setJobs(found)
       }

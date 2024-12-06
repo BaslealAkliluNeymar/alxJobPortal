@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signup } from '../services/login';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signupThunk } from '../reducers/authReducer';
+
 const SignUp = () => {
   const dispatch = useDispatch()
-  const data2 = useSelector(state => state.auth)
 
-  console.log(data2)
   const [credential, setCredential] = useState({
     firstname: '',
     lastname: '',
@@ -25,9 +23,9 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = await signup(credential);
-      dispatch(signupThunk(credential))
+    try 
+    {
+      const data = dispatch(signupThunk(credential))
       console.log(data);
       setCredential({
         firstname: '',

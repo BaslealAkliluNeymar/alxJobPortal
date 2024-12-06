@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { getUserJobs, saveJob, setToken } from "../services/jobs";
+import { getUserJobs, saveJob } from "../services/jobs";
 import Job from "./Job";
 import Button from "./Button";
 
@@ -22,8 +22,8 @@ const Jobz = () => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const token = localStorage.getItem('token')
-      setToken(token)
+      // const token = localStorage.getItem('token')
+      // setToken(token)
       const found = await getUserJobs()
       setJobs(found)
     };  

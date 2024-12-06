@@ -1,6 +1,6 @@
 import React,{useState , useEffect }from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { getProfile, setToken } from "../services/talents";
+import { getProfile } from "../services/talents";
 import { Upload } from 'lucide-react'
 export default function Profile() {
   const { register, handleSubmit, control } = useForm();
@@ -22,8 +22,8 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem('token')
-      setToken(token)
+      // const token = localStorage.getItem('token')
+      // setToken(token)
       const found = await getProfile(profile)
       console.log(found)
     };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
-import { getJobs,setToken } from '../services/jobs';
+import { getJobs } from '../services/jobs';
 
 const Latest = () => {
   const [jobs, setJobs] = useState([]);
@@ -11,8 +11,8 @@ const Latest = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        let token = localStorage.getItem('token')
-        setToken(token)
+        // let token = localStorage.getItem('token')
+        // setToken(token)
         const jobsData = await getJobs();
         setJobs(jobsData);
       } catch (err) {

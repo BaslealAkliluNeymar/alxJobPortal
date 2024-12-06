@@ -1,35 +1,32 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-
+import { signup } from '../services/login'
+import { LoginPost } from '../services/login'
 const initialState = {
     user:{},
-    token:null,
+    token:"",
     isLoading:false,
     isAuthenticated:false,
     error:null
 }
 
 export const signupThunk = createAsyncThunk(
-    'auth/signupThunk',
-    async (credential, { rejectWithValue }) =>{
-        try
-        {
-           const response = await axios.post('http://localhost:8000/signup',credential)
-           console.log(`This is from the Thunk => ${response.data}`)
-           return response.data
-        }
-        catch(error){
-            return rejectWithValue(error.response.data)
-        }
+    'auth/signup',
+    async (credential) =>{
+        const response = await signup(credential)
+        console.log(`This is from the thunk => ${response}`)
+        return response
+       
     }
 )
 
 export const login = createAsyncThunk(
     'auth/login',
-     async (userData, {rejectWithValue}) =>{
+     async (userData, { rejectWithValue }) =>{
         try {
-            const response = await axios.post('http://localhost:8000/login',userData)
-            return response.data
+            const response = await LoginPost(userData)
+            localStorage.setItem('token',response.token)
+            return response
         }
         catch(error){
             return rejectWithValue(error)
@@ -52,7 +49,7 @@ const authSlice = createSlice({
         builder
         .addCase(signupThunk.pending, (state) =>{
             state.isLoading = true
-            state.error = error
+            state.error = false
         })
         .addCase(signupThunk.fulfilled, (state,action) =>{
             state.user = action.payload.user,
@@ -73,6 +70,7 @@ const authSlice = createSlice({
             state.isAuthenticated = true
             state.user = action.payload.user
             state.isLoading = false
+            state.token = action.payload.token
         })
         .addCase(login.rejected,(state) =>{
             state.error = true

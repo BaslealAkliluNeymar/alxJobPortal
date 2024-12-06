@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { Analytics, setToken } from "../services/jobs";
+import { Analytics } from "../services/jobs";
 import DashboardVis from "./DashboardVis";
 
 
@@ -15,8 +15,8 @@ const Dashboard = () => {
 
   useEffect(() =>{
     const fetchAdminJobs = async () =>{
-      const token = localStorage.getItem('token')
-      setToken(token)
+      // const token = localStorage.getItem('token')
+      // setToken(token)
       const data = await Analytics()
         
       setStats(prevStat => 

@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { AllContext } from '../Context/AllContext';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
-  const { user ,login,logout } = useContext(AllContext);
-
-  console.log(user)
+  const user = useSelector((state) => state).auth
   const [daz,setDaz] = useState({})
-  console.log(user)
   const navigate = useNavigate();
   
   useEffect(() => {

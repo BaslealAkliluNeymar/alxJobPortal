@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { ApplyJob, setToken } from '../services/jobs';
+import { ApplyJob  } from '../services/jobs';
 
 const PopOver = ({ PopOver, setPop, item, setError }) => {
   if (!PopOver) return null;
@@ -10,7 +10,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
   
   const handleApply = async (id) =>{
     const found = localStorage.getItem('token')
-    setToken(found)
+    // setToken(found)
 
     const response = await ApplyJob(id)
     console.log(response)

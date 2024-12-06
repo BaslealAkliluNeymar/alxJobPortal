@@ -1,30 +1,28 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginPost } from '../services/login';
-import { AllContext } from '../Context/AllContext';
-
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/authReducer';
+import { store } from '../reducers/store'
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
-  const { login } = useContext(AllContext);
+  const dispatch = useDispatch()
+  const [reload, setReload] = useState({})
+
   const navigate = useNavigate();
 
+  console.log(store.getState().token)
   const handleChange = (e) => {
     setCredential((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await LoginPost(credential);
-    login(data);
+    setReload(dispatch(login(credential)))
     navigate('/');
   };
 
   return (
     <section className='flex justify-center items-center w-[33%] h-[640px] mx-auto shadow-xl bg-gradient-to-br from-blue-50 to-white rounded-lg overflow-hidden m-4 transition-shadow duration-300'>
-      {/* Left Section */}
-      {/* <div className='flex-1 bg-green-400'></div> */}
-
-      {/* Right Section */}
       <div className='flex flex-col items-center space-y-8 justify-center p-8  '>
         <div className='text-center'>
           <h1 className='text-2xl font-bold'>Welcome to</h1>

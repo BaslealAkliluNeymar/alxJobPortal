@@ -1,7 +1,7 @@
 import { Building2, MapPin } from 'lucide-react'
 import React,{useState, useEffect, useContext} from 'react'
 import SkillCard from '../components/SkillCard'
-import { getSingle, setToken } from '../services/talents'
+import { getSingle } from '../services/talents'
 import { useParams } from 'react-router-dom'
 import { AllContext } from '../Context/AllContext'
 
@@ -12,8 +12,8 @@ const Single = () => {
  
   useEffect(() => {
     const fetchSingle = async () => {
-      const token = localStorage.getItem('token');
-      setToken(token);
+      // const token = localStorage.getItem('token');
+      // setToken(token);
       const data = await getSingle(id);
       setDetail(data);
     };
