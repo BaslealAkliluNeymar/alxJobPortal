@@ -3,11 +3,18 @@ import Card from "../components/Card";
 import { getAll, getFiltered } from "../services/talents.js";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-
+import { talentThunk } from "../reducers/talentReducer.js";
+import { talentFiltered } from "../reducers/talentReducer.js";
 import SkeletonCard from "../components/SkeletonCard.jsx";
-
+import { useDispatch, useSelector } from "react-redux";
 const Description = () => {
-  const [talents, setTalents] = useState([]);
+  const dispatch = useDispatch()
+  const { talent } = useSelector(
+    (state) =>(state.talent)
+  )
+
+  console.log(talent)
+  const [talents, setTalents] = useState(talent);
   const [select, setSelect] = useState({
     role: "",
     experience: "",
@@ -18,11 +25,13 @@ const Description = () => {
   const [filterVisible, setFilterVisible] = useState(false); // For collapsible sidebar
 
   useEffect(() => {
-    const fetchTalent = async () => {
-      const allData = await getAll();
-      setTalents(allData);
-    };
-    fetchTalent();
+    dispatch(talentThunk())
+    // const fetchTalent = async () => {
+     
+    //   const allData = await getAll();
+    //   setTalents(allData);
+    // };
+    // fetchTalent();
   }, []);
 
   useEffect(() => {
@@ -31,14 +40,15 @@ const Description = () => {
       return;
     }
 
-    const fetchFilteredData = async () => {
-      const token = localStorage.getItem("token");
-      setToken(token);
-      const filteredData = await getFiltered(select);
-      setTalents(filteredData);
-    };
+    // const fetchFilteredData = async () => {
+    //   const token = localStorage.getItem("token");
+    //   setToken(token);
+      // const filteredData =
+      dispatch(talentFiltered(select))
+      // setTalents(filteredData);
+    // };
 
-    fetchFilteredData(select);
+    // fetchFilteredData(select);
   }, [select]);
 
   const handlePrevious = () => {
@@ -157,8 +167,8 @@ const Description = () => {
 
   
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-        {talents.length > 0 ? (
-          talents
+        {talent.length > 0 ? (
+          talent
             .slice(0, visible)
             .map((talent, index) => <Card talent={talent} key={index} />)
         ) : (
