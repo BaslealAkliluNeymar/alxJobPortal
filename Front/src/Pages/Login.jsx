@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../reducers/authReducer';
 import { store } from '../reducers/store'
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
   const dispatch = useDispatch()
   const [reload, setReload] = useState({})
-  const select = useSelector((state) => state.auth)
-
-  console.log(select)
   const navigate = useNavigate();
 
   console.log(store.getState().token)

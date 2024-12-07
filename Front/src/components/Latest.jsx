@@ -5,18 +5,15 @@ import { getJobs } from '../services/jobs';
 
 const Latest = () => {
   const [jobs, setJobs] = useState([]);
-  // const [error, setError] = useState('');
+
   
   console.log(jobs)
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        // let token = localStorage.getItem('token')
-        // setToken(token)
         const jobsData = await getJobs();
         setJobs(jobsData);
       } catch (err) {
-        // setError('Failed to fetch jobs');
         console.log(err)
       }
     };
