@@ -7,7 +7,7 @@ import Latest from '../components/Latest'
 import Footer from '../components/Footer'
 import { useLocation } from 'react-router-dom'
 import HeroSearch from '../components/HeroSearch'
-import { getJobs, setToken } from '../services/search'
+import { getJobs } from '../services/search'
 import Card from '../components/Card'
 import SkeletonCard from '../components/SkeletonCard'
 
@@ -25,8 +25,8 @@ const Browse = () => {
   const [data, setData] = useState([])
   useEffect(() =>{
     const fetchData = async() =>{
-      const token = localStorage.getItem('token')
-      setToken(token)
+      // const token = localStorage.getItem('token')
+      // setToken(token)
       const found = await getJobs(locate.state)
       setTalents(found)
     }

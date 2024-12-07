@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 import { signup } from '../services/login'
 import { LoginPost } from '../services/login'
 const initialState = {
@@ -26,6 +25,11 @@ export const login = createAsyncThunk(
         try {
             const response = await LoginPost(userData)
             localStorage.setItem('token',response.token)
+            localStorage.setItem('user',JSON.stringify({
+                user:response.user,
+                email:response.email,
+                role:response.role
+            }))
             return response
         }
         catch(error){

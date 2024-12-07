@@ -8,18 +8,20 @@ import PopOver from '../components/PopOver'
 import { ListFilter } from 'lucide-react'
 import Error from '../components/Error'
 import SkeletonJobCard from '../components/SkeletonJobCard'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { jobAsyncThunk } from '../reducers/jobReducer'
+import { store } from '../reducers/store'
 const Jobs = () => {
+    const dispatch = useDispatch()
+    const jobz = useSelector((state) => state.job.jobs)
     const locate = useLocation()
-    const [jobs, setJobs] = useState([]);
+    const jobs= useSelector((state) => state?.job?.job?.jobs);
     const [pop,setPop] =  useState(false)
     const [popData,setpopData] = useState({})
     const [search,setSearch] = useState('')
     const [errors , setError] = useState({})
     const [visible ,setVisible] = useState(12)
-    console.log(jobs)
 
-    console.log(errors)
     const handlePopOver = (item) =>{
       setpopData(item)
       setPop(!pop)
@@ -27,13 +29,8 @@ const Jobs = () => {
     
     const [data, setData] = useState([])
     useEffect(() =>{
-      const fetchData = async() =>{
-        // const token = localStorage.getItem('token')
-        // setToken(token)
-        const found = await getJobs()
-        setJobs(found)
-      }
-      fetchData()
+      const found = dispatch(jobAsyncThunk())
+      console.log(found)
     },[])
 
     const handleChange = (e) =>{
@@ -44,7 +41,7 @@ const Jobs = () => {
       setVisible((prev) => prev + 2)
     }
 
-    console.log(visible)
+
 
     return (
       <div className='min-h-screen relative container'>
@@ -55,8 +52,8 @@ const Jobs = () => {
         </div>
         <div className="flex flex-wrap justify-center  gap-2  mt-10 aspect-square p-2 h-auto container">
           
-           {jobs.length > 0 ? (
-            jobs.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).splice(0,visible).map((item, index) => {
+           {jobz && jobz.length > 0 ? (
+            jobz.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).splice(0,visible).map((item, index) => {
              
               return (
                 

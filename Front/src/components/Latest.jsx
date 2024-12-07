@@ -16,7 +16,8 @@ const Latest = () => {
         const jobsData = await getJobs();
         setJobs(jobsData);
       } catch (err) {
-        setError('Failed to fetch jobs');
+        // setError('Failed to fetch jobs');
+        console.log(err)
       }
     };
     fetchJobs();

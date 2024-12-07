@@ -1,10 +1,10 @@
 import axios from 'axios'
 const BASE_URL = 'http://localhost:8000/talent/search'
-let token = ''
+let token = `Bearer ${localStorage.getItem('token')}`
 
-export const setToken = (signature) =>{
-    token =`Bearer ${signature}`
-}
+// export const setToken = (signature) =>{
+//     token =`Bearer ${signature}`
+// }
 
 
 export const getJobs = async (data) =>{

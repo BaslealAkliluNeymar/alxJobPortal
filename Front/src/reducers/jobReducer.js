@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getJobs } from '../services/search'
+import { getJobs } from '../services/jobs.js'
 const initialState = {
     jobs:[],
     ispending:false
@@ -7,7 +7,7 @@ const initialState = {
 
 export const jobAsyncThunk = createAsyncThunk(
     'job/get',
-    async () =>{
+    async () => {
         const jobs = await getJobs()
         return jobs
     }
@@ -16,13 +16,19 @@ export const jobAsyncThunk = createAsyncThunk(
 const jobSlice = createSlice({
     name:'job',
     initialState,
+    reducer:{
+        addJob:(state, action) =>{
+            state.jobs.push(action.payload)
+        }
+    },
     extraReducers: (builder) =>{
-        builder.addCase(jobAsyncThunk.pending,(state) =>{
+        builder
+        .addCase(jobAsyncThunk.pending,(state) =>{
             state.ispending = true
         })
-        .addCase(jobAsyncThunk.fulfilled,(state,action) =>{
+        .addCase(jobAsyncThunk.fulfilled,(state,{payload}) =>{
             state.ispending = false
-            state.jobs = state.jobs.concat(action.payload)
+            state.jobs = [...payload]
         })
         .addCase(jobAsyncThunk.rejected,(state) =>{
             state.ispending = false
@@ -31,6 +37,6 @@ const jobSlice = createSlice({
     }
 })
 
-// export const {} = autoSlice.actions
 
+export const { addJob } = jobSlice.actions
 export default jobSlice.reducer
