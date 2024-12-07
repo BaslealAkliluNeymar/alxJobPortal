@@ -1,21 +1,16 @@
 import { Building2, MapPin } from 'lucide-react'
-import React,{ useState, useEffect } from 'react'
+import React,{ useEffect } from 'react'
 import SkillCard from '../components/SkillCard'
-import { getSingle } from '../services/talents'
 import { useParams } from 'react-router-dom'
-
-
+import { talentSingle } from '../reducers/talentReducer'
+import { useDispatch, useSelector } from 'react-redux'
 const Single = () => {
-  const [detail, setDetail] = useState({})
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.talent.talent[0])
   const { id } = useParams()
  
   useEffect(() => {
-    const fetchSingle = async () => {
-      const data = await getSingle(id);
-      setDetail(data);
-    };
-  
-    fetchSingle();
+    dispatch(talentSingle(id))
   }, [id]);
   
   
@@ -30,13 +25,13 @@ const Single = () => {
       />
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="font-bold text-2xl">{detail?.name}</h1>
+          <h1 className="font-bold text-2xl">{user?.name}</h1>
           <div className="bg-black w-1 h-8"></div>
-          <h1 className="font-bold text-2xl">{detail?.position}</h1>
+          <h1 className="font-bold text-2xl">{user?.position}</h1>
         </div>
         <div className="flex items-center gap-2">
           <MapPin size={16} />
-          <p>{detail?.location}</p>
+          <p>{user?.location}</p>
         </div>
       </div>
     </div>
@@ -68,7 +63,7 @@ const Single = () => {
       <h1 className="font-bold text-2xl text-left mb-5">Skills</h1>
       <div className="shadow-lg border-slate-200 border-2 p-4 rounded-lg">
         <div className="flex flex-wrap gap-2">
-          {detail?.skills?.map((item, index) => (
+          {user?.skills?.map((item, index) => (
             <SkillCard item={item} key={index} />
           ))}
         </div>
@@ -77,7 +72,7 @@ const Single = () => {
 
     <div className="mt-8">
       <h1 className="font-bold text-2xl text-left mb-5">Work History</h1>
-      {detail?.workHistory?.map((item, index) => (
+      {user?.workHistory?.map((item, index) => (
         <div
           key={index}
           className="shadow-lg border-slate-200 border-2 p-4 rounded-lg mb-4"
@@ -86,7 +81,7 @@ const Single = () => {
             <Building2 size={24} />
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <h1 className="font-bold text-2xl">{detail?.name}</h1>
+                <h1 className="font-bold text-2xl">{user?.name}</h1>
                 <div className="bg-black w-1 h-8"></div>
                 <h1 className="font-bold text-2xl">{item.position}</h1>
               </div>
@@ -114,7 +109,7 @@ const Single = () => {
     <div className="mt-8">
       <h1 className="font-bold text-2xl text-left mb-5">Projects</h1>
       <div className="shadow-lg border-slate-200 border-2 p-4 rounded-lg">
-        {detail?.projects?.map((item) => (
+        {user?.projects?.map((item) => (
           <div key={item.id} className="flex gap-2 mb-4">
             <Building2 size={24} />
             <div className="flex flex-col gap-2">
@@ -156,7 +151,7 @@ const Single = () => {
     <div className="mt-8">
       <h1 className="font-bold text-2xl text-left mb-5">Education</h1>
       <div className="shadow-lg border-slate-200 border-2 p-4 rounded-lg">
-        {detail?.education?.map((item, index) => (
+        {user?.education?.map((item, index) => (
           <div
             key={index}
             className="flex flex-col gap-2 mb-2 border-b-2 border-slate-400 pb-2"
