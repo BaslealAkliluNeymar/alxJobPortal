@@ -9,7 +9,7 @@ import Login from './Pages/Login.jsx'
 import SignUp from './Pages/SignUp.jsx'
 import Chat from './Pages/Chat.jsx'
 import Single from './Pages/Single.jsx'
-import { AllContextProvider } from './Context/AllContext.jsx'
+// import { AllContextProvider } from './Context/AllContext.jsx'
 import Test from './Pages/Test.jsx'
 import Profile from './Pages/Profile.jsx'
 import Admin from './Pages/Admin.jsx'
@@ -22,13 +22,15 @@ import Talents from './components/Talents.jsx'
 import Chats from './components/Chats.jsx'
 import Users from './components/Users.jsx'
 import NotFoundPage from './Pages/NotFoundPage.jsx'
-
+import { store } from './reducers/store.js'
 
 const App = () => {
+
+  console.log(store.getState())
   return (
     
     <Router>
-      <AllContextProvider>
+      {/* <AllContextProvider> */}
 
         <div className='main-container min-h-screen flex flex-col'>
           <Navbar />
@@ -56,7 +58,7 @@ const App = () => {
           <Footer />
         </div>
 
-      </AllContextProvider>
+      {/* </AllContextProvider> */}
     </Router>
    
   )

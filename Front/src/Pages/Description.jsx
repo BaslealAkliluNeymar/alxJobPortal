@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "../components/Card";
-import { getAll, setToken, getFiltered } from "../services/talents.js";
+import { getAll, getFiltered } from "../services/talents.js";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -19,8 +19,6 @@ const Description = () => {
 
   useEffect(() => {
     const fetchTalent = async () => {
-      const token = localStorage.getItem("token");
-      setToken(token);
       const allData = await getAll();
       setTalents(allData);
     };

@@ -15,8 +15,7 @@ const Dashboard = () => {
 
   useEffect(() =>{
     const fetchAdminJobs = async () =>{
-      // const token = localStorage.getItem('token')
-      // setToken(token)
+
       const data = await Analytics()
         
       setStats(prevStat => 

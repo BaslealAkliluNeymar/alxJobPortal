@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
-import { getJobs } from '../services/jobs';
+import { getSearchJobs } from '../services/jobs';
 
 const Latest = () => {
   const [jobs, setJobs] = useState([]);
 
-  
-  console.log(jobs)
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const jobsData = await getJobs();
+        const jobsData = await getSearchJobs();
         setJobs(jobsData);
       } catch (err) {
         console.log(err)

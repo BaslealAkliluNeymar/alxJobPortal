@@ -1,8 +1,7 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
-import Icon from './Icon';
-import { Link, useNavigate } from 'react-router-dom';
-import { getJobs } from '../services/search';
+import { useNavigate } from 'react-router-dom';
+
 
 const GridItem = ({ items }) => {
   const { title, path, number } = items;
@@ -12,17 +11,11 @@ const GridItem = ({ items }) => {
   })
   const navigate = useNavigate()
 
-  const [state, setState] = useState({
-    fill: "white",
-    stroke: "#09F53D"
-  });
-
   const handleClick = () =>{
     navigate(`/talent/search?position=${title}&location=`,{state:value})
   }
 
   return (
-    
       <div className="griditem-sm w-[250px] h-[190px] border-[#D6DDEB] cursor-pointer border-2 p-2 hover:bg-secondary hover:rounded-lg ease-in-out hover:text-slate-50 flex flex-col gap-3 justify-center items-start pl-5" onClick={handleClick}>
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_54_1714)">

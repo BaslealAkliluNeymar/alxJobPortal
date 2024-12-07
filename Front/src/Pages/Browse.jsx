@@ -1,13 +1,6 @@
-import React, { useState,useEffect, useContext } from 'react'
-import Ads from '../components/Ads'
-import Hero from '../components/Hero'
-import Explore from '../components/Explore'
-import Grid from '../components/Grid'
-import Latest from '../components/Latest'
-import Footer from '../components/Footer'
+import React, { useState,useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import HeroSearch from '../components/HeroSearch'
-import { getJobs } from '../services/search'
+import { getSearchJobs } from '../services/search'
 import Card from '../components/Card'
 import SkeletonCard from '../components/SkeletonCard'
 
@@ -16,7 +9,7 @@ import SkeletonCard from '../components/SkeletonCard'
 const Browse = () => {
   const locate = useLocation()
   const [talents, setTalents] = useState([]);
-  const {path,location,search ,pathname} = locate.state || {}
+  const { path,location,search ,pathname} = locate.state || {}
   const [visible ,setVisible] = useState(8)
   console.log(locate.state)
 
@@ -25,9 +18,7 @@ const Browse = () => {
   const [data, setData] = useState([])
   useEffect(() =>{
     const fetchData = async() =>{
-      // const token = localStorage.getItem('token')
-      // setToken(token)
-      const found = await getJobs(locate.state)
+      const found = await getSearchJobs(locate.state)
       setTalents(found)
     }
     fetchData()
