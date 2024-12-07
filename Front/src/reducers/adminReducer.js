@@ -1,10 +1,11 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
-import { getUserJobs, saveJob } from "../services/jobs";
+import { Analytics, getUserJobs, saveJob } from "../services/jobs";
 import { addJob } from "./jobReducer";
-import { dispatch } from "d3";
+import { dispatch } from "@reduxjs/toolkit";
 
 const initialState = {
-    adminDetails:[],
+    adminDetails:{},
+    analytics :{},
     loading:false,
     error:false
 }
@@ -30,6 +31,14 @@ export const getUserJobsThunk = createAsyncThunk(
     }
 )
 
+export const analyticsThunk = createAsyncThunk(
+    'admin/analytics',
+    async () =>{
+        const response = await Analytics()
+        return response
+    }
+)
+
 
 const adminSlice = createSlice({
     name:'admin',
@@ -52,6 +61,17 @@ const adminSlice = createSlice({
             state.loading = false
             state.error = true
         })
+        .addCase(analyticsThunk.pending,(state) =>{
+            state.loading = true
+        })
+        .addCase(analyticsThunk.fulfilled,(state,action) =>{
+            state.adminDetails = action.payload
+        })
+        .addCase(analyticsThunk.rejected, (state) =>{
+            state.loading = false
+            state.error = true
+        })
+        
     }
 })
 
