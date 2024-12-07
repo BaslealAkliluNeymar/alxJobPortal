@@ -2,9 +2,17 @@ import React,{useState , useEffect }from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { getProfile } from "../services/talents";
 import { Upload } from 'lucide-react'
+import { talentProfile } from "../reducers/talentReducer";
+import { useDispatch, useSelector } from "react-redux";
 export default function Profile() {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state)
+
+  console.log(user)
   const { register, handleSubmit, control } = useForm();
   const [profile, setProfile]  = useState({})
+
+  console.log(profile)
   const [value, setValue] = useState({})
   const [file,setFile] = useState({})
   const { fields: workHistoryFields, append: addWorkHistory } = useFieldArray({
@@ -20,15 +28,15 @@ export default function Profile() {
     name: "education",
   });
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      // const token = localStorage.getItem('token')
-      // setToken(token)
-      const found = await getProfile(profile)
-      console.log(found)
-    };
-    fetchProfile();
-  }, [profile]);
+  // useEffect(() => {
+    
+  //   const fetchProfile = async () => {
+
+  //     const found = await getProfile(profile)
+  //     console.log(found)
+  //   };
+  //   fetchProfile();
+  // }, [profile]);
 
 
   const onSubmit = (data) => {

@@ -9,6 +9,7 @@ const initialState = {
     loading:false,
     error:false
 }
+
 export const saveJobThunk = createAsyncThunk(
     'admin/savejob',
     async (credential,rejectWithValue) =>{
