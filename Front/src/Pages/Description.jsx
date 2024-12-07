@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "../components/Card";
-import { getAll, getFiltered } from "../services/talents.js";
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { talentThunk } from "../reducers/talentReducer.js";
 import { talentFiltered } from "../reducers/talentReducer.js";
@@ -10,10 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 const Description = () => {
   const dispatch = useDispatch()
   const { talent } = useSelector(
-    (state) =>(state.talent)
+    (state) => (state.talent)
   )
 
-  console.log(talent)
+
   const [talents, setTalents] = useState(talent);
   const [select, setSelect] = useState({
     role: "",
@@ -26,12 +24,6 @@ const Description = () => {
 
   useEffect(() => {
     dispatch(talentThunk())
-    // const fetchTalent = async () => {
-     
-    //   const allData = await getAll();
-    //   setTalents(allData);
-    // };
-    // fetchTalent();
   }, []);
 
   useEffect(() => {
@@ -39,17 +31,9 @@ const Description = () => {
       isMounted.current = true;
       return;
     }
-
-    // const fetchFilteredData = async () => {
-    //   const token = localStorage.getItem("token");
-    //   setToken(token);
-      // const filteredData =
-      dispatch(talentFiltered(select))
-      // setTalents(filteredData);
-    // };
-
-    // fetchFilteredData(select);
+    dispatch(talentFiltered(select))
   }, [select]);
+
 
   const handlePrevious = () => {
     setVisible((prev) => prev + 2);
