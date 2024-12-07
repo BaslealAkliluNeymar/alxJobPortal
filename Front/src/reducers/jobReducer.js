@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getJobs } from '../services/jobs.js'
 const initialState = {
     jobs:[],
+    searchResult:[],
     ispending:false
 }
 
@@ -12,7 +13,29 @@ export const jobAsyncThunk = createAsyncThunk(
         return jobs
     }
 )
+export const jobSearchThunk = createAsyncThunk(
+    'job/search',
+    async () =>{
+        const searchResult = await getSearchJobs()
+        return searchResult
+    }
+)
 
+
+const handleAsyncThunk = (builder, thunk , onFullfilled) =>{
+    builder
+        .addCase(thunk.pending, (state) =>{
+            state.ispending = true
+        })
+        .addCase(thunk.rejected, (state) =>{
+            state.ispending = false
+            state.jobs = []
+        })
+        .addCase(thunk.fulfilled,(state,action) =>{
+            state.ispending = false
+            onFullfilled(state, action)
+        })
+}
 const jobSlice = createSlice({
     name:'job',
     initialState,
@@ -22,17 +45,13 @@ const jobSlice = createSlice({
         }
     },
     extraReducers: (builder) =>{
-        builder
-        .addCase(jobAsyncThunk.pending,(state) =>{
-            state.ispending = true
-        })
-        .addCase(jobAsyncThunk.fulfilled,(state,{payload}) =>{
+        handleAsyncThunk(builder, jobAsyncThunk, (state,{payload}) =>{
             state.ispending = false
-            state.jobs = [...payload]
+            state.searchResult = [...payload]
         })
-        .addCase(jobAsyncThunk.rejected,(state) =>{
+        handleAsyncThunk(builder, jobSearchThunk,(state,{payload}) =>{
             state.ispending = false
-            state.jobs = []
+            state.searchResult = [...payload]
         })
     }
 })

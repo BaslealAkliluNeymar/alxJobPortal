@@ -23,9 +23,9 @@ const Card = (props) => {
           
           <div className="flex-1">
             <p className="text-xl font-semibold text-gray-800">{name}</p>
-            <a href="https://www.alxafrica.com/programme/data-science/">
+            <Link to="https://www.alxafrica.com/programme/data-science/">
               <h1 className="text-lg text-gray-500">{position}</h1>
-            </a>
+            </Link>
           </div>
 
           {/* Chat Icon
