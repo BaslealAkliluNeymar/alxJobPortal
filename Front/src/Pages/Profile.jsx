@@ -32,7 +32,7 @@ export default function Profile() {
     
   //   const fetchProfile = async () => {
 
-  //     const found = await getProfile(profile)
+      // const found = await getProfile(profile)
   //     console.log(found)
   //   };
   //   fetchProfile();

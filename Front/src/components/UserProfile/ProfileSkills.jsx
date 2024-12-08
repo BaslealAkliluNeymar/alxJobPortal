@@ -22,7 +22,7 @@ const ProfileSkills = ({ skills, setUser }) => {
     <div className="mt-8 p-6 bg-white shadow-md rounded-lg">
       <h2 className="font-bold text-2xl mb-6 text-gray-800">Skills</h2>
       <div className="flex flex-wrap gap-3">
-        {skills.map((skill, index) => (
+        {skills?.map((skill, index) => (
           <span
             key={index}
             className="px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold shadow-md"

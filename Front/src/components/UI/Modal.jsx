@@ -2,7 +2,7 @@ import React from "react";
 
 const Modal = ({ children, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="border-red-200 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center w-full">
       <div className="bg-white p-6 rounded-lg w-96">
         {children}
         <button

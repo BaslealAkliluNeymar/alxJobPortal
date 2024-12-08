@@ -67,7 +67,6 @@ const talentSchema = new mongoose.Schema({
     projects: [{
         nameofProject: {
             type: String,
-            // Make the name of the project optional
         },
         durationofProject: {
             type: Number
@@ -88,11 +87,9 @@ const talentSchema = new mongoose.Schema({
     education: [{
         nameofDegree: {
             type: String,
-            // Make the degree name optional
         },
         placeofEducation: {
             type: String,
-            // Make the place of education optional
         },
         dateFrom: {
             type: Date
