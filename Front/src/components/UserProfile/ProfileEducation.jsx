@@ -41,28 +41,28 @@ const ProfileEducation = ({ education }) => {
         isEditing && (
           <Modal onClose={() => setIsEditing(!isEditing)}>
             {
-              all.map((_) =>{
+              all.map((item) =>{
                 return (
                   <div className="flex flex-col">
                   <input
-                  name="nameofDegree" value={single.nameofDegree}
+                  name="nameofDegree" value={item.nameofDegree}
                   type="text" onChange={handleChange} placeholder="Name of Degree" />
                   <input
-                  name="placeofEducation" value={single.placeofEducation}
+                  name="placeofEducation" value={item.placeofEducation}
                   type="text" onChange={handleChange} placeholder="Place of Education" />
                   <input
-                  name="dateFrom" value={single.dateFrom}
+                  name="dateFrom" value={item.dateFrom}
                   type="date" onChange={handleChange} placeholder="From" />
                   <input
-                  name="dateTo" value={single.dateTo}
+                  name="dateTo" value={item.dateTo}
                   type="date" onChange={handleChange} placeholder="To" />
-                  <button onClick={handleMore}>Add More</button>
-                  <button>Save</button>
+                  
                 </div>
                 )
               })
             }
-           
+           <button onClick={handleMore}>Add More</button>
+           <button>Save</button>
           </Modal>
         )
       }
