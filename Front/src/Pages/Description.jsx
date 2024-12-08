@@ -11,6 +11,7 @@ const Description = () => {
     (state) => (state.talent)
   )
 
+  console.log(talent)
 
   const [talents, setTalents] = useState(talent);
   const [select, setSelect] = useState({

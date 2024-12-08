@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [enter, setEnter] = useState(false);
 
+  const id = JSON.parse(localStorage.getItem('user'))._id
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setLoggedin(true);
@@ -62,7 +63,7 @@ const Navbar = () => {
                
                 {enter && (
                   <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10">
-                    <Link to="/1/profile">
+                    <Link to={`/${id}/profile`}>
                       <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
                         View Profile
                       </p>

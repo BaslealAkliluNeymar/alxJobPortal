@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ProfileEducation from "../components/UserProfile/ProfileEducation.jsx";
 import ProfileHeader from "../components/UserProfile/ProfileHeader.jsx";
 import ProfileSummary from "../components/UserProfile/ProfileSummary.jsx";
@@ -7,43 +7,28 @@ import ProfileWorkHistory from "../components/UserProfile/ProfileWorkHistory.jsx
 import ProfileProjects from "../components/UserProfile/ProfileProjects.jsx";
 import { Save } from "lucide-react";
 import ProfileResume from "../components/UserProfile/ProfileResume.jsx";
+import { talentThunk,talentSingle } from "../reducers/talentReducer.js";
+import { useDispatch,useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { store } from '../reducers/store.js'
 const ProProfile = () => {
-  const [user, setUser] = useState({
-    name: "John Doe",
-    image:"",
-    resume:"",
-    position: "Software Engineer",
-    location: "Ethiopia",
-    summary: "Passionate developer specializing in full-stack applications.",
-    skills: ["React", "Node.js", "MongoDB"],
-    workHistory: [
-      {
-        position: "Frontend Developer",
-        placeofWork: "Tech Corp",
-        duration: "2022-2023",
-        summary: "Developed dynamic UI components.",
-        technologies: ["React", "CSS"],
-      },
-    ],
-    projects: [
-      {
-        id: 1,
-        nameofProject: "Weather App",
-        durationofProject: "3 months",
-        summary: "Built a weather app using OpenWeather API.",
-        technologies: ["React", "API Integration"],
-      },
-    ],
-    education: [
-      {
-        nameofDegree: "BSc in Electrical and Computer Engineering",
-        placeofEducation: "XYZ University",
-        duration: "2016-2021",
-      },
-    ],
-  });
+    const dispatch = useDispatch()
+    const { id } = useParams()
+    const okay = useSelector((state) => (state.talent.talent))
+
+
+    const found = okay.find(item => item._id === id)
+    console.log(found)
+
+    const [user, setUser] = useState(found);
+
+    useEffect(() =>{
+        dispatch(talentThunk())
+    },[])
+
   const handleClick = () =>{
-    console.log(user)
+    // dispatch(talentProfile(id))
+    console.log('in proprofile')
   }
 
   console.log(user)

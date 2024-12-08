@@ -28,7 +28,8 @@ export const login = createAsyncThunk(
             localStorage.setItem('user',JSON.stringify({
                 user:response.user,
                 email:response.email,
-                role:response.role
+                role:response.role,
+                _id:response._id
             }))
             return response
         }
@@ -72,9 +73,14 @@ const authSlice = createSlice({
 
         .addCase(login.fulfilled,(state,action)=>{
             state.isAuthenticated = true
-            state.user = action.payload.user
+            console.log(action.payload)
+            state.user = {
+                ...action.payload
+            }
             state.isLoading = false
             state.token = action.payload.token
+
+            console.log(state.user)
         })
         .addCase(login.rejected,(state) =>{
             state.error = true

@@ -123,8 +123,6 @@ talentRoute.post('/search',async(req,res) =>{
 talentRoute.get('/:id',async (req,res) =>{
     const { id } = req.params
 
-   
-
     const str = req.headers.authorization.split(' ')[1]
 
     if(!str) return res.send({message:"Token Missing!"})

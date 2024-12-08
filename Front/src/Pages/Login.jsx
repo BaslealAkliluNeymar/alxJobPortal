@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../reducers/authReducer';
 import { store } from '../reducers/store'
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
   const dispatch = useDispatch()
+  const okay = useSelector((state) => (state.auth.user))
+
+  console.log(okay)
   const [reload, setReload] = useState({})
   const navigate = useNavigate();
 
-  console.log(store.getState().token)
   const handleChange = (e) => {
     setCredential((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
