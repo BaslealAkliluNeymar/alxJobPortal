@@ -4,7 +4,7 @@ import Modal from "../UI/Modal.jsx";
 import { AlignLeft } from "lucide-react";
 const ProfileEducation = ({ education }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const [all, setAll]  = useState(education)
+  const [all, setAll]  = useState(education || [])
   const [single, setSingle] = useState({
     nameofDegree:'',
     placeofEducation:'',
@@ -12,12 +12,14 @@ const ProfileEducation = ({ education }) => {
     dateTo:''
   })
 
-  const handleChange = (e) =>{
-    setSingle((prev) =>{
-      return {
-        ...prev,
+  const handleChange = (e,index) =>{
+    setAll((prev) =>{
+      const updated = [...prev]
+      updated[index] = {
+        ...updated[index],
         [e.target.name]:e.target.value
       }
+      return updated
     })
   }
 
@@ -25,14 +27,16 @@ const ProfileEducation = ({ education }) => {
     setAll((prev) =>{
       return [
         ...prev,
-        single
+        { ...single}
       ]
     })
   }
 
 
-  console.log(all)
-  console.log(single)
+  const handleSave = () =>{
+    setIsEditing(false)
+  }
+
   return (
     <div className="mt-8 p-4 bg-white shadow-md rounded-lg">
       <h2 className="font-bold text-2xl text-gray-800 mb-6">Education</h2>
@@ -41,33 +45,33 @@ const ProfileEducation = ({ education }) => {
         isEditing && (
           <Modal onClose={() => setIsEditing(!isEditing)}>
             {
-              all.map((item) =>{
+              all.map((item,index) =>{
                 return (
-                  <div className="flex flex-col">
+                  <div className="flex flex-col" key={index}>
                   <input
                   name="nameofDegree" value={item.nameofDegree}
-                  type="text" onChange={handleChange} placeholder="Name of Degree" />
+                  type="text" onChange={(e) => handleChange(e,index)} placeholder="Name of Degree" />
                   <input
                   name="placeofEducation" value={item.placeofEducation}
-                  type="text" onChange={handleChange} placeholder="Place of Education" />
+                  type="text" onChange={(e) => handleChange(e,index)} placeholder="Place of Education" />
                   <input
                   name="dateFrom" value={item.dateFrom}
-                  type="date" onChange={handleChange} placeholder="From" />
+                  type="date" onChange={(e) => handleChange(e,index)} placeholder="From" />
                   <input
                   name="dateTo" value={item.dateTo}
-                  type="date" onChange={handleChange} placeholder="To" />
+                  type="date" onChange={(e) => handleChange(e,index)} placeholder="To" />
                   
                 </div>
                 )
               })
             }
            <button onClick={handleMore}>Add More</button>
-           <button>Save</button>
+           <button onClick={handleSave}>Save</button>
           </Modal>
         )
       }
       <div className="space-y-6">
-        {education?.map((item, index) => (
+        {all?.map((item, index) => (
           <div
             key={index}
             className="p-4 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition-shadow"
