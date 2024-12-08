@@ -7,7 +7,7 @@ import ProfileWorkHistory from "../components/UserProfile/ProfileWorkHistory.jsx
 import ProfileProjects from "../components/UserProfile/ProfileProjects.jsx";
 import { Save } from "lucide-react";
 import ProfileResume from "../components/UserProfile/ProfileResume.jsx";
-import { talentThunk,talentSingle } from "../reducers/talentReducer.js";
+import { talentThunk,talentProfile } from "../reducers/talentReducer.js";
 import { useDispatch,useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { store } from '../reducers/store.js'
@@ -15,19 +15,33 @@ const ProProfile = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const okay = useSelector((state) => (state.talent.talent))
+    const [user, setUser] = useState({
+        name: "",
+        image:"",
+        resume:"",
+        position: "",
+        location: "",
+        summary: "",
+        skills: [],
+        workHistory: [],
+        projects: [],
+        education: [],
+    });
 
 
     const found = okay.find(item => item._id === id)
-    console.log(found)
-
-    const [user, setUser] = useState(found);
-
+    
+    if(found){
+        setUser(found)
+    }
+   
+    
     useEffect(() =>{
         dispatch(talentThunk())
     },[])
 
   const handleClick = () =>{
-    // dispatch(talentProfile(id))
+    dispatch(talentProfile(user))
     console.log('in proprofile')
   }
 

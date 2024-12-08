@@ -6,9 +6,9 @@ const ProfileHeader = ({ user, setUser }) => {
   const [file, setFile] = useState(null);
   const [isEditing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
-    name: user.name,
-    position: user.position,
-    location: user.location,
+    name: user?.name,
+    position: user?.position,
+    location: user?.location,
   });
 
   const handleClick = () => inputRef.current.click();
@@ -42,7 +42,7 @@ const ProfileHeader = ({ user, setUser }) => {
         className="relative w-44 h-44 rounded-full bg-gray-100 hover:shadow-lg cursor-pointer overflow-hidden flex items-center justify-center"
       >
         <img
-          src={file ? URL.createObjectURL(file) : user.profileImage || "/default-avatar.png"}
+          src={file ? URL.createObjectURL(file) : user?.profileImage || "/default-avatar.png"}
           alt="Profile"
           className="w-full h-full object-cover"
         />
@@ -60,9 +60,9 @@ const ProfileHeader = ({ user, setUser }) => {
 
       {/* Profile Details */}
       <div className="flex-1">
-        <h1 className="text-3xl font-bold text-gray-700">{user.name}</h1>
-        <p className="text-lg text-gray-500">{user.position}</p>
-        <p className="text-sm text-gray-400">{user.location}</p>
+        <h1 className="text-3xl font-bold text-gray-700">{user?.name}</h1>
+        <p className="text-lg text-gray-500">{user?.position}</p>
+        <p className="text-sm text-gray-400">{user?.location}</p>
         <button
           onClick={() => setEditing(true)}
           className="mt-4 px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-md transition-all"
@@ -80,7 +80,7 @@ const ProfileHeader = ({ user, setUser }) => {
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                value={formData?.name}
                 onChange={handleInputChange}
                 placeholder="Your Name"
                 className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
@@ -88,7 +88,7 @@ const ProfileHeader = ({ user, setUser }) => {
               <input
                 type="text"
                 name="position"
-                value={formData.position}
+                value={formData?.position}
                 onChange={handleInputChange}
                 placeholder="Your Position"
                 className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
@@ -96,7 +96,7 @@ const ProfileHeader = ({ user, setUser }) => {
               <input
                 type="text"
                 name="location"
-                value={formData.location}
+                value={formData?.location}
                 onChange={handleInputChange}
                 placeholder="Location"
                 className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"

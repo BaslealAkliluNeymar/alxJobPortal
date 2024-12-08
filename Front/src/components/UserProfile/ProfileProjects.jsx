@@ -45,10 +45,21 @@ const ProfileProjects = ({ projects, setUser }) => {
                 type="text"
                 placeholder="Duration of your project"
               />
+              <input
+                className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                type="date"
+                placeholder="Date From"
+              />
+              <input
+                className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                type="date"
+                placeholder="Date To"
+              />
               <textarea
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-400"
                 placeholder="Enter the description of your project"
               />
+              
             </div>
             <button
               onClick={handleSave}

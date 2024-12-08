@@ -34,6 +34,8 @@ talentRoute.get('/',async (req,res) =>{
 talentRoute.post('/',async(req,res) =>{
     
     const data = req.body
+
+    console.log(data)
     const user = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
     const found = await talentModel.find({_id:user._id})
 
@@ -147,7 +149,7 @@ talentRoute.post('/:id/profile',async (req,res) =>{
 
         const found  = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
         const userfound = await userModel.findOne({_id:found._id})
-      
+        
         const data = req.body
         
         const newName = userfound.firstname + ' ' + userfound.lastname
