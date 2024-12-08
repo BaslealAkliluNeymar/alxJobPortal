@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="flex justify-center items-center">
           <Link to="/">
             <svg width="40" height="40" src="./assets/Icon.svg">
-              {/* SVG content */}
+             
             </svg>
           </Link>
         </div>
@@ -52,8 +52,7 @@ const Navbar = () => {
             <div className="relative flex items-center space-x-4">
               <div
                 className="relative"
-                onClick={() => setEnter(true)}
-                onMouseLeave={() => setEnter(false)}
+                onClick={() => setEnter(!enter)}
               >
                 <img
                   src=""

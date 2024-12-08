@@ -4,7 +4,7 @@ import ProfileSkills from "./ProfileSkills";
 import ProfileSummary from "./ProfileSummary";
 import ProfileWorkHistory from "./ProfileWorkHistory";
 import ProfileEducation from './ProfileEducation'
-
+import ProfileResume from './ProfileResume'
 
 export const profile = {
     ProfileHeader,
@@ -12,5 +12,6 @@ export const profile = {
     ProfileSkills,
     ProfileSummary,
     ProfileWorkHistory,
-    ProfileEducation
+    ProfileEducation,
+    ProfileResume
 }

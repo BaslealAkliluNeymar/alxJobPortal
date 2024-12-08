@@ -1,22 +1,22 @@
 import React from "react";
-// import { EditButton } from '../UI/index.js'
 import EditButton from "../UI/EditButton.jsx";
+
 const ProfileEducation = ({ education, onEdit }) => {
   return (
-    <div className="mt-8">
-      <h2 className="font-bold text-2xl text-left mb-5">Education</h2>
-      <div className="shadow-lg border-slate-200 border-2 p-4 rounded-lg">
+    <div className="mt-8 p-4 bg-white shadow-md rounded-lg">
+      <h2 className="font-bold text-2xl text-gray-800 mb-6">Education</h2>
+      <div className="space-y-6">
         {education?.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col gap-2 mb-4 border-b-2 border-slate-400 pb-2"
+            className="p-4 bg-gray-50 border rounded-lg shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex justify-between items-center">
-              <h3 className="font-bold text-xl">{item.nameofDegree}</h3>
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="font-bold text-lg text-gray-700">{item.nameofDegree}</h3>
               <EditButton onClick={() => onEdit(item.id)} />
             </div>
-            <p>{item.placeofEducation}</p>
-            <div className="flex gap-2 items-center text-gray-600">
+            <p className="text-sm text-gray-600">{item.placeofEducation}</p>
+            <div className="flex gap-2 items-center text-sm text-gray-500 mt-1">
               <p>{item.startDate}</p>
               <span>-</span>
               <p>{item.endDate}</p>

@@ -49,7 +49,7 @@ const Description = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-2 overflow-x-hidden bg-gray-50">
+    <div className="flex justify-center items-center p-2 overflow-x-hidden bg-gray-50">
     <div className="flex gap-8 p-8 min-h-screen w-screen overflow-x-hidden">
 
       <div
@@ -149,27 +149,31 @@ const Description = () => {
         </button>
       )}
 
-  
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-        {talent.length > 0 ? (
-          talent
-            .slice(0, visible)
-            .map((talent, index) => <Card talent={talent} key={index} />)
-        ) : (
+      <div className="flex flex-col">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+          {talent.length > 0 ? (
+            talent
+              .slice(0, visible)
+              .map((talent, index) => <Card talent={talent} key={index} />)
+          ) : (
+            
+              Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonCard />
+              ))
           
-            Array.from({ length: 10 }).map((_, index) => (
-              <SkeletonCard />
-            ))
-         
-        )}
+          )}
+        </div>
+        <button
+            className="flex justify-center items-center gap-2 bg-gradient-to-r mx-auto from-green-400 to-green-600 text-white font-semibold mt-10 w-36 h-12 p-2 rounded-full shadow-lg hover:from-green-500 hover:to-green-700 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            onClick={handlePrevious}
+          >
+            Load More
+        </button>
+
       </div>
+  
     </div>
-      <button
-        className="flex justify-center font-extrabold leading-3 space-x-1 items-center gap-2 bg-blue-300 mt-10 w-36 h-12 p-2 rounded-3xl"
-        onClick={handlePrevious}
-      >
-        Load More
-      </button>
+
     </div>
   );
 };
