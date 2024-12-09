@@ -15,7 +15,8 @@ const ProProfile = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const okay = useSelector((state) => (state.talent.talent))
-    const [user, setUser] = useState({
+    const found = okay.find(item => item._id === id)
+    const [user, setUser] = useState(found ||{
         name: "",
         image:"",
         resume:"",
@@ -28,12 +29,13 @@ const ProProfile = () => {
         education: [],
     });
 
-
-    // const found = okay.find(item => item._id === id)
     
-    if(found){
-        setUser(found)
-    }
+
+    
+    console.log(found)
+    // if(found){
+    //     setUser(found)
+    // }
    
     
     useEffect(() =>{
