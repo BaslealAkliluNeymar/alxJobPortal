@@ -4,6 +4,7 @@ import React from 'react'
 const Job = (props) => {
   const { item } = props
 
+
   
   return (
     <div 

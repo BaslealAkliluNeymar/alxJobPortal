@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { login } from '../reducers/authReducer'
+import { useDispatch } from 'react-redux';
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const user = useSelector((state) => state).auth;
+  const dispatch = useDispatch()
+  const [allow, setAllow] = useState(false)
   const [daz, setDaz] = useState({});
   const navigate = useNavigate();
   const [enter, setEnter] = useState(false);
@@ -17,6 +20,16 @@ const Navbar = () => {
     }
   }, [user]);
 
+  // const display = ? 'hidden':'block'
+
+  useEffect(() =>{
+    const isAllowed =  JSON.parse(localStorage.getItem('user')).role === 'Professional'
+    setAllow(isAllowed)
+    
+  },[])
+
+
+  console.log(allow)
   const handleLogout = () => {
     localStorage.removeItem('token');
     setLoggedin(false);
@@ -63,11 +76,15 @@ const Navbar = () => {
                
                 {enter && (
                   <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10">
-                    <Link to={`/${id}/profile`}>
-                      <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
-                        View Profile
-                      </p>
-                    </Link>
+                    {
+                      allow && (
+                        <Link to={`/${id}/profile`}>
+                          <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
+                            View Profile
+                          </p>
+                      </Link>
+                      )
+                    }
                     <Link to="/settings">
                       <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
                         Settings

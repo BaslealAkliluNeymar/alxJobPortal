@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
 import { getJobs } from '../services/jobs';
-
+import { jobAsyncThunk } from '../reducers/jobReducer';
+import { useDispatch, useSelector } from 'react-redux'
 const Latest = () => {
-  const [jobs, setJobs] = useState([]);
-
+  const dispatch = useDispatch()
+  const jobz = useSelector((state) => (state.job.jobs))
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const jobsData = await getJobs();
+        const jobsData = dispatch(jobAsyncThunk());
         setJobs(jobsData);
       } catch (err) {
         console.log(err)
@@ -31,8 +32,8 @@ const Latest = () => {
       </div>
     </div>
     <div className="container grid grid-cols-2 gap-2 w-full py-2 border-2 border-red-50-">
-      {jobs.length > 0 ? (
-        jobs.filter((item) => item.experience === "Entry").map((item) => <Job item={item} key={item.id || item.title}  />)
+      {jobz.length > 0 ? (
+        jobz.filter((item) => item.experience === "Entry").map((item) => <Job item={item} key={item.id || item.title}  />)
       ) : (
         <div className='flex gap-2 justify-center items-center w-full h-96'>
           <p>Loading jobs</p>
