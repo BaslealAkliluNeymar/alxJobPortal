@@ -1,13 +1,16 @@
 import React,{useEffect, useState} from 'react';
 import { ApplyJob  } from '../services/jobs';
-
+import { useNavigate } from 'react-router-dom';
 const PopOver = ({ PopOver, setPop, item, setError }) => {
   if (!PopOver) return null;
   const [initial,setInitial] = useState({})
   const [apply, setApply] = useState(false)
   const handleClose =  () => setPop(false);
+  const navigate = useNavigate()
 
-  
+  const handleChange = () => {
+    navigate(`/${JSON.parse(localStorage.getItem('user'))._id}/profile`)
+  }
   const handleApply = async (id) =>{
     const found = localStorage.getItem('token')
     // setToken(found)
@@ -100,6 +103,12 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
           >
             Apply
+          </button>
+          <button
+            onClick={() => handleChange()}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Edit/Change My Resume
           </button>
         </div>
       </div>

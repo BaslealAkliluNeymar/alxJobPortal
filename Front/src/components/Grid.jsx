@@ -7,7 +7,7 @@ import {talentThunk} from '../reducers/talentReducer'
 const Grid = () => {
   const dispatch = useDispatch()
   const data1 = useSelector((state) => (state.talent.talent))
-  console.log(data1 )
+  console.log(data1)
   const [aggregate, setAggregate] = useState({})
   
   useEffect(() =>{
