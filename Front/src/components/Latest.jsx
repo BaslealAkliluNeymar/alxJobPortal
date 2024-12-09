@@ -3,6 +3,7 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
 import { jobAsyncThunk } from '../reducers/jobReducer';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 const Latest = () => {
   const dispatch = useDispatch()
   const jobz = useSelector((state) => (state.job.jobs))
@@ -10,7 +11,6 @@ const Latest = () => {
     const fetchJobs = async () => {
       try {
         const jobsData = dispatch(jobAsyncThunk());
-        // setJobs(jobsData);
       } catch (err) {
         console.log(err)
       }
@@ -26,7 +26,9 @@ const Latest = () => {
         <span className="text-secondary font-poppins font-semibold text-heroSize explore">Open</span>
       </div>
       <div className="flex justify-center items-center gap-2">
-        <p className="text-secondary font-poppins text-[14px] explore first-letter:">Show all jobs</p>
+        <Link to='/jobs' className="flex gap-2 items-center">
+          <p className="text-secondary font-poppins text-[14px] explore first-letter:">Show all jobs</p>
+        </Link>
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
