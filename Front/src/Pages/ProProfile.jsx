@@ -10,13 +10,13 @@ import ProfileResume from "../components/UserProfile/ProfileResume.jsx";
 import { talentThunk,talentProfile } from "../reducers/talentReducer.js";
 import { useDispatch,useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { store } from '../reducers/store.js'
+
 const ProProfile = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const okay = useSelector((state) => (state.talent.talent))
     const found = okay.find(item => item._id === id)
-    const [user, setUser] = useState(found ||{
+    const [user, setUser] = useState({
         name: "",
         image:"",
         resume:"",
@@ -29,7 +29,13 @@ const ProProfile = () => {
         education: [],
     });
 
-    
+    useEffect(() => {
+      if (!found) {
+        dispatch(talentThunk());
+      } else {
+        setUser(found);
+      }
+    }, [found, dispatch]);
 
     
     console.log(found)
