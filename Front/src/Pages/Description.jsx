@@ -83,8 +83,8 @@ const Description = () => {
               <option value="" disabled>
                 Select a Role
               </option>
-              <option value="Front-End Developer">Front-End Developer</option>
-              <option value="Back-End Developer">Back-End Developer</option>
+              <option value="Front-end Developer">Front-End Developer</option>
+              <option value="Back-end Developer">Back-End Developer</option>
               <option value="Data Scientist">Data Scientist</option>
               <option value="Data Analyst">Data Analyst</option>
               <option value="Software Engineer">Software Engineer</option>

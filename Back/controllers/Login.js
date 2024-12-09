@@ -1,44 +1,47 @@
-const LoginRouter = require('express').Router()
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const LoginRouter = require('express').Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const userModel = require('../models/Users');
 
-const userModel = require('../models/Users')
-
-LoginRouter.post('/',async (req,res) =>{
-   
+LoginRouter.post('/', async (req, res) => {
     try {
+        const { email, password } = req.body;
 
-            const { email, password } = req.body
-            const user = await userModel.findOne({ email:email })
-            
-            const findPassword = await bcrypt.compare(password, user.password)
-        
-            if(findPassword && user){ 
-                const tokenSign = {
-                    _id:user._id,
-                    email,
-                    password
-                }
-                const token = jwt.sign(tokenSign, process.env.TOKEN_KEY)
-                const tokenObj = {
-                    _id:user._id,
-                    email,
-                    token,
-                    role:user.role,
-                    user:user.firstname
-                }
-                res.send(tokenObj)
-            }
-            else{
-                res.status(401).send("Wrong Password!")
-            }
-        
+        // Validate input
+        if (!email || !password) {
+            return res.status(400).send({ message: 'Email and password are required' });
+        }
+
+        // Check if user exists
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).send({ message: 'User not found. Please sign up first.' });
+        }
+
+        // Compare passwords
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).send({ message: 'Incorrect password' });
+        }
+
+        // Generate JWT token
+        const tokenPayload = {
+            _id: user._id,
+            email: user.email,
+        };
+        const token = jwt.sign(tokenPayload, process.env.TOKEN_KEY, { expiresIn: '1d' });
+
+        // Respond with token and user info
+        res.send({
+            _id: user._id,
+            email: user.email,
+            token,
+            role: user.role,
+            firstname: user.firstname,
+        });
+    } catch (error) {
+        res.status(500).send({ message: 'Internal server error' });
     }
-    catch (error) {
-        res.status(500).send("Please Sign-up First")
-    }
-  
-})
+});
 
-
-module.exports = LoginRouter
+module.exports = LoginRouter;

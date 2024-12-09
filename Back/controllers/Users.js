@@ -1,42 +1,56 @@
-const users = require('express').Router()
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const users = require('express').Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/Users');
 
+// GET users endpoint (Basic route for testing)
+users.get('/', (req, res) => {
+    res.send('You are at the users endpoint');
+});
 
-const userModel  = require('../models/Users')
+// POST endpoint for user registration
+users.post('/', async (req, res) => {
+    try {
+        const { firstname, lastname, email, password, role } = req.body;
 
-users.get('/', (req,res) =>{
-    res.send('You are at the users endpoint')
-})
-
-users.post('/',async (req,res) =>{
-    
-    try
-    {
-        const { firstname, lastname, email, password, role } = req.body
-        const found = await userModel.findOne({email:email})
-        if (found){
-            res.send({
-                message:"This email is already user, try logging in!"
-            })
+        // Check if the email already exists
+        const found = await userModel.findOne({ email });
+        if (found) {
+            return res.status(409).json({
+                message: "This email is already in use. Please try logging in!",
+            });
         }
 
-        const hashPassword = await bcrypt.hash(password,10)
-    
-        const newObj = {
-            ...req.body,
-            password:hashPassword
-        }
-        const created = await userModel.create(newObj);
-        
+        // Hash the password before saving
+        const hashPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user object
+        const newUser = {
+            firstname,
+            lastname,
+            email,
+            password: hashPassword,
+            role,
+        };
+
+        // Save the user in the database
+        const createdUser = await userModel.create(newUser);
+
         res.status(201).json({
-            message: "User Credentials Successfully Saved!",
-            user: newObj
+            message: "User successfully registered!",
+            user: {
+                firstname: createdUser.firstname,
+                lastname: createdUser.lastname,
+                email: createdUser.email,
+                role: createdUser.role,
+            },
         });
-    }catch (error){
-         res.status(500).send('Error Found');
+    } catch (error) {
+        res.status(500).json({
+            message: "An error occurred during registration.",
+            error: error.message,
+        });
     }
-})
+});
 
-
-module.exports = users
+module.exports = users;

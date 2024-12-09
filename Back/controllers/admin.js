@@ -1,130 +1,70 @@
-const admin = require('express').Router()
-const userModel = require('../models/Users')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const Job = require('../models/jobs')
-const talent = require('../models/Talent')
-admin.get('/',async (req,res) =>{
-    try{
-        const auth = req.headers.authorization.split(' ')[1]
-        const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const user = await userModel.findOne({ email:found.email })
-        res.send(user)
+const admin = require('express').Router();
+const Job = require('../models/jobs');
+const authenticate = require('../middleware/authenticate');
+
+
+
+
+admin.get('/', authenticate, (req, res) => {
+    res.send(req.user);
+});
+
+admin.get('/jobs', authenticate, async (req, res) => {
+    try {
+        const user = await req.user.populate('jobsPosted');
+        res.send(user);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
     }
-    catch(error){
-        res.send({
-            message:error
-        })
+});
+
+admin.post('/jobs', authenticate, async (req, res) => {
+    try {
+        const newJob = { postedBy: req.user._id, ...req.body };
+        const savedJob = await Job.create(newJob);
+        req.user.jobsPosted.push(savedJob._id);
+        await req.user.save();
+        res.send(savedJob);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
     }
-})
-admin.get('/jobs',async (req,res) =>{
-    try{
-        const auth = req.headers.authorization.split(' ')[1]
+});
 
-        const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const user = await userModel.findOne({email:found.email}).populate("jobsPosted")
-        
-        
-        res.send(user)
-    }
-    catch(error){
-        res.send({
-            message:error
-        })
-    }
-})
-admin.post('/jobs',async (req,res) =>{
-    try
-    {
-        
-        const auth = req.headers.authorization.split(' ')[1]
-        
-        const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const user = await userModel.findOne({ email:found.email })
-        
-        
-        const newObj = {
-            postedBy:user._id,
-            ...req.body
-        }
-
-        const savedJob = await Job.create(newObj)
-
-        user.jobsPosted.push(savedJob._id)
-
-        await user.save()
-
-        console.log(user)
-        res.send(savedJob)
-    }
-    catch(error){
-        res.send({
-            message:error.message
-        })
-    }
-})
-
-admin.get('/talents',async (req,res) =>{
-    try
-    {
-        
-        const auth = req.headers.authorization.split(' ')[1]
-        const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const tal  = await Job.find({postedBy:found._id}).populate('students')
-       
-
-        const arr = tal.flatMap(item =>
-            item.students.length > 0
-                ? item.students.map(student => ({
-                      id: student._id,
-                      jobTitle: item.jobTitle,
-                      name: student.name,
-                      skills: student.skills,
-                      status: student.status,
-                      resume: student.resume,
-                      location: student.location,
-                  }))
-                : []
+admin.get('/talents', authenticate, async (req, res) => {
+    try {
+        const jobs = await Job.find({ postedBy: req.user._id }).populate('students');
+        const talents = jobs.flatMap(job =>
+            job.students.map(student => ({
+                id: student._id,
+                jobTitle: job.jobTitle,
+                name: student.name,
+                skills: student.skills,
+                status: student.status,
+                resume: student.resume,
+                location: student.location,
+            }))
         );
-        
-        res.send(arr)
+        res.send(talents);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
     }
-    catch(err){
-        res.send({
-            message:err.message
-            })
+});
+
+admin.get('/dashboard', authenticate, async (req, res) => {
+    try {
+        const jobs = await Job.find({ postedBy: req.user._id }).populate('students');
+        const students = jobs.flatMap(job => job.students);
+        const dashboardData = {
+            totalStudents: students.length,
+            totalPending: students.filter(s => s.status === 'pending').length,
+            totalApproved: students.filter(s => s.status === 'active').length,
+            totalRejected: students.filter(s => s.status === 'rejected').length,
+            totalJobs: jobs.length,
+        };
+        res.send(dashboardData);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
     }
-  
-})
+});
 
-
-admin.get('/dashboard',async(req,res)=>{  
-    try{
-        const auth = req.headers.authorization.split(' ')[1]
-        const found = jwt.verify(auth, process.env.TOKEN_KEY)
-        const tal  = await Job.find({postedBy:found._id}).populate('students')
-       
-
-        const data = tal.reduce((acc,job) => acc.concat(job.students),[])
-
-
-        const newData = {
-            totalStudents:data.length,
-            totalPending:data.reduce((acc,start) => start.status === 'pending' && acc++,0),
-            totalApproved:data.reduce((acc,start) => start.status === 'active' && acc++,0),
-            totalRejected:data.reduce((acc,start) => start.status === 'rejected' && acc++,0),
-            totalJobs:tal.length
-        }
-        
-        res.send(newData)
-    }
-    catch(err){
-        res.send({
-            message:err.message
-            })
-    }
-
- })
-
-
-module.exports = admin
+module.exports = admin;

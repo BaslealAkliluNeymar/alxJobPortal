@@ -4,8 +4,14 @@ import { ListFilter } from 'lucide-react';
 import PopOver from '../components/PopOver';
 import SkeletonJobCard from '../components/SkeletonJobCard';
 import { jobAsyncThunk } from '../reducers/jobReducer';
+import { useLocation } from 'react-router-dom'
+
 
 const Jobs = () => {
+  const param = useLocation()
+  const okay = param.state || {};
+
+  console.log(okay)
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state?.job?.jobs);
 
@@ -18,6 +24,10 @@ const Jobs = () => {
   useEffect(() => {
     dispatch(jobAsyncThunk());
   }, [dispatch]);
+
+  // useEffect(() =>{
+  //   setSearch(title)
+  // },[title])
 
   const handlePopOver = (item) => {
     setPopData(item);
