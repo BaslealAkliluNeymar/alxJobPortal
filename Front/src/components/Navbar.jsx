@@ -100,12 +100,12 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              <button
+              {/* <button
                 className="bg-secondary text-white p-2 rounded"
                 onClick={handleLogout}
               >
                 Logout
-              </button>
+              </button> */}
             </div>
           )}
         </div>

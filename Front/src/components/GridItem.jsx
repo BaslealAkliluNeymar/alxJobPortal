@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 
 const GridItem = ({ items }) => {
-  const { title, path, number } = items;
+  const { name,path, number } = items;
   const [value, setValue] = useState({
-    title,
+    title:name,
     location:"ALL"
   })
   const navigate = useNavigate()
 
   const handleClick = () =>{
-    navigate(`/talent/search?position=${title}&location=`,{state:value})
+    navigate(`/talent/search?position=${value.title}&location=`,{state:value})
   }
 
   return (
@@ -33,7 +33,7 @@ const GridItem = ({ items }) => {
               </defs>
           </svg>
 
-        <h1 className="font-poppins text-[1.5rem] font-bold">{title}</h1>
+        <h1 className="font-poppins text-[1.5rem] font-bold">{name}</h1>
         <div className="flex justify-start items-center gap-1">
           <p>{number} Candidates available</p>
           <ArrowRightIcon />
