@@ -29,7 +29,7 @@ const ProProfile = () => {
     });
 
 
-    const found = okay.find(item => item._id === id)
+    // const found = okay.find(item => item._id === id)
     
     if(found){
         setUser(found)
@@ -45,7 +45,6 @@ const ProProfile = () => {
     console.log('in proprofile')
   }
 
-  console.log(user)
   return (
     <section className="container mx-auto py-8">
       <ProfileHeader user={user} setUser={setUser} />

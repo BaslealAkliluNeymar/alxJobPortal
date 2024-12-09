@@ -15,7 +15,7 @@ const talentSchema = new mongoose.Schema({
         required: true
     },
     resume: {
-        type: String,
+        type: Object,
         required: true
     },
     name: {
