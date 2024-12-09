@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
-import { getJobs } from '../services/jobs';
 import { jobAsyncThunk } from '../reducers/jobReducer';
 import { useDispatch, useSelector } from 'react-redux'
 const Latest = () => {
@@ -11,7 +10,7 @@ const Latest = () => {
     const fetchJobs = async () => {
       try {
         const jobsData = dispatch(jobAsyncThunk());
-        setJobs(jobsData);
+        // setJobs(jobsData);
       } catch (err) {
         console.log(err)
       }
