@@ -48,6 +48,7 @@ const jobSlice = createSlice({
         handleAsyncThunk(builder, jobAsyncThunk, (state,{payload}) =>{
             state.ispending = false
             state.searchResult = [...payload]
+            state.jobs =[...payload]
         })
         handleAsyncThunk(builder, jobSearchThunk,(state,{payload}) =>{
             state.ispending = false

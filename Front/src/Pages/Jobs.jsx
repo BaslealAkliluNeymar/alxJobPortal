@@ -1,119 +1,108 @@
-import React,{useState, useEffect} from 'react'
-import Card from '../components/Card'
-import { useLocation } from 'react-router-dom'
-import { getJobs } from '../services/jobs'
-import Job from '../components/Job'
-import Button from '../components/Button'
-import PopOver from '../components/PopOver'
-import { ListFilter } from 'lucide-react'
-import Error from '../components/Error'
-import SkeletonJobCard from '../components/SkeletonJobCard'
-import { useDispatch, useSelector } from 'react-redux'
-import { jobAsyncThunk } from '../reducers/jobReducer'
-import { store } from '../reducers/store'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ListFilter } from 'lucide-react';
+import PopOver from '../components/PopOver';
+import SkeletonJobCard from '../components/SkeletonJobCard';
+import { jobAsyncThunk } from '../reducers/jobReducer';
+
 const Jobs = () => {
-    const dispatch = useDispatch()
-    const jobz = useSelector((state) => state.job.jobs)
-    const locate = useLocation()
-    const jobs= useSelector((state) => state?.job?.job?.jobs);
-    const [pop,setPop] =  useState(false)
-    const [popData,setpopData] = useState({})
-    const [search,setSearch] = useState('')
-    const [errors , setError] = useState({})
-    const [visible ,setVisible] = useState(12)
+  const dispatch = useDispatch();
+  const jobs = useSelector((state) => state?.job?.jobs);
 
-    const handlePopOver = (item) =>{
-      setpopData(item)
-      setPop(!pop)
-    }
-    
-    const [data, setData] = useState([])
-    useEffect(() =>{
-      const found = dispatch(jobAsyncThunk())
-      console.log(found)
-    },[])
+  const [pop, setPop] = useState(false);
+  const [popData, setPopData] = useState({});
+  const [search, setSearch] = useState('');
+  const [error, setError] = useState({});
+  const [visible, setVisible] = useState(12);
 
-    const handleChange = (e) =>{
-      setSearch(e.target.value)
-    }
+  useEffect(() => {
+    dispatch(jobAsyncThunk());
+  }, [dispatch]);
 
-    const handlePrevious = () =>{
-      setVisible((prev) => prev + 2)
-    }
+  const handlePopOver = (item) => {
+    setPopData(item);
+    setPop(!pop);
+  };
 
+  const handleChange = (e) => setSearch(e.target.value);
 
+  const handleLoadMore = () => setVisible((prev) => prev + 2);
 
-    return (
-      <div className='min-h-screen relative container'>
-  
-        <div className='flex justify-between items-center gap-2 mt-10 w-full'>
-            <input type="text" className='outline-none  border-4 border-green-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400 w-3/5 ' placeholder='Search jobs' onChange={handleChange}/>
-            <ListFilter className='text-green-400 hover:text-green-500 text-8xl w-10 h-10 cursor-pointerpointer' />
-        </div>
-        <div className="flex flex-wrap justify-center  gap-2  mt-10 aspect-square p-2 h-auto container">
-          
-           {jobz && jobz.length > 0 ? (
-            jobz.filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase())).splice(0,visible).map((item, index) => {
-             
-              return (
-                
-                <div 
-                className="flex gap-4 justify-start items-start h-44 w-[45%] bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer" 
+  return (
+    <div className="min-h-screen p-6 bg-gray-50">
+      {/* Header */}
+      <div className="flex justify-between items-center gap-4 mt-8">
+        <input
+          type="text"
+          className="w-3/5 p-3 text-sm rounded-lg border-2 border-green-300 focus:ring-2 focus:ring-green-400"
+          placeholder="Search jobs"
+          onChange={handleChange}
+          aria-label="Search jobs"
+        />
+        <ListFilter className="text-green-400 hover:text-green-500 w-8 h-8 cursor-pointer" />
+      </div>
+
+      {/* Job Listings */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+        {jobs?.length > 0 ? (
+          jobs
+            .filter((item) => item.jobTitle.toLowerCase().includes(search.toLowerCase()))
+            .slice(0, visible)
+            .map((item, index) => (
+              <div
+                key={index}
+                className="flex gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-xl cursor-pointer transition-all duration-300"
                 onClick={() => handlePopOver(item)}
               >
-                {/* Logo Section */}
-                <div className="flex justify-center items-center h-[120px] w-[120px] bg-white border-2 border-gray-200 rounded-md">
+                {/* Logo */}
+                <div className="flex justify-center items-center h-20 w-20 bg-gray-100 border rounded-md">
                   {item?.logo ? (
                     <img src={item.logo} alt="logo" className="h-full w-full object-contain rounded-md" />
                   ) : (
                     <span className="text-gray-400">No Logo</span>
                   )}
                 </div>
-              
-               
-                <div className="flex flex-col gap-2 justify-between flex-auto">
-                 
-                  <h1 className="font-bold font-poppins text-lg text-gray-800">{item?.position}</h1>
-                
-                  <p className="font-epilogue text-sm text-gray-600 flex items-center gap-2">
-                    <span>{item?.company}</span>
-                    <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
-                    <span>{item?.location}</span>
+
+                {/* Job Info */}
+                <div className="flex-1 flex flex-col gap-2">
+                  <h2 className="text-lg font-bold text-gray-800">{item?.position}</h2>
+                  <p className="text-sm text-gray-600">
+                    {item?.company} • {item?.location}
                   </p>
-                 
-                  <p className='font-bold w-full'>{item?.jobTitle}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+                  <p className="text-gray-600 font-semibold">{item?.jobTitle}</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 text-xs bg-blue-100 text-blue-600 rounded-full">
                       {item?.type}
                     </span>
-                    <span className="px-3 py-1 bg-green-100 text-green-600 text-sm font-medium rounded-full">
+                    <span className="px-3 py-1 text-xs bg-green-100 text-green-600 rounded-full">
                       {item?.experience}
                     </span>
-                    <span className="px-3 py-1 bg-yellow-100 text-yellow-600 text-sm font-medium rounded-full">
+                    <span className="px-3 py-1 text-xs bg-yellow-100 text-yellow-600 rounded-full">
                       Design
                     </span>
                   </div>
                 </div>
               </div>
-             
-              );
-            })
-         
-          ) : (
-            Array.from({ length: 10 }).map((_, index) => (
-              <SkeletonJobCard />
             ))
-          )}
-          <div className='flex justify-center items-center gap-2 bg-blue-300 mt-10 w-1/2 p-4 rounded-lg'>
-            <button onClick={handlePrevious}>Load More</button>
-          </div>
-          {
-            pop && <PopOver PopOver={pop} setPop={setPop} item={popData} setError={setError}/>
-          }
-         </div>       
-         
-    </div>
-    )
-}
+        ) : (
+          Array.from({ length: 10 }).map((_, index) => <SkeletonJobCard key={index} />)
+        )}
+      </div>
 
-export default Jobs
+      {/* Load More Button */}
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={handleLoadMore}
+          className="px-6 py-2 bg-blue-600 text-white text-sm rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200"
+        >
+          Load More
+        </button>
+      </div>
+
+      {/* Popover */}
+      {pop && <PopOver PopOver={pop} setPop={setPop} item={popData} setError={setError} />}
+    </div>
+  );
+};
+
+export default Jobs;
