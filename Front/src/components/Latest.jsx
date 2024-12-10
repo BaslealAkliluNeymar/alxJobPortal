@@ -20,10 +20,6 @@ const Latest = () => {
     fetchJobs();
   }, []);
 
-
-  // const handleClick = (item) => {
-  //   navigate('/jobs',{state:item})
-  // }
   return (
     <section className="bg-hero-pattern mt-2 w-full min-h-screen explore">
     <div className="container flex flex-col justify-between items-center mt-2 latest-m">

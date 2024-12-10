@@ -6,7 +6,7 @@ const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [enter, setEnter] = useState(false);
   const [daz, setDaz] = useState({});
-  const [allow, setAllow] = useState(false)
+  const [allow, setAllow] = useState('')
   const user = useSelector((state) => state).auth;
   const navigate = useNavigate();
 
@@ -19,10 +19,10 @@ const Navbar = () => {
   }, [user]);
 
 
-  useEffect(() =>{
-    const isAllowed = JSON.parse(localStorage.getItem('user')).role === 'Professional'
-    setAllow(isAllowed)
-  },[])
+  // useEffect(() =>{
+  //   const isAllowed = 
+  //   setAllow(isAllowed)
+  // },[])
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -78,12 +78,19 @@ const Navbar = () => {
                 {enter && (
                   <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10">
                     {
-                      allow && (
+                      JSON.parse(localStorage.getItem('user')).role === 'Professional' ? (
                         <Link to={`/${id}/profile`}>
                           <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
                             View Profile
                           </p>
                       </Link>
+                      ):(
+                        <Link to={`/admin`}>
+                        <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
+                          Dashboard
+                        </p>
+                      </Link>
+
                       )
                     }
                     <Link to="/settings">
