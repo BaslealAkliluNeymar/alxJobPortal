@@ -3,9 +3,10 @@ import desktopImg from '../assets/Desktop.png';
 
 const Project = () => {
   return (
-    <div>
+    <div className='flex flex-col justify-center items-center'>
         <h1>Browse Projects</h1>
 
+    
         <div
          style={{
             backgroundImage: `url(${desktopImg})`,
@@ -13,7 +14,7 @@ const Project = () => {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
-        className="w-50% h-[35vh] bg-white shadow-md flex flex-col justify-between p-4 rounded-lg"
+        className="w-3/4 h-[45vh] m-10 bg-white shadow-md flex flex-col justify-between p-4 rounded-lg"
         >
 
       <div className="">
@@ -48,6 +49,7 @@ const Project = () => {
         </button>
       </div>
     </div>
+
     </div>
   )
 }
