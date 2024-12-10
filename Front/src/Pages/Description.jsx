@@ -5,13 +5,14 @@ import { talentThunk } from "../reducers/talentReducer.js";
 import { talentFiltered } from "../reducers/talentReducer.js";
 import SkeletonCard from "../components/SkeletonCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { skills } from '../constants/index.js'
 const Description = () => {
   const dispatch = useDispatch()
   const { talent } = useSelector(
     (state) => (state.talent)
   )
 
-  console.log(talent)
+  console.log(skills)
 
   const [talents, setTalents] = useState(talent);
   const [select, setSelect] = useState({
@@ -83,12 +84,11 @@ const Description = () => {
               <option value="" disabled>
                 Select a Role
               </option>
-              <option value="Front-end Developer">Front-End Developer</option>
-              <option value="Back-end Developer">Back-End Developer</option>
-              <option value="Data Scientist">Data Scientist</option>
-              <option value="Data Analyst">Data Analyst</option>
-              <option value="Software Engineer">Software Engineer</option>
-              <option value="Product Designer">Product Designer</option>
+              {
+                skills.map((item,key) => {
+                  return <option key={key} value={item}>{item}</option>
+                })
+              }
             </select>
           </div>
 

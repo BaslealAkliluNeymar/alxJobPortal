@@ -46,3 +46,14 @@ export const data = [
 
 
 
+export const skills = [
+    'Software Engineer',
+    'Data Analyst',
+    'Data Scientist',
+    'Financial Analyst',
+    'Virtual Assistant',
+    'Salesforce Adminsitrator',
+    'AWS Solutions Architect',
+    'Front-end Developer',
+    'Back-end Developer'
+]

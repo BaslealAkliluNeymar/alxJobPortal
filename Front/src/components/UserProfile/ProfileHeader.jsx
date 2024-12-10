@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Modal from "../UI/Modal";
-
+import { skills } from '../../constants/index.js'
 const ProfileHeader = ({ user, setUser }) => {
   const inputRef = useRef();
   const [file, setFile] = useState(null);
@@ -58,7 +58,7 @@ const ProfileHeader = ({ user, setUser }) => {
         </div>
       </div>
 
-      {/* Profile Details */}
+
       <div className="flex-1">
         <h1 className="text-3xl font-bold text-gray-700">{user?.name}</h1>
         <p className="text-lg text-gray-500">{user?.position}</p>
@@ -71,7 +71,6 @@ const ProfileHeader = ({ user, setUser }) => {
         </button>
       </div>
 
-      {/* Modal for Editing */}
       {isEditing && (
         <Modal onClose={() => setEditing(false)}>
           <div className="p-6 bg-white rounded-lg shadow-md">
@@ -85,14 +84,28 @@ const ProfileHeader = ({ user, setUser }) => {
                 placeholder="Your Name"
                 className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
               />
-              <input
+              <select 
                 type="text"
                 name="position"
                 value={formData?.position}
                 onChange={handleInputChange}
                 placeholder="Your Position"
                 className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-              />
+              >
+                {
+                  skills?.map((item, key) =>{
+                    return <option value={item} key={key}>{item}</option>
+                  })
+                }
+              </select>
+              {/* <input
+                type="text"
+                name="position"
+                value={formData?.position}
+                onChange={handleInputChange}
+                placeholder="Your Position"
+                className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+              /> */}
               <input
                 type="text"
                 name="location"

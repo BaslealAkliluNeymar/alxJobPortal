@@ -9,18 +9,15 @@ import Login from './Pages/Login.jsx'
 import SignUp from './Pages/SignUp.jsx'
 import Chat from './Pages/Chat.jsx'
 import Single from './Pages/Single.jsx'
-import Profile from './Pages/Profile.jsx'
 import Admin from './Pages/Admin.jsx'
 import RequiredAuth from './components/RequiredAuth.jsx'
 import Jobs from './Pages/Jobs.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import Jobz from './components/Jobz.jsx'
 import Talents from './components/Talents.jsx'
-import Chats from './components/Chats.jsx'
-import Users from './components/Users.jsx'
 import NotFoundPage from './Pages/NotFoundPage.jsx'
-import { store } from './reducers/store.js'
 import ProProfile from './Pages/ProProfile.jsx'
+import Project from './Pages/Project.jsx'
 
 const App = () => {
 
@@ -37,9 +34,8 @@ const App = () => {
               <Route path='/talent/:id' element={<Single />} />
               <Route path='/chat/:id' element={<Chat />} />
               <Route path ='/:id/profile' element={<ProProfile />} />
-              <Route path ='/browse' element={<Browse />} />
+              <Route path ='/browse' element={<Project />} />
               <Route path ='/jobs' element={<Jobs />} />
-              {/* <Route path='/a' element={<ProProfile />} /> */}
               <Route element = {<RequiredAuth />}>
                 <Route path = '/admin' element={<Admin />} >
                   <Route path='/admin/dashboard' element={<Dashboard />} />
