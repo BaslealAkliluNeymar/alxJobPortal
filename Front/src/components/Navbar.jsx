@@ -48,9 +48,17 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-4">
-          <Link to="/talent">
-            <p className="text-green-700 hover:bg-white rounded px-4 py-2">Hire Talent</p>
-          </Link>
+          {
+              JSON.parse(localStorage.getItem('user')).role === 'Professional' ? (
+                <Link to="/jobs">
+                    <p className="text-green-700 hover:bg-white rounded px-4 py-2">Browse Jobs</p>
+                </Link>
+              ):(
+                <Link to="/talent">
+                    <p className="text-green-700 hover:bg-white rounded px-4 py-2">Hire Talent</p>
+                </Link>
+              )
+          }
           <Link to="/browse">
             <p className="text-green-700 hover:bg-white rounded px-4 py-2">Browse Projects</p>
           </Link>
