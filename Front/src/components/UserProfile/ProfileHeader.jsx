@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Modal from "../UI/Modal";
+import axios from 'axios'
 import { skills } from '../../constants/index.js'
 const ProfileHeader = ({ user, setUser }) => {
   const inputRef = useRef();
@@ -14,12 +15,18 @@ const ProfileHeader = ({ user, setUser }) => {
   const handleClick = () => inputRef.current.click();
 
   const handleFileUpload = (e) => {
+    // const cloud_name = 'drdyhlgxj'
     const uploadedFile = e.target.files[0];
+    // const data = new FormData();
+    // data.append("image", uploadedFile);
+    // axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, data)
+    // .then(response => console.log(response))
+    // .catch(error => console.log(error))
     if (uploadedFile) {
       setFile(uploadedFile);
       setUser((prev) => ({
         ...prev,
-        image: URL.createObjectURL(uploadedFile),
+        image: uploadedFile,
       }));
     }
   };

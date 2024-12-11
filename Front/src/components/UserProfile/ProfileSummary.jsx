@@ -9,6 +9,7 @@ const ProfileSummary = ({ summary, setUser }) => {
     setUser((prev) => ({ ...prev, summary: newSummary }));
     setEditing(false);
   };
+  console.log(summary)
 
   return (
     <div className="mt-8 p-6 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-lg">

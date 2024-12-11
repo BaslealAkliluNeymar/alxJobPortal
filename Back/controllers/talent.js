@@ -32,10 +32,7 @@ talentRoute.get('/',async (req,res) =>{
 })
 
 talentRoute.post('/',async(req,res) =>{
-    
     const data = req.body
-    // console.log(data)
-    console.log(data)
     const user = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
     const found = await talentModel.find({_id:user._id})
 
@@ -46,6 +43,7 @@ talentRoute.post('/',async(req,res) =>{
             _id: user._id,
             ...data
         }
+        console.log(profileObj)
 
         const savedObj = await talentModel.create(profileObj)
         res.send(savedObj)
@@ -117,11 +115,6 @@ talentRoute.post('/search',async(req,res) =>{
     }
 })
 
-// talentRoute.get('/search',async(req,res) =>{
-//     const {position, location} = req.query
-
-
-// })
 talentRoute.get('/:id',async (req,res) =>{
     const { id } = req.params
 
@@ -146,7 +139,6 @@ talentRoute.get('/:id',async (req,res) =>{
 
 talentRoute.post('/:id/profile',async (req,res) =>{
     try{
-
         const found  = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
         const userfound = await userModel.findOne({_id:found._id})
         

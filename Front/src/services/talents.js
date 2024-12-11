@@ -34,12 +34,9 @@ export const getFiltered = async (data) =>{
 }
 
 export const getProfile = async (data) =>{
-    //change data to formdata
-    const frorm = new FormData(data)
-    const response = await axios.post(BASE_URL,frorm,{
+    const response = await axios.post(BASE_URL,data,{
         headers:{
             'Authorization' :token,
-            'Content-Type':'multipart/form-data'
         }
     })
     return response.data

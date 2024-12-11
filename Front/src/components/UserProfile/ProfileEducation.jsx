@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import EditButton from "../UI/EditButton.jsx";
 import Modal from "../UI/Modal.jsx";
 import { AlignLeft } from "lucide-react";
-const ProfileEducation = ({ education }) => {
+const ProfileEducation = ({ education,setUser }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [all, setAll]  = useState(education || [])
   const [single, setSingle] = useState({
@@ -33,8 +33,13 @@ const ProfileEducation = ({ education }) => {
   }
 
 
+
   const handleSave = () =>{
     setIsEditing(false)
+    setUser((prev) => ({
+      ...prev, 
+      education: all
+    }))
   }
 
   return (

@@ -3,9 +3,6 @@ import React from 'react'
 
 const Job = (props) => {
   const { item } = props
-
-
-  console.log(item)
   
   return (
     <div 

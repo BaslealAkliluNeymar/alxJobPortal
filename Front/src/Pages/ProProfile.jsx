@@ -37,22 +37,27 @@ const ProProfile = () => {
       }
     }, [found, dispatch]);
 
-    console.log(user)
-    
-    // console.log(found)
-    // // if(found){
-    // //     setUser(found)
-    // // }
-   
-    
     useEffect(() =>{
         dispatch(talentThunk())
     },[])
 
-  const handleClick = () =>{
-    console.log(user)
-    dispatch(talentProfile(user))
-    console.log('in proprofile')
+  const handleClick =  () =>{
+    const config = {
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    }
+    const data  = new FormData()
+
+    for (const key in user) {
+      if (user[key] && key !== 'image') {
+        data.append(key, user[key]);
+      }
+    }
+
+    for (const [key, value] of data.entries()) {
+      console.log(`${key}:`, value);
+    }
   }
 
   return (
