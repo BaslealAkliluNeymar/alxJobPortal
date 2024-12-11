@@ -37,11 +37,12 @@ const ProProfile = () => {
       }
     }, [found, dispatch]);
 
+    console.log(user)
     
-    console.log(found)
-    // if(found){
-    //     setUser(found)
-    // }
+    // console.log(found)
+    // // if(found){
+    // //     setUser(found)
+    // // }
    
     
     useEffect(() =>{
@@ -49,6 +50,7 @@ const ProProfile = () => {
     },[])
 
   const handleClick = () =>{
+    console.log(user)
     dispatch(talentProfile(user))
     console.log('in proprofile')
   }

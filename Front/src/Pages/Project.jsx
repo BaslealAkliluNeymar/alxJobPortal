@@ -3,6 +3,22 @@ import desktopImg from '../assets/Desktop.png';
 import { Ellipsis, Heart, ThumbsUpIcon } from 'lucide-react';
 
 const Project = () => {
+
+  const data = [
+    {
+      _id:1,
+      like:[2,3,4],
+      wishlist:[4,5,6],
+      title:'ddafas',
+      rewards:[
+        'lkfda;flak;fafa',
+        'daflkj;afdas',
+        'daslkjf;daslk;ldkaf'
+      ],
+      required_candidates:30,
+      added_candidates:0,
+    }
+  ]
   return (
     <div className="flex flex-col justify-center items-center bg-gray-100 py-10">
       <h1 className="text-4xl font-extrabold leading-relaxed tracking-wide text-gray-800 mb-8">

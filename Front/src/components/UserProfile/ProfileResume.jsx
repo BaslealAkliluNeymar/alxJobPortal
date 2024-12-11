@@ -9,11 +9,16 @@ const ProfileResume = ({ user, setUser }) => {
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
-    console.log(uploadedFile);
+    
     if (uploadedFile) {
       setFile(uploadedFile);
-      setUser((prev) => ({ ...prev, resume: uploadedFile })); // Save uploaded file to user state
+      const formData = new FormData();
+      formData.append("resume", uploadedFile);
+      console.log(formData)
+      setUser((prev) => ({ ...prev, resume: uploadedFile })); 
     }
+
+    console.log(user)
   };
 
   return (

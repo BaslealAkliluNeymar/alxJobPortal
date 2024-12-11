@@ -34,7 +34,7 @@ talentRoute.get('/',async (req,res) =>{
 talentRoute.post('/',async(req,res) =>{
     
     const data = req.body
-
+    // console.log(data)
     console.log(data)
     const user = jwt.verify(req.headers.authorization.split(' ')[1],process.env.TOKEN_KEY)
     const found = await talentModel.find({_id:user._id})
