@@ -9,6 +9,8 @@ const Single = () => {
   const user = useSelector(state => state.talent.talent[0])
   const { id } = useParams()
  
+
+  console.log(user)
   useEffect(() => {
     dispatch(talentSingle(id))
   }, [id]);

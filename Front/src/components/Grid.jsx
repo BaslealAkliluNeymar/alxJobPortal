@@ -16,13 +16,13 @@ const Grid = () => {
 
   const aggregate = useMemo(() => {
     return data1.reduce((acc, curr) => {
-        const existing = acc.find(item => item.name === curr.position);
+        const existing = acc.find(item => item?.name === curr?.position);
 
         if (existing) {
             existing.number += 1;
         } else {
             acc.push({
-                name: curr.position,
+                name: curr?.position,
                 number: 1,
             });
         }

@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore } from 'firebase/firestore'
 import { getStorage } from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
+import { collection } from "../../../Back/models/Talent";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,5 +21,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const imageDb = getStorage(app)
+const db = getFirestore()
+const conRef = collection(db,'images')
+// const analytics = getAnalytics(app);
+// const imageDb = getStorage(app)
+
+getDocs(conRef).then((querySnapshot) => console.log(querySnapshot.docs.map(doc => doc.data()))) 

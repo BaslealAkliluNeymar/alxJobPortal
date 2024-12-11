@@ -39,8 +39,8 @@ const Jobs = () => {
   const handleLoadMore = () => setVisible((prev) => prev + 2);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
-      {/* Header */}
+    <div className="min-h-screen p-6 bg-gray-50 container mx-auto my-4">
+
       <div className="flex justify-between items-center gap-4 mt-8">
         <input
           type="text"
@@ -64,7 +64,7 @@ const Jobs = () => {
                 className="flex gap-4 p-4 bg-white shadow-md rounded-lg hover:shadow-xl cursor-pointer transition-all duration-300"
                 onClick={() => handlePopOver(item)}
               >
-                {/* Logo */}
+
                 <div className="flex justify-center items-center h-20 w-20 bg-gray-100 border rounded-md">
                   {item?.logo ? (
                     <img src={item.logo} alt="logo" className="h-full w-full object-contain rounded-md" />

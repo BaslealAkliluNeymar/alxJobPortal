@@ -82,9 +82,16 @@ const HeroSearch = () => {
                   <div className='flex flex-col h-auto gap-2 w-96 absolute top-20 left-52 bg-white'>
                     {
                      showDropdown && searchResult.map((item, index) =>{
-                          return <div key={index} value={item.item} className='rounded-l-lg text-left shadow-lg cursor-pointer h-10 w-full border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white' onClick={() => setValue({...value, title:item.item})}>
+                          return (<div 
+                                key={index} value={item.item} 
+                                className='rounded-l-lg text-left shadow-lg cursor-pointer h-10 w-full border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white' 
+                                onClick={() => {
+                                  setValue({...value, title:item.item}) 
+                                  setShowDropdown(false)
+                                }}
+                              >
                                     {item.item}
-                                </div>
+                                </div>)
                         })
                     }  
                   </div>

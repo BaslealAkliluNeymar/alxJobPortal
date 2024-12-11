@@ -59,7 +59,7 @@ const Navbar = () => {
                 </Link>
               )
           }
-          <Link to="/browse">
+          <Link to="/projects">
             <p className="text-green-700 hover:bg-white rounded px-4 py-2">Browse Projects</p>
           </Link>
           {!loggedin ? (

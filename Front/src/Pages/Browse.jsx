@@ -10,6 +10,8 @@ const Browse = () => {
   const { path, location, search, pathname } = locate.state || {};
   const [visible, setVisible] = useState(8);
 
+
+  console.log(talents)
   useEffect(() => {
     const fetchData = async () => {
       const found = await getSearchJobs(locate.state);
