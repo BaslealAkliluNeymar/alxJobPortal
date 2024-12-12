@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Modal from "../UI/Modal";
 import { skills } from '../../constants/index.js'
-
+import axios from 'axios'
 const ProfileHeader = ({ user, setUser }) => {
   const inputRef = useRef();
   const [file, setFile] = useState(null);
@@ -14,18 +14,32 @@ const ProfileHeader = ({ user, setUser }) => {
 
   const handleClick = () => inputRef.current.click();
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload =  (e) => {
     const uploadedFile = e.target.files[0];
+    console.log(uploadedFile)
+    try {
+      const from_data = new FormData()
+      from_data.append('file',uploadedFile)
 
-    if (uploadedFile) {
-      setFile(uploadedFile);
-      setUser((prev) => ({
-        ...prev,
-        image: uploadedFile,
-      }));
+     axios.post('http://localhost:8000/upload',from_data)
+     .then(res => {
+          setFile(uploadedFile)
+          setUser((prev) => ({
+            ...prev,
+            image: res.data.url,
+          }))
+
+      // console.log(res.data)
+    })
+
     }
+    catch(err){
+      console.log(err)
+    }
+ 
   };
 
+  console.log(user)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

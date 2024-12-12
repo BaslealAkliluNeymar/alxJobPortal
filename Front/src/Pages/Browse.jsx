@@ -11,7 +11,6 @@ const Browse = () => {
   const [visible, setVisible] = useState(8);
 
 
-  console.log(talents)
   useEffect(() => {
     const fetchData = async () => {
       const found = await getSearchJobs(locate.state);
@@ -27,7 +26,7 @@ const Browse = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 flex flex-col items-center">
       {/* Title */}
-      <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center px-4">
         Browse Jobs
       </h1>
 
@@ -47,12 +46,14 @@ const Browse = () => {
       </div>
 
       {/* Load More Button */}
-      <button
-        className="mt-8 px-6 py-3 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 hover:shadow-lg active:scale-95 transition-all duration-200"
-        onClick={handlePrevious}
-      >
-        Load More
-      </button>
+      {talents.length > visible && (
+        <button
+          className="mt-8 px-6 py-3 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 hover:shadow-lg active:scale-95 transition-all duration-200"
+          onClick={handlePrevious}
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 };
