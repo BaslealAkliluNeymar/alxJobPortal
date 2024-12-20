@@ -2,12 +2,15 @@ import React from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 
-const Explore = () => {
+const Explore = () => { 
   return (
-    <section className='container mx-auto mt-12 mb-4 p-6 bg-white rounded-lg shadow-md flex justify-between items-center'>
+    <section className='md:container lg:container mx-auto mt-12 mb-4 p-6 bg-white rounded-lg 
+    shadow-md flex flex-col md:w-full md:flex-row
+    md:items-center md:justify-between 
+    gap-2 justify-between items-center w-[90%]'>
 
-      <div className='flex items-baseline gap-2'>
-        <h1 className='font-poppins font-extrabold text-4xl text-gray-800'>Explore by</h1>
+      <div className='flex items-baseline gap-4 w-full md:items-center'>
+        <h1 className='font-poppins font-extrabold text-4xl text-gray-800 '>Explore by</h1>
         <span className='text-secondary font-poppins font-extrabold text-4xl'>Role</span>
       </div>
 
