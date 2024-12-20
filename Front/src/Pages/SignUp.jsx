@@ -40,17 +40,17 @@ const SignUp = () => {
   };
 
   return (
-    <section className='flex w-[90%] md:w-1/2 justify-center items-center bg-gradient-to-r  transition-shadow delay-100 h-auto min-h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4 py-8'>
+    <section className='flex w-full md:w-1/2 lg:w-[35%] justify-center items-center bg-gradient-to-r  transition-shadow delay-100 h-auto min-h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4 py-8'>
      
 
 
-      <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-4 md:p-8 bg-white'>
+      <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-4 md:p-8 bg-white drop-shadow-sm shadow-md'>
         <div className='text-center'>
-          <h1 className='text-2xl font-bold'>Welcome to</h1>
+          <h1 className='text-3xl font-bold'>Welcome to</h1>
           <span className='text-2xl text-green-500 font-bold'>Your Future</span>
         </div>
 
-        <form onSubmit={handleSubmit} className='w-full md:w-[60%] space-y-4 px-4 md:px-0'>
+        <form onSubmit={handleSubmit} className='w-full md:w-[70%] space-y-4 px-4 md:px-0'>
           <input
             type='text'
             name='firstname'

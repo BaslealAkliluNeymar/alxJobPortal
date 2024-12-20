@@ -71,7 +71,7 @@ const Navbar = () => {
             <p className="text-green-700 hover:bg-white rounded px-4 py-2">Browse Projects</p>
           </Link>
           {!loggedin ? (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 max-[414px]:block">
               <Link to="/login">
                 <button className="bg-white text-black p-2 rounded w-20">Login</button>
               </Link>
@@ -140,13 +140,67 @@ const Navbar = () => {
                 <div className="flex flex-col items-center justify-end space-x-2">
                   <Menu onClick={() => setDrop(!drop)} className='relative'/>
                     <div className='absolute top-14 z-10 space-y-2 border-slate-50 shadow-md p-2'>
-                      <Link to="/login">
-                        <button className="bg-white text-black p-2 rounded w-20">Login</button>
-                      </Link>
-                      <Link to="/sign-up">
-                        <button className="bg-secondary text-white p-2 rounded w-20">Sign-up</button>
-                      </Link>
-                      
+                      {
+                       !loggedin ? (
+                        <>
+                           <Link to="/login">
+                              <button className="bg-white text-black p-2 rounded w-20">Login</button>
+                            </Link>
+                            <Link to="/sign-up">
+                              <button className="bg-secondary text-white p-2 rounded w-20">Sign-up</button>
+                            </Link>
+                        </>
+                       ):(
+                        <div className="relative flex items-center space-x-4">
+                          {/* <div
+                            className="relative"
+                            onClick={() => setEnter(!enter)}> */}
+                         
+                         
+                            {/* {enter && ( */}
+                              <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10 top-1">
+                                {
+                                  JSON.parse(localStorage.getItem('user')).role === 'Professional' ? (
+                                    <Link to={`/${id}/profile`}>
+                                      <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
+                                        View Profile
+                                      </p>
+                                  </Link>
+                                  ):(
+                                    <Link to={`/admin`}>
+                                    <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
+                                      Dashboard
+                                    </p>
+                                  </Link>
+            
+                                  )
+                                }
+                                <Link to="/settings">
+                                  <p className="hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer">
+                                    Settings
+                                  </p>
+                                </Link>
+                                <button
+                                  className="w-full text-left hover:bg-green-300 hover:text-slate-50 px-2 py-1 rounded cursor-pointer"
+                                  onClick={handleLogout}
+                                >
+                                  Logout
+                                </button>
+                              </div>
+                            {/* )} */}
+                        {/* </div> */}
+                        {/* <button
+                          className="bg-secondary text-white p-2 rounded"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </button> */}
+                      </div>
+                       )
+                      }
+
+
+                     
                     </div>
             </div>
               ) :

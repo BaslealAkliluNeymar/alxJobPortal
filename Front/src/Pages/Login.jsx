@@ -23,10 +23,10 @@ const Login = () => {
   };
 
   return (
-    <section className='flex justify-center items-center md:w-[33%] w-full h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 lg:md-4 transition-shadow duration-300'>
-      <div className='flex flex-col items-center space-y-8 justify-center p-8 border-3 border-red-400 '>
+    <section className='flex justify-center items-center  w-full h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 md:mx-auto lg:mx-auto lg:md-4 transition-shadow duration-300  lg:w-[35%] md:w-[50%]'>
+      <div className='flex flex-col items-center space-y-8 justify-center p-8 w-full lg:w-full md:w-full'>
         <div className='text-center'>
-          <h1 className='text-2xl font-bold'>Welcome to</h1>
+          <h1 className='text-3xl font-bold'>Welcome to</h1>
           <span className='text-2xl text-green-500 font-bold'>Your Future</span>
         </div>
 
