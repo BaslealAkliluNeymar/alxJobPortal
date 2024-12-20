@@ -23,9 +23,9 @@ const Latest = () => {
   return (
     <section className="bg-hero-pattern mt-2 w-full min-h-screen explore">
     <div className="container flex flex-col justify-between items-center mt-2 latest-m">
-      <div className="flex gap-1 mt-10 latest">
-        <h1 className="font-poppins font-semibold text-heroSize explore">Latest Jobs</h1>
-        <span className="text-secondary font-poppins font-semibold text-heroSize explore">Open</span>
+      <div className="flex gap-2 mt-10 latest p-4 text-3xl md:text-5xl md:font-extrabold md:p-2">
+        <h1 className="font-poppins font-semibold">Latest Jobs</h1>
+        <span className="text-secondary font-poppins font-semibold">Open</span>
       </div>
       <div className="flex justify-center items-center gap-2">
         <Link to='/jobs' className="flex gap-2 items-center">
@@ -34,7 +34,7 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container grid grid-cols-2 gap-2 w-full py-2 border-2 border-red-50-">
+    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 border-2 border-red-50-">
       {jobz.length > 0 ? (
         jobz.filter((item) => item.experience === "Entry")
             .map(
