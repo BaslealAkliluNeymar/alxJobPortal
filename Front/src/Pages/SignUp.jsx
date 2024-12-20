@@ -40,17 +40,17 @@ const SignUp = () => {
   };
 
   return (
-    <section className='flex w-1/2 justify-center items-center bg-gradient-to-r from-blue-500  to-white transition-shadow delay-100 h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4'>
-      {/* <div className='flex-1 bg-green-400'></div> */}
+    <section className='flex w-[90%] md:w-1/2 justify-center items-center bg-gradient-to-r  transition-shadow delay-100 h-auto min-h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4 py-8'>
+     
 
 
-      <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-8 bg-white'>
+      <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-4 md:p-8 bg-white'>
         <div className='text-center'>
           <h1 className='text-2xl font-bold'>Welcome to</h1>
           <span className='text-2xl text-green-500 font-bold'>Your Future</span>
         </div>
 
-        <form onSubmit={handleSubmit} className='w-[60%] space-y-4'>
+        <form onSubmit={handleSubmit} className='w-full md:w-[60%] space-y-4 px-4 md:px-0'>
           <input
             type='text'
             name='firstname'
@@ -87,7 +87,7 @@ const SignUp = () => {
             name='role'
             value={credential.role}
             onChange={handleChange}
-            className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
+            className='w-1/2 p-3 border rounded-lg shadow-lg focus:outline-green-400 '
           >
             <option value='Employer'>Employer</option>
             <option value='Professional'>Professional</option>

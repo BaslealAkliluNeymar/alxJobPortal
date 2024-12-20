@@ -122,6 +122,7 @@ talentRoute.get('/:id',async (req,res) =>{
 
     if(!str) return res.send({message:"Token Missing!"})
     const data = jwt.verify(str,process.env.TOKEN_KEY)
+    console.log(data)
 
     const found = await userModel.find({email:data.email})
 

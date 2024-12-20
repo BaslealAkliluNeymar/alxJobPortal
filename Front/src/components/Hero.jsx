@@ -3,7 +3,7 @@ import HeroSearch from './HeroSearch';
 
 const Hero = () => {
   return (
-    <section className="hero flex flex-col mx-auto h-full bg-hero-pattern gap-6 px-4 sm:px-6 py-8 sm:py-12 lg:px-20 relative">
+    <section className="hero flex flex-col mx-auto h-full bg-hero-pattern gap-6 md:px-4 sm:px-6 py-8 sm:py-12 lg:px-20 relative">
       <div className="container flex-1">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Section */}

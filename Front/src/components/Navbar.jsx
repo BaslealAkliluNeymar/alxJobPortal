@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { DropletIcon, Menu } from 'lucide-react';
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [enter, setEnter] = useState(false);
   const [daz, setDaz] = useState({});
   const [allow, setAllow] = useState('')
   const user = useSelector((state) => state).auth;
+  const [size, setSize] = useState(false)
+  const [drop, setDrop] = useState(false)
   const navigate = useNavigate();
 
   const id = JSON.parse(localStorage.getItem('user'))._id
@@ -19,11 +21,17 @@ const Navbar = () => {
   }, [user]);
 
 
-  // useEffect(() =>{
-  //   const isAllowed = 
-  //   setAllow(isAllowed)
-  // },[])
+  useEffect(() =>{
+    if (window.innerWidth <= 414){
+      setDrop(true)
+    }
+    else{
+      setDrop(!drop)
+    }
 
+  },[window.innerWidth])
+
+  console.log(size)
   const handleLogout = () => {
     localStorage.removeItem('token');
     setLoggedin(false);
@@ -47,7 +55,7 @@ const Navbar = () => {
             </svg>
           </Link>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 max-[414px]:hidden">
           {
               JSON.parse(localStorage.getItem('user')).role === 'Professional' ? (
                 <Link to="/jobs">
@@ -123,6 +131,29 @@ const Navbar = () => {
               </button> */}
             </div>
           )}
+        </div>
+
+
+        <div className='block md:hidden'>
+            {
+              drop ? (
+                <div className="flex flex-col items-center justify-end space-x-2">
+                  <Menu onClick={() => setDrop(!drop)} className='relative'/>
+                    <div className='absolute top-14 z-10 space-y-2 border-slate-50 shadow-md p-2'>
+                      <Link to="/login">
+                        <button className="bg-white text-black p-2 rounded w-20">Login</button>
+                      </Link>
+                      <Link to="/sign-up">
+                        <button className="bg-secondary text-white p-2 rounded w-20">Sign-up</button>
+                      </Link>
+                      
+                    </div>
+            </div>
+              ) :
+              <button >
+                <Menu onClick={() => setDrop(!drop)}/>
+              </button> 
+            }
         </div>
       </div>
     </div>

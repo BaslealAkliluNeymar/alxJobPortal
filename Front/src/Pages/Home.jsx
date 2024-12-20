@@ -8,7 +8,7 @@ import Latest from '../components/Latest'
 
 const Home = () => {
   return (
-    <div className='overflow-x-hidden'>
+    <div className='md:overflow-x-hidden'>
         <Hero />
         <Ads />
         <Explore />

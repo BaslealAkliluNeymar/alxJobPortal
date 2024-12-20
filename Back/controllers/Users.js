@@ -5,7 +5,9 @@ const userModel = require('../models/Users');
 
 // GET users endpoint (Basic route for testing)
 users.get('/', (req, res) => {
+    console.log(res)
     res.send('You are at the users endpoint');
+
 });
 
 // POST endpoint for user registration
