@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import Job from './Job';
 import { jobAsyncThunk } from '../reducers/jobReducer';
@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const Latest = () => {
   const dispatch = useDispatch()
+  const myRef = useRef()
+  const [size, setSize] = useState()
   const navigate = useNavigate()
   const jobz = useSelector((state) => (state.job.jobs))
+  const [layout, setLayout] = useState(6)
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -19,6 +22,21 @@ const Latest = () => {
     };
     fetchJobs();
   }, []);
+
+  // if(jobz.length > 0){
+  //   console.log(myRef.current.getBoundingClientRect().height)
+  // }
+
+  console.log(size)
+  useEffect(() =>{
+    const updateSize = () =>{
+      setTimeout(() =>{
+        setSize(myRef.current.getBoundingClientRect().height)
+      },0)
+    }
+
+    window.addEventListener('resize',updateSize)
+  },[])
 
   return (
     <section className="bg-hero-pattern mt-2 w-full min-h-screen explore">
@@ -34,10 +52,14 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 border-2 border-red-50">
+    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 h-auto border-red-500 border-4" 
+    style={{
+      height:'auto'
+    }}ref={myRef}>
       {jobz.length > 0 ? (
-        jobz.filter((item) => item.experience === "Entry")
-            .map(
+        jobz
+        .slice(0,8)
+        .map(
               (item) =>
                 (<Job item={item} key={item.id || item.title} />)
           )

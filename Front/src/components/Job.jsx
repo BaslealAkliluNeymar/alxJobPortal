@@ -30,7 +30,7 @@ const Job = (props) => {
           
           <p className='font-bold w-full'>{item?.jobTitle}</p>
           <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full">
+            <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full shadow-inner">
               {item?.type}
             </span>
             <span className="px-3 py-1 bg-green-100 text-green-600 text-sm font-medium rounded-full">
