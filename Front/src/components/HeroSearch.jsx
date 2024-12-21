@@ -18,6 +18,7 @@ const HeroSearch = () => {
   });
 
   const [showDropdown, setShowDropdown] = useState(false);
+  // const [filled, setFilled] = useState(false)
 
   const [searchResult, setSearchResult] = useState([])
 
@@ -82,12 +83,18 @@ const HeroSearch = () => {
                   <div className='flex flex-col h-auto gap-2 w-96 absolute top-20 left-52 bg-white'>
                     {
                      showDropdown && searchResult.map((item, index) =>{
-                          return (<div 
-                                key={index} value={item.item} 
-                                className='rounded-l-lg text-left shadow-lg cursor-pointer h-10 w-full border-2 p-2 border-slate-200 hover:bg-green-400 hover:text-white' 
-                                onClick={() => {
-                                  setValue({...value, title:item.item}) 
-                                  setShowDropdown(false)
+                          return (
+                              <div 
+                                  key={index} value={item.item} 
+                                  style={{
+                                    // display: value.title ? 'none' :'flex'
+                                  }}
+                                  className='rounded-l-lg text-left shadow-lg cursor-pointer 
+                                              h-10 w-full border-2 p-2 border-slate-200
+                                            hover:bg-green-400 hover:text-white' 
+                                  onClick={() => {
+                                    setValue({...value, title:item.item}) 
+                                    setShowDropdown(false)
                                 }}
                               >
                                     {item.item}

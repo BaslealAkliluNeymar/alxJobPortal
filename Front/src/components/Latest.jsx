@@ -34,7 +34,7 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 border-2 border-red-50-">
+    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 border-2 border-red-50">
       {jobz.length > 0 ? (
         jobz.filter((item) => item.experience === "Entry")
             .map(

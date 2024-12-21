@@ -42,8 +42,6 @@ const SignUp = () => {
   return (
     <section className='flex w-full md:w-1/2 lg:w-[35%] justify-center items-center bg-gradient-to-r  transition-shadow delay-100 h-auto min-h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4 py-8'>
      
-
-
       <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-4 md:p-8 bg-white drop-shadow-sm shadow-md'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Welcome to</h1>

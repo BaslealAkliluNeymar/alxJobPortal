@@ -123,12 +123,7 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              {/* <button
-                className="bg-secondary text-white p-2 rounded"
-                onClick={handleLogout}
-              >
-                Logout
-              </button> */}
+             
             </div>
           )}
         </div>
@@ -152,12 +147,7 @@ const Navbar = () => {
                         </>
                        ):(
                         <div className="relative flex items-center space-x-4">
-                          {/* <div
-                            className="relative"
-                            onClick={() => setEnter(!enter)}> */}
                          
-                         
-                            {/* {enter && ( */}
                               <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10 top-1">
                                 {
                                   JSON.parse(localStorage.getItem('user')).role === 'Professional' ? (
@@ -172,7 +162,6 @@ const Navbar = () => {
                                       Dashboard
                                     </p>
                                   </Link>
-            
                                   )
                                 }
                                 <Link to="/settings">
@@ -187,20 +176,9 @@ const Navbar = () => {
                                   Logout
                                 </button>
                               </div>
-                            {/* )} */}
-                        {/* </div> */}
-                        {/* <button
-                          className="bg-secondary text-white p-2 rounded"
-                          onClick={handleLogout}
-                        >
-                          Logout
-                        </button> */}
                       </div>
                        )
                       }
-
-
-                     
                     </div>
             </div>
               ) :
