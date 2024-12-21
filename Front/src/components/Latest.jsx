@@ -52,7 +52,7 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 h-auto border-red-500 border-4" 
+    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 md:min-h-fit border-4 p-2 shadow-md rounded-md" 
     style={{
       height:'auto'
     }}ref={myRef}>

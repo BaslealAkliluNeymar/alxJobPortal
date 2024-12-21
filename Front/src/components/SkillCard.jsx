@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SkillCard = (props) => {
-  // Predefined vibrant colors to cycle through if needed
+
   const colorMap = {
     'A': '#FF6B6B', 'B': '#6BCB77', 'C': '#4D96FF', 'D': '#FFD93D',
     'E': '#FF8A5B', 'F': '#7B61FF', 'G': '#3EC1D3', 'H': '#FF6B6B',
