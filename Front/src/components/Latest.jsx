@@ -5,6 +5,7 @@ import { jobAsyncThunk } from '../reducers/jobReducer';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 const Latest = () => {
   const dispatch = useDispatch()
   const myRef = useRef()
@@ -23,9 +24,6 @@ const Latest = () => {
     fetchJobs();
   }, []);
 
-  // if(jobz.length > 0){
-  //   console.log(myRef.current.getBoundingClientRect().height)
-  // }
 
   console.log(size)
   useEffect(() =>{
@@ -52,7 +50,8 @@ const Latest = () => {
         <ArrowRightIcon  className='hover:translate-x-1 hover:delay-700 text-green-400'/>
       </div>
     </div>
-    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 md:min-h-fit border-4 p-2 shadow-md rounded-md" 
+    <div className="container md:grid md:grid-cols-2 md:gap-2 flex flex-col w-full gap-2 py-2 md:min-h-fit border-4 p-2 shadow-md 
+    rounded-md md:" 
     style={{
       height:'auto'
     }}ref={myRef}>
@@ -64,9 +63,8 @@ const Latest = () => {
                 (<Job item={item} key={item.id || item.title} />)
           )
       ) : (
-        <div className='flex gap-2 justify-center items-center w-full h-96'>
-          <p>Loading jobs</p>
-          <div className="loader"></div>
+        <div className='flex gap-2 md:col-span-2 justify-center items-center w-full h-96'> 
+            <Loading />
         </div>
       )}
     </div>

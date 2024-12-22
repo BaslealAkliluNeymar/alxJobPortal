@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../reducers/authReducer';
-import { store } from '../reducers/store'
+
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
   const dispatch = useDispatch()
@@ -18,12 +18,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setReload(dispatch(login(credential)))
     navigate('/');
   };
 
   return (
-    <section className='flex justify-center items-center  w-full h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 md:mx-auto lg:mx-auto lg:md-4 transition-shadow duration-300  lg:w-[35%] md:w-[50%]'>
+    <section className='flex justify-center items-center  
+
+            w-full h-[740px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 md:mx-auto lg:mx-auto 
+            lg:md-4 transition-shadow duration-300 lg:w-[35%] md:w-[40%]'>
       <div className='flex flex-col items-center space-y-8 justify-center p-8 w-full lg:w-full md:w-full'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Welcome to</h1>
@@ -65,6 +69,8 @@ const Login = () => {
             type='email'
             name='email'
             value={credential.email}
+            required
+            aria-required
             onChange={handleChange}
             placeholder='Email'
             className='w-full p-3 border rounded-lg shadow-lg focus:outline-green-400'
@@ -72,6 +78,8 @@ const Login = () => {
           <input
             type='password'
             name='password'
+            required
+            aria-required
             value={credential.password}
             onChange={handleChange}
             placeholder='Password'

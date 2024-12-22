@@ -1,8 +1,8 @@
-import React,{ useState,useEffect,useMemo } from 'react'
+import React,{ useEffect,useMemo } from 'react'
 import GridItem from './GridItem'
-import { data } from '../constants/index'
 import { useDispatch, useSelector } from 'react-redux'
 import {talentThunk} from '../reducers/talentReducer'
+import Loading from './Loading'
 
 const Grid = () => {
   const dispatch = useDispatch()
@@ -34,7 +34,11 @@ const Grid = () => {
 
 
     if(!data1 || data1.length === 0){
-      return <p>...loading</p>;
+      return (
+        <div className='flex gap-2 md:col-span-2 justify-center items-center w-full h-96'> 
+            <Loading />
+        </div>
+      );
     }
 
   return (

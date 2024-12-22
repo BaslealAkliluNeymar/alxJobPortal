@@ -38,6 +38,16 @@ const Navbar = () => {
     navigate('/');
   };
 
+  const handleContinue = () =>{
+    const token = localStorage.getItem('token')
+    if(!token){
+      navigate('/sign-up')
+    }
+    else{
+      navigate('/talent')
+    }
+  }
+
   return (
     <div className="nav bg-herobackground flex h-[75px] justify-between items-center w-full">
       <div className="w-full container flex justify-between items-center">
@@ -62,9 +72,7 @@ const Navbar = () => {
                     <p className="text-green-700 hover:bg-white rounded px-4 py-2">Browse Jobs</p>
                 </Link>
               ):(
-                <Link to="/talent">
-                    <p className="text-green-700 hover:bg-white rounded px-4 py-2">Hire Talent</p>
-                </Link>
+                <p className="text-green-700 hover:bg-white rounded px-4 py-2 cursor-pointer"  onClick={handleContinue}>Hire Talent</p> 
               )
           }
           <Link to="/projects">
