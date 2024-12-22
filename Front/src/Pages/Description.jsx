@@ -6,6 +6,7 @@ import { talentFiltered } from "../reducers/talentReducer.js";
 import SkeletonCard from "../components/SkeletonCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { skills } from '../constants/index.js'
+import  {StepBack} from 'lucide-react'
 const Description = () => {
   const dispatch = useDispatch()
   const { talent } = useSelector(
@@ -56,16 +57,16 @@ const Description = () => {
 
       <div
         className={`${
-          filterVisible ? "block" : "hidden lg:block"
-        } w-3/12 p-6 shadow-lg rounded-lg bg-white lg:static fixed z-50 top-0 left-0 h-screen lg:h-auto lg:bg-transparent lg:z-auto transition-all duration-300`}
+          filterVisible ? "block" : "hidden"
+        } w-3/12 p-6  shadow-lg rounded-lg bg-white lg:static fixed z-50 top-0 left-0 h-screen lg:h-auto lg:bg-transparent lg:z-auto transition-all duration-300`}
       >
-        <div className="flex justify-between items-center mb-6 lg:hidden">
-          <h2 className="text-xl font-semibold text-gray-700">Filters</h2>
+
+        <div className="flex justify-between items-center mb-6 h-10">
           <button
             onClick={() => setFilterVisible(false)}
-            className="text-gray-600 text-lg"
+            className="text-gray-600 text-lg absolute left-[28rem]"
           >
-            ✕
+            <StepBack size={24} />
           </button>
         </div>
         <h2 className="hidden lg:block text-xl font-semibold text-gray-700 mb-4">
@@ -144,13 +145,13 @@ const Description = () => {
       {!filterVisible && (
         <button
           onClick={() => setFilterVisible(true)}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg lg:hidden fixed top-6 left-6 z-50"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg fixed lg:top-46 lg:left-6 top-6 left-6 z-50"
         >
           Open Filters
         </button>
       )}
 
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center container">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
           {talent.length > 0 ? (
             talent
