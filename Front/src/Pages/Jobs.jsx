@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListFilter } from 'lucide-react';
+import { ListFilter, Search } from 'lucide-react';
 import PopOver from '../components/PopOver';
 import SkeletonJobCard from '../components/SkeletonJobCard';
 import { jobAsyncThunk } from '../reducers/jobReducer';
@@ -39,17 +39,18 @@ const Jobs = () => {
   const handleLoadMore = () => setVisible((prev) => prev + 2);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50 container mx-auto my-4">
+    <div className="min-h-screen p-6 bg-gray-50 md:container mx-auto my-4 w-full md:p-4">
 
-      <div className="flex justify-between items-center gap-4 mt-8">
+      <div className="flex items-center gap-4 mt-8">
+        <Search />
         <input
           type="text"
-          className="w-3/5 p-3 text-sm rounded-lg border-2 border-green-300 focus:ring-2 focus:ring-green-400"
+          className="w-full md:w-3/5 p-3 text-sm rounded-lg border-2 border-green-300 focus:ring-2 focus:ring-green-400"
           placeholder="Search jobs"
           onChange={handleChange}
           aria-label="Search jobs"
         />
-        <ListFilter className="text-green-400 hover:text-green-500 w-8 h-8 cursor-pointer" />
+        {/* <ListFilter className="text-green-400 hover:text-green-500 w-8 h-8 cursor-pointer" /> */}
       </div>
 
       {/* Job Listings */}

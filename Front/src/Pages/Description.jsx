@@ -7,6 +7,7 @@ import SkeletonCard from "../components/SkeletonCard.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { skills } from '../constants/index.js'
 import  {StepBack} from 'lucide-react'
+import Loading from "../components/Loading.jsx";
 const Description = () => {
   const dispatch = useDispatch()
   const { talent } = useSelector(
@@ -145,7 +146,7 @@ const Description = () => {
       {!filterVisible && (
         <button
           onClick={() => setFilterVisible(true)}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg fixed lg:top-46 lg:left-6 top-6 left-6 z-50"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg fixed lg:top-46 lg:left-6 top-16 left-6 z-50"
         >
           Open Filters
         </button>
@@ -158,7 +159,10 @@ const Description = () => {
               .slice(0, visible)
               .map((talent, index) => <Card talent={talent} key={index} />)
           ) : (
-            
+            // <div>
+            //   <Loading />
+
+            // </div>
               Array.from({ length: 10 }).map((_, index) => (
                 <SkeletonCard />
               ))

@@ -9,7 +9,7 @@ const Card = (props) => {
 
   return (
     <Link to={`/talent/${_id}`}>
-      <div className="flex flex-col space-y-4 w-auto p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative aspect-video">
+      <div className="flex flex-col space-y-4 p-6 border h-[21rem] w-[21rem] md:h-[21.875rem] md:w-[21.875rem] border-gray-300 rounded-lg shadow-lg hover:shadow-2xl transition-all m-4 bg-white relative aspect-video">
         <div className="flex items-center gap-4">
           <div className="relative">
             <img
@@ -27,11 +27,6 @@ const Card = (props) => {
               <h1 className="text-lg text-gray-500">{position}</h1>
             </Link>
           </div>
-
-          {/* Chat Icon
-          <Link to={`/chat/${_id}`} className="text-green-400 hover:text-green-500">
-            <Send size={24} />
-          </Link> */}
         </div>
 
         {/* Experience */}

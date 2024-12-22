@@ -91,13 +91,8 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
         </div>
 
         
-        <div className="mt-6 flex justify-between items-center">
-          <button
-            onClick={handleClose}
-            className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
-          >
-            Close
-          </button>
+        <div className="mt-6 flex justify-between items-center gap-2">
+      
           <button
             onClick={() => handleApply(item._id)}
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
@@ -106,7 +101,7 @@ const PopOver = ({ PopOver, setPop, item, setError }) => {
           </button>
           <button
             onClick={() => handleChange()}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 h-10"
           >
             Edit/Change My Resume
           </button>
