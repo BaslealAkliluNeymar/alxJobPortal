@@ -24,6 +24,7 @@ export const login = createAsyncThunk(
      async (userData, { rejectWithValue }) =>{
         try {
             const response = await LoginPost(userData)
+            console.log(response)
             localStorage.setItem('token',response.token)
             localStorage.setItem('user',JSON.stringify({
                 user:response.user,

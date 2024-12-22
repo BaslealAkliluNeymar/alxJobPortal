@@ -2,12 +2,12 @@ import React from 'react'
 
 
 const Job = (props) => {
-  const { item } = props
+  const { item,lead } = props
   
   return (
     <div 
         className="flex w-full gap-4 justify-start items-start h-auto bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer" 
-        onClick={() => handlePopOver(item)}
+        onClick={lead}
       >
         <div className="flex justify-center items-center h-[120px] w-[120px] bg-white border-2 border-gray-200 rounded-md">
           {item?.logo ? (

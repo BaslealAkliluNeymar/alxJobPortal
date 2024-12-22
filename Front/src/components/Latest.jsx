@@ -36,6 +36,10 @@ const Latest = () => {
     window.addEventListener('resize',updateSize)
   },[])
 
+  const handleNavigate = () =>{
+    navigate('/jobs')
+  }
+
   return (
     <section className="bg-hero-pattern mt-2 w-full min-h-screen explore">
     <div className="container flex flex-col justify-between items-center mt-2 latest-m">
@@ -60,7 +64,7 @@ const Latest = () => {
         .slice(0,8)
         .map(
               (item) =>
-                (<Job item={item} key={item.id || item.title} />)
+                (<Job item={item} key={item.id || item.title} lead={handleNavigate}/>)
           )
       ) : (
         <div className='flex gap-2 md:col-span-2 justify-center items-center w-full h-96'> 

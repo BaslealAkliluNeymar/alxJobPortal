@@ -7,7 +7,7 @@ const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
   const dispatch = useDispatch()
   const okay = useSelector((state) => (state.auth.user))
-
+  const [error,setError ] = useState(false)
   console.log(okay)
   const [reload, setReload] = useState({})
   const navigate = useNavigate();
@@ -18,16 +18,36 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setReload(dispatch(login(credential)))
-    navigate('/');
+    // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    // // console.log(emailRegex.test(credential.email))
+    // if (!emailRegex.test(credential.email)) {
+    //   alert('Please enter a valid email address');
+    //   return;
+    // }
+    // else{
+    const response = await dispatch(login(credential))
+    console.log(response.error)
+    if(response.error){
+      setError(true)
+      setTimeout(() =>setError(false),3000)
+      }
+      else{
+        navigate('/')
+      }
+   
   };
 
   return (
     <section className='flex justify-center items-center  
-
             w-full h-[740px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 md:mx-auto lg:mx-auto 
             lg:md-4 transition-shadow duration-300 lg:w-[35%] md:w-[40%]'>
+              {
+                error && (
+                  <div className='z-10 absolute top-20 right-8 bg-red-600 text-white p-3 rounded border-3 shadow-md'>
+                      <p>An Error Occured</p>
+                  </div>
+                )
+              }
       <div className='flex flex-col items-center space-y-8 justify-center p-8 w-full lg:w-full md:w-full'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Welcome to</h1>
