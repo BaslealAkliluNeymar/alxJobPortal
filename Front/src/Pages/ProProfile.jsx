@@ -17,17 +17,20 @@ const ProProfile = () => {
     const okay = useSelector((state) => (state.talent.talent))
     const found = okay.find(item => item._id === id)
     const [user, setUser] = useState({
-        name: "",
-        image:"",
-        resume:"",
-        position: "",
-        location: "",
-        summary: "",
-        skills: [],
-        workHistory: [],
-        projects: [],
-        education: [],
+      education: "",
+      github: "",
+      id: "",
+      jobseekerlocation: "",
+      languages: "",
+      linkedin: "",
+      name: "",
+      porfoliolink: "",
+      professionalsummary: "",
+      skills: "",
+      telegram: ""
     });
+
+    console.log(user)
 
     useEffect(() => {
       if (!found) {
@@ -44,7 +47,7 @@ const ProProfile = () => {
   const handleClick =  () =>{
     const config = {
       headers:{
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/formdata',
       }
     }
     const data  = new FormData()
@@ -54,30 +57,23 @@ const ProProfile = () => {
         data.append(key, user[key]);
       }
     }
-
     for (const [key, value] of data.entries()) {
       console.log(`${key}:`, value);
     }
+    
   }
 
   return (
     <section className="container mx-auto py-8">
       <ProfileHeader user={user} setUser={setUser} />
-      <ProfileResume user={user} setUser={setUser} />
-      <ProfileSummary summary={user.summary} setUser={setUser} />
+      {/* <ProfileResume user={user} setUser={setUser} /> */}
+      {/* <ProfileSummary summary={user.summary} setUser={setUser} />
       <ProfileSkills skills={user.skills} setUser={setUser} />
       <ProfileWorkHistory workHistory={user.workHistory} setUser={setUser} />
       <ProfileProjects projects={user.projects} setUser={setUser} />
-      <ProfileEducation education={user.education} setUser={setUser} />
+      <ProfileEducation education={user.education} setUser={setUser} /> */}
 
-      <button
-            onClick={() => handleClick()}
-            className={`flex mt-2 items-center rounded-lg w-44 h-12 justify-center font-extrabold  gap-2 text-slate-50 bg-green-500 cursor-pointer`}
-            aria-label="Edit"
-            >
-            <Save size={16}/>
-            <span>Save</span>
-    </button>
+     
     </section>
   );
 };

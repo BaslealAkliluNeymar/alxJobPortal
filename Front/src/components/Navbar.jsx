@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { DropletIcon, Menu } from 'lucide-react';
+import {  Menu } from 'lucide-react';
+import Avatar from '../components/UI/Avatar'
 const Navbar = () => {
   const [loggedin, setLoggedin] = useState(false);
   const [enter, setEnter] = useState(false);
   const [daz, setDaz] = useState({});
-  const [allow, setAllow] = useState('')
   const user = useSelector((state) => state).auth;
   const [size, setSize] = useState(false)
   const [drop, setDrop] = useState(false)
@@ -93,11 +93,7 @@ const Navbar = () => {
                 className="relative"
                 onClick={() => setEnter(!enter)}
               >
-                <img
-                  src=""
-                  alt="Profile"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
+                <Avatar src="https://github.com/shadcn.png" alt="@shadcn" className="w-10 h-10 rounded-full object-cover"/>
                
                 {enter && (
                   <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10">

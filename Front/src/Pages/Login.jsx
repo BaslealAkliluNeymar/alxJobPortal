@@ -54,7 +54,7 @@ const Login = () => {
           <span className='text-2xl text-green-500 font-bold'>Your Future</span>
         </div>
 
-        <button className='flex items-center space-x-2 justify-center w-3/4 p-3 rounded-lg shadow-md hover:bg-gray-100'>
+        <button className='flex border-2 border-slate-50 items-center space-x-2 justify-center w-3/4 p-3 rounded-lg shadow-md hover:bg-gray-100'>
           <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_1_492)">
               <path d="M7.09188 19.3378L5.978 23.4961L1.90681 23.5822C0.690125 21.3255 0 18.7436 0 15.9999C0 13.3467 0.64525 10.8447 1.789 8.6416H1.78988L5.41437 9.3061L7.00212 12.9089C6.66981 13.8777 6.48869 14.9177 6.48869 15.9999C6.48881 17.1743 6.70156 18.2997 7.09188 19.3378Z" fill="#FBBB00" />
@@ -71,12 +71,7 @@ const Login = () => {
           <p>Login with Google</p>
         </button>
 
-        <button className='flex items-center space-x-2 justify-center w-3/4 p-3 rounded-lg shadow-md hover:bg-gray-100'>
-          <svg width="16" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.0789 5.31333H16V0.225333C15.496 0.156 13.7629 0 11.7444 0C2.50246 0 5.01692 10.4667 4.64895 12H0V17.688H4.64761V32H10.3458V17.6893H14.8054L15.5134 12.0013H10.3445C10.5951 8.236 9.32989 5.31333 13.0789 5.31333Z" fill="#3B5999" />
-          </svg>
-          <p>Login with Facebook</p>
-        </button>
+       
 
         <div className='flex items-center w-full space-x-4'>
           <hr className='flex-1' />

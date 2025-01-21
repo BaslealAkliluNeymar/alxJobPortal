@@ -12,7 +12,5 @@ export const LoginPost = async (credential) =>{
 
 export const signup = async (credential) =>{
     const response = await axios.post(BASE_URL,credential)
-
-    console.log(response.data)
     return response.data
 }

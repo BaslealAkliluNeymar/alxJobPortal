@@ -7,6 +7,7 @@ const config = {
 
 export const getAll = async () =>{
     const response = await axios.get(BASE_URL,config)
+    console.log(response)
     return response.data
 }
 
@@ -29,6 +30,7 @@ export const getSingle = async (id) => {
 
 
 export const getFiltered = async (data) =>{
+    console.log(data)
     const response = await axios.post(`${BASE_URL}/search`,data,config)
     return response.data
 }

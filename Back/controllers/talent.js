@@ -116,25 +116,34 @@ talentRoute.post('/search',async(req,res) =>{
 })
 
 talentRoute.get('/:id',async (req,res) =>{
-    const { id } = req.params
+    try
+    {
+        const { id } = req.params
 
-    const str = req.headers.authorization.split(' ')[1]
+        const str = req.headers.authorization.split(' ')[1]
 
-    if(!str) return res.send({message:"Token Missing!"})
-    const data = jwt.verify(str,process.env.TOKEN_KEY)
-    console.log(data)
+        if(!str) return res.send({message:"Token Missing!"})
+        const data = jwt.verify(str,process.env.TOKEN_KEY)
+        console.log(data)
 
-    const found = await userModel.find({email:data.email})
+        const found = await userModel.find({email:data.email})
 
-    if(found){
-        const talentData = await talentModel.find({_id:id})
-        res.send(talentData)
+        if(found){
+            const talentData = await talentModel.find({_id:id})
+            res.send(talentData)
+        }
+        else{
+            res.send({
+                message:"talent"
+            })
+        }
     }
-    else{
+    catch(error){
         res.send({
-            message:"talent"
+            message:error
         })
     }
+    
 
 })
 

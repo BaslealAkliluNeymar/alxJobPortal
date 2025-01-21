@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Modal from "../UI/Modal";
 import { skills } from '../../constants/index.js'
 import axios from 'axios'
+import Avatar from "../UI/Avatar.jsx";
 const ProfileHeader = ({ user, setUser }) => {
   const inputRef = useRef();
   const [file, setFile] = useState(null);
@@ -28,10 +29,7 @@ const ProfileHeader = ({ user, setUser }) => {
             ...prev,
             image: res.data.url,
           }))
-
-      // console.log(res.data)
     })
-
     }
     catch(err){
       console.log(err)
@@ -39,7 +37,7 @@ const ProfileHeader = ({ user, setUser }) => {
  
   };
 
-  console.log(user)
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -51,102 +49,33 @@ const ProfileHeader = ({ user, setUser }) => {
   };
 
   return (
-    <div className="flex items-center gap-8 p-6 shadow-lg bg-slate-50 rounded-lg mb-5">
-      <div
-        onClick={handleClick}
-        className="relative w-44 h-44 rounded-full bg-gray-100 hover:shadow-lg cursor-pointer overflow-hidden flex items-center justify-center"
-      >
-        <img
-          src={file ? URL.createObjectURL(file) : user?.profileImage || "/default-avatar.png"}
-          alt="Profile"
-          className="w-full h-full object-cover"
-        />
-        <input
-          type="file"
-          accept="image/*"
-          className="hidden"
-          ref={inputRef}
-          onChange={handleFileUpload}
-        />
-        <div className="absolute inset-0 bg-black/20 flex items-center justify-center text-white text-sm opacity-0 hover:opacity-100 transition-opacity">
-          Click to Upload
-        </div>
+    <div className="flex flex-col shadow-lg bg-slate-50 rounded-lg mb-5 h-[34.5rem]">
+      <div className="w-full bg-slate-200 h-72 rounded-tr-lg rounded-tl-lg flex-3 inset-3 border-spacing-16">
+
       </div>
 
+      <div className="w-full flex-1 relative">
+          <Avatar className="w-44 h-44 rounded-full absolute left-10 bottom-44 shadow-md border-white border-[5px]"/>
+          <div className="absolute bottom-16 left-10 flex flex-col justify-between items-start gap-2">
+            <p className="text-4xl font-bold leading-4 pb-4">Eyoel Mekonnen</p>
+            <p className="text-slate-500 text-xl">Lead Backend Developer @ Google</p>
+            <p className="text-slate-500">San Francisco, USA</p>
+          </div>
 
-      <div className="flex-1">
-        <h1 className="text-3xl font-bold text-gray-700">{user?.name}</h1>
-        <p className="text-lg text-gray-500">{user?.position}</p>
-        <p className="text-sm text-gray-400">{user?.location}</p>
-        <button
-          onClick={() => setEditing(true)}
-          className="mt-4 px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-md transition-all"
-        >
-          Edit Profile
-        </button>
-      </div>
+          <div className="float-right flex pr-12 pt-14 gap-8">
+            <div className="bg-green-100 w-60 h-[8rem] shadow-md leading-2 rounded-md flex flex-col justify-center items-start p-4 gap-2">
+                <p className="text-3xl font-bold text-green-800">351</p>
+                <p className="text-xl font-bold">Completed Sessions</p>
+            </div>
 
-      {isEditing && (
-        <Modal onClose={() => setEditing(false)}>
-          <div className="p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-4 text-gray-700">Edit Profile</h2>
-            <div className="flex flex-col gap-4">
-              <input
-                type="text"
-                name="name"
-                value={formData?.name}
-                onChange={handleInputChange}
-                placeholder="Your Name"
-                className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-              />
-              <select 
-                type="text"
-                name="position"
-                value={formData?.position}
-                onChange={handleInputChange}
-                placeholder="Your Position"
-                className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-              >
-                {
-                  skills?.map((item, key) =>{
-                    return <option value={item} key={key}>{item}</option>
-                  })
-                }
-              </select>
-              {/* <input
-                type="text"
-                name="position"
-                value={formData?.position}
-                onChange={handleInputChange}
-                placeholder="Your Position"
-                className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-              /> */}
-              <input
-                type="text"
-                name="location"
-                value={formData?.location}
-                onChange={handleInputChange}
-                placeholder="Location"
-                className="border rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-              />
-              <div className="flex justify-end gap-4 mt-4">
-                <button
-                  onClick={() => setEditing(false)}
-                  className="px-4 py-2 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md"
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md transition-all"
-                  onClick={handleSaveChanges}
-                >
-                  Save Changes
-                </button>
-              </div>
+            <div className= "bg-blue-100 w-60 h-[8rem] shadow-md leading-2 rounded-md flex flex-col justify-center items-start p-4 gap-2">
+              <p className="text-3xl font-bold text-blue-800">2+</p>
+              <p className="text-xl font-bold">Years Experience</p>
             </div>
           </div>
-        </Modal>
-      )}
+         
+      </div>
+     
     </div>
   );
 };

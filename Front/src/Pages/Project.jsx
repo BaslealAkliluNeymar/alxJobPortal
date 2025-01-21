@@ -20,7 +20,7 @@ const Project = () => {
     }
   ]
   return (
-    <div className="flex flex-col justify-center items-center bg-gray-100 py-10 gap-4">
+    <div className="flex flex-col justify-center items-center bg-gray-100 py-10 gap-6 overflow-x-hidden">
       <h1 className="text-4xl font-extrabold leading-relaxed tracking-wide text-gray-800 mb-8">
         Browse Projects
       </h1>

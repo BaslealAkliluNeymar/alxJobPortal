@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './reducers/store.js'
 
-console.log(store.getState())
+
 
 
 createRoot(document.getElementById('root')).render(

@@ -39,7 +39,7 @@ const Jobs = () => {
   const handleLoadMore = () => setVisible((prev) => prev + 2);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50 md:container mx-auto my-4 w-full md:p-4">
+    <div className="min-h-screen p-6 bg-gray-50 md:container mx-auto my-4 w-full md:p-4 shadow-lg">
 
       <div className="flex items-center gap-4 mt-8">
         <Search />
@@ -68,10 +68,11 @@ const Jobs = () => {
 
                 <div className="flex justify-center items-center h-20 w-20 bg-gray-100 border rounded-md">
                   {item?.logo ? (
-                    <img src={item.logo} alt="logo" className="h-full w-full object-contain rounded-md" />
+                    <img src={item?.logo} alt="logo" className="h-full w-full object-contain rounded-md" />
                   ) : (
                     <span className="text-gray-400">No Logo</span>
                   )}
+
                 </div>
 
                 {/* Job Info */}
