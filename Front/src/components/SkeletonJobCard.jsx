@@ -5,7 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 const SkeletonJobCard = () => {
   return (
     <div 
-      className="flex gap-4 justify-start items-start h-44 w-[45%] bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+      className="flex gap-4 justify-start items-start h-44 w-full bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
     >
       {/* Logo Section */}
       <div className="flex justify-center items-center h-[120px] w-[120px] bg-white border-2 border-gray-200 rounded-md">

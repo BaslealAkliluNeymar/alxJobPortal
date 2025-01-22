@@ -143,8 +143,6 @@ talentRoute.get('/:id',async (req,res) =>{
             message:error
         })
     }
-    
-
 })
 
 talentRoute.post('/:id/profile',async (req,res) =>{

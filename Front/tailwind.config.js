@@ -24,6 +24,7 @@ export default {
       },
       container: {
         center: true, // Center the container
+        width:'76.67%',
         padding: '0.25rem', // Add padding to the container
         screens: {
           sm: '320px', // Custom width for small screens

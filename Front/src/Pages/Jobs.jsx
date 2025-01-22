@@ -25,9 +25,6 @@ const Jobs = () => {
     dispatch(jobAsyncThunk());
   }, [dispatch]);
 
-  // useEffect(() =>{
-  //   setSearch(title)
-  // },[title])
 
   const handlePopOver = (item) => {
     setPopData(item);
@@ -45,12 +42,11 @@ const Jobs = () => {
         <Search />
         <input
           type="text"
-          className="w-full md:w-3/5 p-3 text-sm rounded-lg border-2 border-green-300 focus:ring-2 focus:ring-green-400"
+          className="w-full md:w-3/5 p-3 text-sm rounded-lg border-2 border-green-300 focus:ring-2 focus:ring-green-400 outline-none"
           placeholder="Search jobs"
           onChange={handleChange}
           aria-label="Search jobs"
         />
-        {/* <ListFilter className="text-green-400 hover:text-green-500 w-8 h-8 cursor-pointer" /> */}
       </div>
 
       {/* Job Listings */}
@@ -97,6 +93,7 @@ const Jobs = () => {
               </div>
             ))
         ) : (
+          
           Array.from({ length: 10 }).map((_, index) => <SkeletonJobCard key={index} />)
         )}
       </div>

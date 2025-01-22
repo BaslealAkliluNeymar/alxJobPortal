@@ -64,7 +64,7 @@ const ProProfile = () => {
   }
 
   return (
-    <section className="container mx-auto py-8">
+    <section className="w-full sm:w-4/6 sm:container md:container lg:container mx-auto py-8">
       <ProfileHeader user={user} setUser={setUser} />
       {/* <ProfileResume user={user} setUser={setUser} /> */}
       {/* <ProfileSummary summary={user.summary} setUser={setUser} />

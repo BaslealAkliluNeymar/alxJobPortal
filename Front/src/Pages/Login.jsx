@@ -18,13 +18,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    // // console.log(emailRegex.test(credential.email))
-    // if (!emailRegex.test(credential.email)) {
-    //   alert('Please enter a valid email address');
-    //   return;
-    // }
-    // else{
     const response = await dispatch(login(credential))
     console.log(response.error)
     if(response.error){
