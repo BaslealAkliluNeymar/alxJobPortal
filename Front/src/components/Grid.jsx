@@ -8,6 +8,7 @@ const Grid = () => {
   const dispatch = useDispatch()
   const data1 = useSelector((state) => (state.talent.talent))
 
+
   
   useEffect(() =>{
     dispatch(talentThunk())

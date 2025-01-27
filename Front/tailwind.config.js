@@ -23,11 +23,11 @@ export default {
         revalia:["Revalia","sans-serif"]
       },
       container: {
-        center: true, // Center the container
+        center: true,
         width:'76.67%',
-        padding: '0.25rem', // Add padding to the container
+        padding: '0.25rem',
         screens: {
-          sm: '320px', // Custom width for small screens
+          sm: '320px', 
           md: '768px', // Custom width for medium screens
           lg: '1024px', // Custom width for large screens
           xl: '1124px', // Custom width for extra-large screens

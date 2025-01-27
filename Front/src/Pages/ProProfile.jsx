@@ -66,12 +66,12 @@ const ProProfile = () => {
   return (
     <section className="w-full sm:w-4/6 sm:container md:container lg:container mx-auto py-8">
       <ProfileHeader user={user} setUser={setUser} />
-      {/* <ProfileResume user={user} setUser={setUser} /> */}
-      {/* <ProfileSummary summary={user.summary} setUser={setUser} />
-      <ProfileSkills skills={user.skills} setUser={setUser} />
-      <ProfileWorkHistory workHistory={user.workHistory} setUser={setUser} />
-      <ProfileProjects projects={user.projects} setUser={setUser} />
-      <ProfileEducation education={user.education} setUser={setUser} /> */}
+      <div className="flex gap-2">
+        <ProfileResume className="flex-1"  />
+        <ProfileResume className="flex-1"  />
+      </div>
+      
+     
 
      
     </section>

@@ -1,63 +1,26 @@
-import React, { useRef, useState } from "react";
-import { FileUser } from "lucide-react";
+import React from "react";
+import { CirclePlus, FileUser, Focus } from "lucide-react";
+import Avatar from "../UI/Avatar";
 
-const ProfileResume = ({ user, setUser }) => {
-  const inputRef = useRef();
-  const [file, setFile] = useState(null);
-
-  const handleClick = () => inputRef.current.click();
-
-  const handleFileUpload = (e) => {
-    const uploadedFile = e.target.files[0];
-    
-    if (uploadedFile) {
-      setFile(uploadedFile);
-      const formData = new FormData();
-      formData.append("resume", uploadedFile);
-      console.log(formData)
-      setUser((prev) => ({ ...prev, resume: uploadedFile })); 
-    }
-
-    console.log(user)
-  };
+const ProfileResume = () => {
+  
 
   return (
-    <div className="flex flex-col items-start gap-6 p-6 bg-slate-50 rounded-lg shadow-lg">
-      <h1 className="font-extrabold text-3xl text-gray-700">Resume</h1>
-      <div
-        onClick={handleClick}
-        className="w-52 h-52 flex flex-col justify-center items-center rounded-lg bg-gradient-to-t from-gray-100 to-gray-300 hover:from-gray-200 hover:to-gray-400 transition-all duration-200 cursor-pointer"
-      >
-        {file ? (
-          <div className="text-center">
-            <p className="text-sm text-gray-600 font-semibold truncate w-44">
-              {file.name}
-            </p>
-            <p className="text-xs text-gray-500 mt-2">Click to change</p>
+    <div className="flex flex-col shadow-lg bg-slate-50 rounded-lg mb-5 h-[34.5rem] w-full p-4">
+        <h2 className="p-6 text-3xl font-bold">Upload Resume</h2>
+        <div className="flex flex-col gap-4 p-6 border-slate-200 border-2 h-3/4 w-3/4 rounded-lg border-dashed items-center justify-center m-auto">
+          <CirclePlus className="text-slate-400" />
+          <div className="flex flex-col justify-center items-center gap-2">
+            <p className="text-slate-400 text-xl font-normal align-middle">Drag & drop or click to choose files</p>
+            <p className="text-slate-500 text-xl font-normal align-middle">Max file size:10MB</p>
           </div>
-        ) : (
-          <>
-            <FileUser size={44} className="text-gray-500" />
-            <p className="text-gray-500 font-medium mt-2">Upload PDF</p>
-          </>
-        )}
-        <input
-          type="file"
-          accept="application/pdf"
-          className="hidden"
-          ref={inputRef}
-          onChange={handleFileUpload}
-        />
-      </div>
-      {file && (
-        <div className="text-sm text-gray-600 mt-2">
-          <p>
-            Uploaded:{" "}
-            <span className="font-semibold">{file.name.split("/").pop()}</span>
-          </p>
-          <p className="text-xs text-gray-500">PDF format only</p>
+
+          <div className="w-full ">
+
+          </div>
         </div>
-      )}
+
+   
     </div>
   );
 };

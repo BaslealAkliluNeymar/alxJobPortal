@@ -161,10 +161,6 @@ const Description = () => {
               .slice(0, visible)
               .map((talent, index) => <Card talent={talent} key={index} />)
           ) : (
-            // <div>
-            //   <Loading />
-
-            // </div>
               Array.from({ length: 10 }).map((_, index) => (
                 <SkeletonCard />
               ))
