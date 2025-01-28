@@ -159,3 +159,13 @@
     }
   }
   
+@layer components{
+  .card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+}
