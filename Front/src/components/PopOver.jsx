@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogDescription,
-} from "./ui/dialog";
+} from "../components/UI/dialog";
 import { Briefcase, MapPin, Clock, CheckCircle2, FileText, LayoutList } from 'lucide-react';
 
 const PopOver = ({ PopOver: isOpen, setPop, item, setError }) => {
