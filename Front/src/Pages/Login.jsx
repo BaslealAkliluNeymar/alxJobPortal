@@ -29,8 +29,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 md:p-12">
-      <div className="w-full max-w-6xl bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[700px]">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 min-[400px]:p-6 md:p-12">
+      <div className="w-full max-w-6xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] md:min-h-[700px]">
         {/* Left Side - Visual Branding */}
         <div className="md:w-1/2 bg-slate-900 relative p-12 flex flex-col justify-between overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-blue-600/30 opacity-60"></div>
@@ -44,7 +44,7 @@ const Login = () => {
               </div>
               <span className="font-bold uppercase tracking-widest text-xs">Back to Home</span>
             </Link>
-            <h1 className="text-5xl font-black text-white leading-tight mb-6 tracking-tighter">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-6 tracking-tighter break-words">
               Find your <span className="text-green-400 underline decoration-green-400/30">dream</span> career path today.
             </h1>
             <p className="text-slate-400 text-lg font-medium max-w-sm">
@@ -63,7 +63,7 @@ const Login = () => {
         </div>
 
         {/* Right Side - Login Form */}
-        <div className="md:w-1/2 p-12 md:p-20 bg-white flex flex-col justify-center relative">
+        <div className="md:w-1/2 p-8 min-[400px]:p-12 md:p-20 bg-white flex flex-col justify-center relative">
           {error && (
             <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-red-50 text-red-600 border border-red-100 px-6 py-3 rounded-2xl font-bold text-xs shadow-xl flex items-center gap-3 animate-bounce">
               <XCircle size={16} />
@@ -71,8 +71,8 @@ const Login = () => {
             </div>
           )}
 
-          <div className="mb-12">
-            <h2 className="text-4xl font-black text-slate-900 tracking-tight mb-2">Welcome Back</h2>
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">Welcome Back</h2>
             <p className="text-slate-500 font-medium">Please enter your details to sign in.</p>
           </div>
 

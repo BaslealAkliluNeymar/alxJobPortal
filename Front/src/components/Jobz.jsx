@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogFooter,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../components/UI/dialog";
 import { Plus, Building2, MapPin, Users as UsersIcon, Briefcase } from 'lucide-react';
 
 const Jobz = () => {

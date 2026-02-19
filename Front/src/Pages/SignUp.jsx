@@ -38,8 +38,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 md:p-12">
-      <div className="w-full max-w-6xl bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row-reverse min-h-[800px]">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 min-[400px]:p-6 md:p-12">
+      <div className="w-full max-w-6xl bg-white rounded-3xl md:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row-reverse min-h-[700px] md:min-h-[800px]">
         {/* Left Side - Visual Branding (Reversed for SignUp) */}
         <div className="md:w-1/2 bg-slate-900 relative p-12 flex flex-col justify-between overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-green-600/20 to-emerald-600/30 opacity-60"></div>
@@ -53,7 +53,7 @@ const SignUp = () => {
               </div>
               <span className="font-bold uppercase tracking-widest text-xs">Back to Home</span>
             </Link>
-            <h1 className="text-5xl font-black text-white leading-tight mb-6 tracking-tighter">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-6 tracking-tighter break-words">
               Start your <span className="text-green-400 underline decoration-green-400/30">journey</span> with us today.
             </h1>
             <p className="text-slate-400 text-lg font-medium max-w-sm">
@@ -84,9 +84,9 @@ const SignUp = () => {
         </div>
 
         {/* Right Side - SignUp Form */}
-        <div className="md:w-1/2 p-12 md:p-20 bg-white flex flex-col justify-center relative">
-          <div className="mb-12">
-            <h2 className="text-4xl font-black text-slate-900 tracking-tight mb-2">Create Account</h2>
+        <div className="md:w-1/2 p-8 min-[400px]:p-12 md:p-20 bg-white flex flex-col justify-center relative">
+          <div className="mb-10 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">Create Account</h2>
             <p className="text-slate-500 font-medium">Join our community of professionals.</p>
           </div>
 
@@ -168,8 +168,8 @@ const SignUp = () => {
                     type="button"
                     onClick={() => setCredential(prev => ({ ...prev, role }))}
                     className={`flex-1 py-3 px-4 rounded-xl font-bold text-xs border-2 transition-all ${credential.role === role
-                        ? 'bg-green-50 border-green-500 text-green-700'
-                        : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-200'
+                      ? 'bg-green-50 border-green-500 text-green-700'
+                      : 'bg-slate-50 border-slate-100 text-slate-400 hover:border-slate-200'
                       }`}
                   >
                     {role === 'Employer' ? 'Hire Talent' : 'Find Work'}
