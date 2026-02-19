@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
+} from "../components/UI/dialog";
 import { Search, Filter, MapPin, Code2, CheckCircle, XCircle, Clock, ExternalLink, User } from 'lucide-react';
 
 const Talents = () => {
