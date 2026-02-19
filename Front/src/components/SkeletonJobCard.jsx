@@ -1,43 +1,29 @@
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 const SkeletonJobCard = () => {
   return (
-    <div 
-      className="flex gap-4 justify-start items-start h-44 w-full bg-gradient-to-r from-blue-50 to-white p-6 shadow-lg rounded-md hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-    >
-      {/* Logo Section */}
-      <div className="flex justify-center items-center h-[120px] w-[120px] bg-white border-2 border-gray-200 rounded-md">
-        <Skeleton height="100%" width="100%" />
-      </div>
-      
-      {/* Content Section */}
-      <div className="flex flex-col gap-2 justify-between flex-auto">
-        {/* Job Title */}
-        <Skeleton width="60%" height={20} />
-        
-        {/* Company and Location */}
-        <div className="flex items-center gap-2">
-          <Skeleton width="40%" height={15} />
-          <span className="h-1 w-1 bg-gray-400 rounded-full"></span>
-          <Skeleton width="30%" height={15} />
+    <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col h-[350px] animate-pulse">
+      <div className="flex items-center gap-5 mb-8">
+        <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 w-[72px] h-[72px]"></div>
+        <div className="flex-1 space-y-3">
+          <div className="h-5 w-3/4 bg-slate-100 rounded-lg"></div>
+          <div className="h-3 w-1/2 bg-slate-100 rounded-md"></div>
         </div>
+      </div>
 
-        {/* Job Description */}
-        <Skeleton width="80%" height={18} />
-
-        {/* Tags */}
+      <div className="flex-1 space-y-6">
         <div className="flex flex-wrap gap-2">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              height={24}
-              width={70}
-              style={{ borderRadius: '9999px' }}
-            />
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="h-7 w-16 bg-slate-50 rounded-full"></div>
           ))}
         </div>
+
+        <div className="h-4 w-32 bg-slate-50 rounded-md"></div>
+      </div>
+
+      <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between">
+        <div className="h-4 w-24 bg-slate-100 rounded-md"></div>
+        <div className="w-10 h-10 rounded-full bg-slate-50"></div>
       </div>
     </div>
   );

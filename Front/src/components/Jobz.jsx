@@ -1,43 +1,41 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getUserJobs, saveJob } from "../services/jobs";
 import Job from "./Job";
 import Button from "./Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Plus, Building2, MapPin, Users as UsersIcon, Briefcase } from 'lucide-react';
 
 const Jobz = () => {
-  const [modal, setModal] = useState(false);
-  const [jobs, setJobs] = useState();
-  const [jobModal, setJobModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [jobs, setJobs] = useState([]);
   const [data, setData] = useState({
     jobTitle: "",
     company: "",
-    experience: "Junior", 
-    type: "Fully Remote", 
+    experience: "Junior",
+    type: "Fully Remote",
     location: "",
     description: [],
     responsibilities: [],
     qualifications: [],
-    logo: "", 
-    students: [], 
+    logo: "",
+    students: [],
   });
 
   useEffect(() => {
     const fetchJobs = async () => {
-      // const token = localStorage.getItem('token')
-      // setToken(token)
-      const found = await getUserJobs()
-      setJobs(found)
-    };  
+      const found = await getUserJobs();
+      setJobs(found);
+    };
     fetchJobs();
-  },[])
+  }, [])
 
-
-
-  const handleJobModal = () => {
-    setJobModal(true)
-  }
-  const handleJobModalClose = () => {
-    setJobModal(false)
-  }
   const handleChange = (e) => {
     setData({
       ...data,
@@ -48,196 +46,179 @@ const Jobz = () => {
   const handleArrayChange = (e, fieldName) => {
     setData({
       ...data,
-      [fieldName]: e.target.value.split("\n"), // Split input into an array of strings
+      [fieldName]: e.target.value.split("\n").filter(line => line.trim() !== ""),
     });
   };
 
   const handleSave = async () => {
-    console.log("Saving job:", data);
-    const token  = localStorage.getItem('token')
-    setToken(token)
-    const response = await saveJob(data);
-    console.log(response);
-    setModal(false);
+    try {
+      const response = await saveJob(data);
+      console.log(response);
+      setIsOpen(false);
+      // Refresh jobs list (mocked)
+      const updated = await getUserJobs();
+      setJobs(updated);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <section className="flex flex-col gap-2">
-      <div className="flex justify-between p-2">
-        <h1 className="text-2xl font-bold">Jobs</h1>
-        <button
-          onClick={() => setModal(true)}
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
-        >
-          Create Job
-        </button>
-      </div>
-      <div className="flex flex-col gap-2">
-        {modal && (
-          <div className="flex h-auto z-50 w-3/5 flex-col gap-6 items-center m-auto border border-gray-300 bg-white rounded-xl shadow-2xl p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-1/2">
-            <div className="border border-gray-200 bg-gray-50 rounded-lg p-6 w-full">
-              <div className="flex flex-wrap gap-2 w-full">
+    <section className="space-y-8">
+      <div className="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Job Postings</h1>
+          <p className="text-slate-500 font-medium">Manage and monitor your open roles</p>
+        </div>
 
-                <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
-                  <label className="text-gray-700 font-medium mb-1">Job Title</label>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <button
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-green-600/20 active:scale-95 flex items-center gap-2"
+            >
+              <Plus size={20} />
+              Post a New Job
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border-none shadow-2xl p-0">
+            <DialogHeader className="p-8 bg-slate-50 border-b border-slate-100">
+              <DialogTitle className="text-2xl font-bold text-slate-800">Job Details</DialogTitle>
+            </DialogHeader>
+            <div className="p-8 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Job Title</label>
                   <input
                     name="jobTitle"
                     value={data.jobTitle}
                     onChange={handleChange}
-                    type="text"
-                    placeholder="Enter job title"
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                    placeholder="e.g. Senior Product Designer"
                   />
                 </div>
-
-                <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
-                  <label className="text-gray-700 font-medium mb-1">Company</label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Company</label>
                   <input
                     name="company"
                     value={data.company}
                     onChange={handleChange}
-                    type="text"
-                    placeholder="Enter company name"
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                    placeholder="Company Name"
                   />
                 </div>
-
-                <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
-                  <label className="text-gray-700 font-medium mb-1">Experience</label>
-                  <select
-                    name="experience"
-                    value={data.experience}
-                    onChange={handleChange}
-                    className="border border-gray-300  p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  >
-                    <option value="Entry">Entry</option>
-                    <option value="Junior">Junior</option>
-                    <option value="Senior">Senior</option>
-                  </select>
-                </div>
-                
-                <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
-                  <label className="text-gray-700 font-medium mb-1">Type</label>
-                  <select
-                    name="type"
-                    value={data.type}
-                    onChange={handleChange}
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  >
-                    <option value="Fully Remote">Fully Remote</option>
-                    <option value="Hybrid">Hybrid</option>
-                    <option value="On-Site">On-Site</option>
-                  </select>
-                </div>
-                {/* Location */}
-                <div className="flex flex-col w-full sm:w-[calc(50%-8px)]">
-                  <label className="text-gray-700 font-medium mb-1">Location</label>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Location</label>
                   <input
                     name="location"
                     value={data.location}
                     onChange={handleChange}
-                    type="text"
-                    placeholder="Enter location"
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                    placeholder="e.g. San Francisco, CA"
                   />
                 </div>
-                {/* Description */}
-                <div className="flex flex-col w-full">
-                  <label className="text-gray-700 font-medium mb-1">Description</label>
-                  <textarea
-                    name="description"
-                    onChange={(e) => handleArrayChange(e, "description")}
-                    placeholder="Enter descriptions (one per line)..."
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  ></textarea>
-                </div>
-                {/* Responsibilities */}
-                <div className="flex flex-col w-full">
-                  <label className="text-gray-700 font-medium mb-1">Responsibilities</label>
-                  <textarea
-                    name="responsibilities"
-                    onChange={(e) => handleArrayChange(e, "responsibilities")}
-                    placeholder="Enter responsibilities (one per line)..."
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  ></textarea>
-                </div>
-                {/* Qualifications */}
-                <div className="flex flex-col w-full">
-                  <label className="text-gray-700 font-medium mb-1">Qualifications</label>
-                  <textarea
-                    name="qualifications"
-                    onChange={(e) => handleArrayChange(e, "qualifications")}
-                    placeholder="Enter qualifications (one per line)..."
-                    className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-400"
-                  ></textarea>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Experience</label>
+                  <select
+                    name="experience"
+                    value={data.experience}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="Entry">Entry Level</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Senior">Senior</option>
+                  </select>
                 </div>
               </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Description (one per line)</label>
+                <textarea
+                  name="description"
+                  onChange={(e) => handleArrayChange(e, "description")}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 h-24 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                ></textarea>
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Responsibilities (one per line)</label>
+                <textarea
+                  name="responsibilities"
+                  onChange={(e) => handleArrayChange(e, "responsibilities")}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 h-24 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                ></textarea>
+              </div>
             </div>
-            <div className="flex gap-4 items-center mt-4">
+            <DialogFooter className="p-8 bg-slate-50 border-t border-slate-100 sm:justify-start">
               <button
-                className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-lg"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg shadow-green-600/20"
                 onClick={handleSave}
               >
-                Save Changes
+                Post Opportunity
               </button>
               <button
-                className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded-lg"
-                onClick={() => setModal(false)}
+                className="bg-white text-slate-500 font-bold py-3 px-8 rounded-xl border border-slate-200 hover:bg-slate-50 transition-all ml-3"
+                onClick={() => setIsOpen(false)}
               >
                 Cancel
               </button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {(jobs?.length > 0 ? jobs : []).map((item, index) => (
+          <div
+            key={item._id || index}
+            className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-green-100 transition-all p-6 group cursor-pointer relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 p-4">
+              <div className="bg-green-50 text-green-600 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 border border-green-100 shadow-sm">
+                <UsersIcon size={14} />
+                {item.students?.length || 0} Apps
+              </div>
             </div>
+
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100 flex-shrink-0 group-hover:scale-110 transition-transform">
+                <img
+                  src={item.logo || "https://github.com/shadcn.png"}
+                  alt="logo"
+                  className="w-12 h-12 object-contain"
+                />
+              </div>
+
+              <div className="space-y-2 max-w-[70%]">
+                <h2 className="text-xl font-bold text-slate-900 group-hover:text-green-600 transition-colors line-clamp-1">{item.jobTitle || item.position}</h2>
+                <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-500">
+                  <span className="flex items-center gap-1">
+                    <Building2 size={14} />
+                    {item.company}
+                  </span>
+                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                  <span className="flex items-center gap-1">
+                    <MapPin size={14} />
+                    {item.location}
+                  </span>
+                </div>
+
+                <div className="flex gap-2 pt-2">
+                  <div className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">{item.type}</div>
+                  <div className="bg-purple-50 text-purple-600 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">{item.experience}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {(!jobs || jobs.length === 0) && (
+          <div className="col-span-full py-20 bg-slate-50/50 border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center text-slate-400">
+            <Briefcase size={48} className="mb-4 opacity-20" />
+            <p className="font-bold text-xl">No jobs posted yet</p>
+            <p className="text-sm">Start by clicking "Post a New Job" above</p>
           </div>
         )}
       </div>
-
-
-      <div className="analytics flex flex-wrap gap-4 p-4 w-full">
-        {
-          jobs?.jobsPosted?.map((items,index) =>{
-            console.log(items)
-            return (
-              <div
-          className="border border-gray-300 rounded-xl shadow-lg cursor-pointer relative transition-transform transform hover:scale-105 hover:shadow-2xl p-4 bg-white"
-          onClick={() => setJobModal(items)}
-        >
-          {/* Badge */}
-          <div className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 bg-green-500 text-white text-sm font-bold rounded-full shadow-md">
-            {items.students.length}
-          </div>
-
-          {/* Logo Section */}
-          <div className="flex justify-center items-center h-20 w-20 mx-auto rounded-full border border-gray-200 overflow-hidden bg-gray-50">
-            <img
-              src={items.logo}
-              alt="logo"
-              className="w-full h-full object-contain"
-            />
-          </div>
-
-          {/* Job Info */}
-          <div className="mt-4 flex flex-col items-center text-center gap-2">
-            <h1 className="text-lg font-bold text-gray-800">{items.jobTitle}</h1>
-            <p className="text-sm text-gray-500 flex items-center gap-1">
-              {items.company} 
-              <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
-              {items.location}
-            </p>
-
-            {/* Tags */}
-            <div className="flex gap-2 mt-2">
-              <Button name="Business" />
-              <Button name="Marketing" />
-              <Button name="Design" />
-            </div>
-          </div>
-        </div>
-
-                 ) 
-                  })
-                }
-                
-              </div>
     </section>
   );
 };

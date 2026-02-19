@@ -1,31 +1,38 @@
-import React from 'react'
-import { Outlet,Link } from 'react-router-dom'
+import { ArrowLeft, LayoutDashboard, Briefcase, Users, MessageSquare } from 'lucide-react'
 
 const Admin = () => {
   return (
-    <section className=''>
-      <div className='main flex gap-2 min-h-screen'>
-        <div className='sidebar flex-1 border-2 border-slate-400 rounded-lg w-1/5'>
-        <div className="flex flex-col gap-6 bg-gray-50 shadow-md rounded-lg p-6 w-full max-w-md mx-auto">
-            <h1 className="text-3xl font-extrabold text-center text-green-600 border-b-2 pb-4">Admin Panel</h1>
+    <section className='bg-slate-50 min-h-screen'>
+      <div className='main flex gap-6 p-6'>
+        <div className='sidebar w-1/4 max-w-xs'>
+          <div className="flex flex-col gap-6 bg-white shadow-sm border border-slate-200 rounded-2xl p-6 h-fit sticky top-6">
+            <Link to="/" className="flex items-center gap-2 text-slate-500 hover:text-green-600 transition-colors font-medium mb-2">
+              <ArrowLeft size={18} />
+              <span>Exit Admin</span>
+            </Link>
+            <h1 className="text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4">Admin Panel</h1>
             <ul className="flex flex-col gap-4">
-              <Link to="/admin/dashboard">
-                <li className="text-lg font-semibold text-gray-800 hover:text-green-600 bg-white hover:bg-green-100 shadow-sm hover:shadow-lg transition-all duration-300 p-4 rounded-lg border border-gray-200 hover:border-green-300 cursor-pointer">
+              <Link to="/admin/dashboard" className="group">
+                <li className="flex items-center gap-3 text-lg font-semibold text-slate-700 group-hover:text-green-600 transition-all p-3 rounded-xl hover:bg-green-50">
+                  <LayoutDashboard size={20} className="text-slate-400 group-hover:text-green-500" />
                   Dashboard
                 </li>
               </Link>
-              <Link to="/admin/jobs">
-                <li className="text-lg font-semibold text-gray-800 hover:text-green-600 bg-white hover:bg-green-100 shadow-sm hover:shadow-lg transition-all duration-300 p-4 rounded-lg border border-gray-200 hover:border-green-300 cursor-pointer">
+              <Link to="/admin/jobs" className="group">
+                <li className="flex items-center gap-3 text-lg font-semibold text-slate-700 group-hover:text-green-600 transition-all p-3 rounded-xl hover:bg-green-50">
+                  <Briefcase size={20} className="text-slate-400 group-hover:text-green-500" />
                   Jobs
                 </li>
               </Link>
-              <Link to="/admin/talents">
-                <li className="text-lg font-semibold text-gray-800 hover:text-green-600 bg-white hover:bg-green-100 shadow-sm hover:shadow-lg transition-all duration-300 p-4 rounded-lg border border-gray-200 hover:border-green-300 cursor-pointer">
+              <Link to="/admin/talents" className="group">
+                <li className="flex items-center gap-3 text-lg font-semibold text-slate-700 group-hover:text-green-600 transition-all p-3 rounded-xl hover:bg-green-50">
+                  <Users size={20} className="text-slate-400 group-hover:text-green-500" />
                   Talents
                 </li>
               </Link>
-              <Link to="/admin/chats">
-                <li className="text-lg font-semibold text-gray-800 hover:text-green-600 bg-white hover:bg-green-100 shadow-sm hover:shadow-lg transition-all duration-300 p-4 rounded-lg border border-gray-200 hover:border-green-300 cursor-pointer">
+              <Link to="/admin/chats" className="group">
+                <li className="flex items-center gap-3 text-lg font-semibold text-slate-700 group-hover:text-green-600 transition-all p-3 rounded-xl hover:bg-green-50">
+                  <MessageSquare size={20} className="text-slate-400 group-hover:text-green-500" />
                   Chats
                 </li>
               </Link>
@@ -34,12 +41,10 @@ const Admin = () => {
 
         </div>
 
-        <div className="flex-4 border border-gray-300 shadow-lg rounded-xl w-4/5 bg-white p-6 mx-auto">
+        <div className="flex-1 bg-white border border-slate-200 shadow-sm rounded-2xl p-8 min-h-[calc(100vh-3rem)]">
           <Outlet />
         </div>
-
       </div>
-
     </section>
   )
 }

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signupThunk } from '../reducers/authReducer';
+import { ArrowLeft } from 'lucide-react';
 
 const SignUp = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [credential, setCredential] = useState({
     firstname: '',
@@ -23,8 +25,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try 
-    {
+    try {
       const data = dispatch(signupThunk(credential))
       console.log(data);
       setCredential({
@@ -41,10 +42,17 @@ const SignUp = () => {
 
   return (
     <section className='flex w-full 
-          md:w-[40%] lg:w-[35%] justify-center items-center bg-gradient-to-r  transition-shadow delay-100 h-auto 
+          md:w-[40%] lg:w-[35%] justify-center items-center bg-white transition-shadow delay-100 h-auto 
           min-h-[640px] mx-auto shadow-xl rounded-lg overflow-hidden m-4 py-8
-          md:h-[740px]'>
-     
+          md:h-[740px] relative'>
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-green-600 transition-all font-medium"
+      >
+        <ArrowLeft size={20} />
+        <span>Back</span>
+      </button>
+
       <div className='flex-1 flex flex-col items-center justify-center space-y-8 p-4 md:p-8 bg-white drop-shadow-sm shadow-md'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Welcome to</h1>

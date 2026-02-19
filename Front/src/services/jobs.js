@@ -1,32 +1,25 @@
-import axios from 'axios'
-const BASE_URL = 'http://localhost:8000/jobs'
+import { MOCK_JOBS, MOCK_ANALYTICS } from './mockData.js'
 
-let token = `Bearer ${localStorage.getItem('token')}`
-const config = {
-    headers:{'Authorization' :token}
+// Fully static service layer
+export const getJobs = async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(MOCK_JOBS), 500);
+    });
 }
 
-export const getJobs = async () =>{
-    const response = await axios.get('http://localhost:8000/jobs',config)
-    return response.data
+export const ApplyJob = async (id) => {
+    return { success: true, message: "Applied successfully (Static Mode)" };
 }
 
-export const ApplyJob = async (id) =>{
-    const response = await axios.post(`http://localhost:8000/jobs/${id}/apply`,{},config)
-    return response.data
-}
-export const saveJob = async (data) =>{
-    const response = await axios.post(`http://localhost:8000/admin/jobs`,data,config)
-    return response.data
+export const saveJob = async (data) => {
+    const newJob = { ...data, _id: Date.now().toString() };
+    return newJob;
 }
 
-export const getUserJobs = async () =>{
-    const response = await axios.get(`http://localhost:8000/admin/jobs`,config)
-    return response.data
+export const getUserJobs = async () => {
+    return MOCK_JOBS;
 }
 
-
-export const Analytics = async () =>{
-    const response = await axios.get(`http://localhost:8000/admin/dashboard`,config)
-    return response.data
+export const Analytics = async () => {
+    return MOCK_ANALYTICS;
 }

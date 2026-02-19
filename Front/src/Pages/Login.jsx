@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../reducers/authReducer';
+import { ArrowLeft } from 'lucide-react';
 
 const Login = () => {
   const [credential, setCredential] = useState({ email: '', password: '' });
   const dispatch = useDispatch()
   const okay = useSelector((state) => (state.auth.user))
-  const [error,setError ] = useState(false)
+  const [error, setError] = useState(false)
   console.log(okay)
   const [reload, setReload] = useState({})
   const navigate = useNavigate();
@@ -20,27 +21,34 @@ const Login = () => {
     e.preventDefault();
     const response = await dispatch(login(credential))
     console.log(response.error)
-    if(response.error){
+    if (response.error) {
       setError(true)
-      setTimeout(() =>setError(false),3000)
-      }
-      else{
-        navigate('/')
-      }
-   
+      setTimeout(() => setError(false), 3000)
+    }
+    else {
+      navigate('/')
+    }
+
   };
 
   return (
-    <section className='flex justify-center items-center  
+    <section className='flex flex-col justify-center items-center  
             w-full h-[740px] mx-auto shadow-xl rounded-lg overflow-hidden md:m-4 md:mx-auto lg:mx-auto 
-            lg:md-4 transition-shadow duration-300 lg:w-[35%] md:w-[40%]'>
-              {
-                error && (
-                  <div className='z-10 absolute top-20 right-8 bg-red-600 text-white p-3 rounded border-3 shadow-md'>
-                      <p>An Error Occured</p>
-                  </div>
-                )
-              }
+            lg:md-4 transition-shadow duration-300 lg:w-[35%] md:w-[40%] bg-white relative'>
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-6 left-6 flex items-center gap-2 text-slate-500 hover:text-green-600 transition-all font-medium"
+      >
+        <ArrowLeft size={20} />
+        <span>Back</span>
+      </button>
+      {
+        error && (
+          <div className='z-10 absolute top-20 right-8 bg-red-600 text-white p-3 rounded border-3 shadow-md'>
+            <p>An Error Occured</p>
+          </div>
+        )
+      }
       <div className='flex flex-col items-center space-y-8 justify-center p-8 w-full lg:w-full md:w-full'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Welcome to</h1>
@@ -64,7 +72,7 @@ const Login = () => {
           <p>Login with Google</p>
         </button>
 
-       
+
 
         <div className='flex items-center w-full space-x-4'>
           <hr className='flex-1' />

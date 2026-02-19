@@ -1,55 +1,85 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Facebook, Linkedin, Github, Instagram, Music2, Mail, ArrowRight } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <div className="bg-footerbackground  text-white overflow-hidden w-full p-6 h-[50rem] md:h-[30rem]">
-      <div className="container mx-auto flex flex-col justify-between h-full">
-        <div className="flex flex-col md:flex-row md:items-start border-b border-slate-500 pb-10 md:h-80">
-          <div className="flex-1 mb-8 md:mb-0 text-center md:text-left">
-            <p className="w-full md:w-[65%] my-auto md:ml-0 text-lg leading-relaxed">
-              Great platform for the job seeker passionate about startups. Find your dream job more easily.
+    <footer className="bg-slate-900 text-white w-full">
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-slate-800 pb-16">
+          {/* Brand Info */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold tracking-tighter text-green-400">alxJobPortal</h2>
+            <p className="text-slate-400 leading-relaxed text-sm">
+              The premier platform for matching ambitious talent with Africa's most innovative startups. Find your mission, not just a job.
             </p>
           </div>
-          <div className="md:flex-3 md:flex md:flex-row flex flex-wrap gap-12 md:gap-20 justify-center">
-            <div className="flex flex-col gap-4">
-              <h1 className="font-semibold text-lg">About</h1>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Company Info</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Careers</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Press</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Blog</p></Link>
-            </div>
-            <div className="flex flex-col gap-4">
-              <h1 className="font-semibold text-lg">Resources</h1>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Support</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Contact Us</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>FAQ</p></Link>
-                <Link to="/" className='hover:underline hover:underline-offset-2 py-1 hover:text-green-300  hover:border-green-300'><p>Help Center</p></Link>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h1 className="font-semibold text-lg">Get Job Notifications</h1>
-                <p className="text-sm leading-relaxed">
-                  The latest job news and articles sent to your inbox weekly.
-                </p>
-              <form className="flex mt-3">
-                <input type="email" className="h-12 w-[65%] p-4 outline-none rounded-l-md text-gray-700" placeholder="Your Email"/>
-                <button className="h-12 w-[35%] bg-secondary text-fontColor rounded-r-md font-extrabold">Subscribe</button>
-              </form>
+
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="font-bold text-lg text-slate-100">Company</h3>
+            <ul className="space-y-2">
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">About Us</Link></li>
+              <li><Link to="/jobs" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Browse Jobs</Link></li>
+              <li><Link to="/talent" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Hire Talent</Link></li>
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Careers</Link></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div className="space-y-4">
+            <h3 className="font-bold text-lg text-slate-100">Resources</h3>
+            <ul className="space-y-2">
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Support Center</Link></li>
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Privacy Policy</Link></li>
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Terms of Service</Link></li>
+              <li><Link to="/" className="text-slate-400 hover:text-green-400 transition-colors text-sm">Community Guidelines</Link></li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div className="space-y-6">
+            <h3 className="font-bold text-lg text-slate-100">Stay Updated</h3>
+            <p className="text-slate-400 text-sm">Get the weekly digest of jobs and career tips.</p>
+            <div className="relative">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-5 py-3 text-sm focus:ring-2 focus:ring-green-400 outline-none transition-all pr-12"
+              />
+              <button className="absolute right-2 top-1.5 p-1.5 bg-green-600 rounded-lg hover:bg-green-700 transition-all">
+                <ArrowRight size={18} />
+              </button>
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between pt-6 text-sm">
-          <p className="text-gray-400">2024 @ alxJobPortal. All rights reserved.</p>
-          <div className="flex gap-3">
-            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
-            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
-            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
-            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
-            <img src="src/assets/Facebook.png" alt="Facebook" className="h-6 w-6"/>
+
+        {/* Bottom Bar */}
+        <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-slate-500 text-sm font-medium">
+            © {new Date().getFullYear()} alxJobPortal. Empowering African Talent.
+          </p>
+
+          <div className="flex items-center gap-5">
+            <a href="#" className="p-2.5 bg-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-blue-600 transition-all">
+              <Facebook size={20} />
+            </a>
+            <a href="#" className="p-2.5 bg-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-blue-700 transition-all">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="p-2.5 bg-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
+              <Github size={20} />
+            </a>
+            <a href="#" className="p-2.5 bg-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-pink-600 transition-all">
+              <Instagram size={20} />
+            </a>
+            <a href="#" className="p-2.5 bg-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
+              <Music2 size={20} />
+            </a>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 

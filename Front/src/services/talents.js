@@ -1,46 +1,34 @@
-import axios from 'axios'
-const BASE_URL = 'http://localhost:8000/talent'
-let token = `Bearer ${localStorage.getItem('token')}`
-const config = {
-    headers:{'Authorization' :token}
+import { MOCK_TALENTS } from './mockData.js'
+
+export const getAll = async () => {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(MOCK_TALENTS), 500);
+    });
 }
 
-export const getAll = async () =>{
-    const response = await axios.get(BASE_URL,config)
-    console.log(response)
-    return response.data
+export const getByCountry = async (country) => {
+    return MOCK_TALENTS.filter(t => t.location.toLowerCase() === country.toLowerCase());
 }
 
-export const getByCountry = async (country) =>{
-    const response = await axios.get(`${BASE_URL}/search?country=${country}`,config)
-    return response.data
+export const getByRole = async (role) => {
+    return MOCK_TALENTS.filter(t => t.role.toLowerCase().includes(role.toLowerCase()));
 }
-
-
-export const getByRole = async (role) =>{
-    const response = await axios.get(`${BASE_URL}/search/position=${role}`,config)
-    return response.data
-}
-
 
 export const getSingle = async (id) => {
-    const response = await axios.get(`http://localhost:8000/talent/${id}`,config)
-    return response.data[0]
+    return MOCK_TALENTS.find(t => t._id === id) || MOCK_TALENTS[0];
 }
 
-
-export const getFiltered = async (data) =>{
-    console.log(data)
-    const response = await axios.post(`${BASE_URL}/search`,data,config)
-    return response.data
+export const getFiltered = async (data) => {
+    let filtered = [...MOCK_TALENTS];
+    if (data.role) {
+        filtered = filtered.filter(t => t.role.toLowerCase().includes(data.role.toLowerCase()));
+    }
+    if (data.location) {
+        filtered = filtered.filter(t => t.location.toLowerCase() === data.location.toLowerCase());
+    }
+    return filtered;
 }
 
-export const getProfile = async (data) =>{
-    const response = await axios.post(BASE_URL,data,{
-        headers:{
-            'Authorization' :token,
-        }
-    })
-    return response.data
+export const getProfile = async (data) => {
+    return MOCK_TALENTS[0];
 }
-

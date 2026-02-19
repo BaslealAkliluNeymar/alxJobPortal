@@ -1,10 +1,20 @@
 import React from 'react';
 import ChatItem from '../components/ChatItem';
-import { Paperclip, Smile, Send } from 'lucide-react';
+import { Paperclip, Smile, Send, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Chat = () => {
+  const navigate = useNavigate();
   return (
-    <section className="w-full h-full bg-gray-100 p-4 flex gap-4">
+    <section className="w-full h-[calc(100vh-8rem)] bg-slate-50 p-6 flex gap-6">
+      <div className="absolute top-2 left-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="p-2 text-slate-400 hover:text-green-600 transition-colors"
+        >
+          <ArrowLeft size={20} />
+        </button>
+      </div>
       {/* Sidebar with Chat Items */}
       <div className="w-1/4 bg-white shadow-lg rounded-lg p-4 overflow-y-auto space-y-4">
         {[...Array(6)].map((_, index) => (

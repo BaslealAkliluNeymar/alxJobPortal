@@ -1,113 +1,183 @@
-import React,{useEffect, useState} from 'react';
-import { ApplyJob  } from '../services/jobs';
+import React, { useState } from 'react';
+import { ApplyJob } from '../services/jobs';
 import { useNavigate } from 'react-router-dom';
-const PopOver = ({ PopOver, setPop, item, setError }) => {
-  if (!PopOver) return null;
-  const [initial,setInitial] = useState({})
-  const [apply, setApply] = useState(false)
-  const handleClose =  () => setPop(false);
-  const navigate = useNavigate()
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogDescription,
+} from "./ui/dialog";
+import { Briefcase, MapPin, Clock, CheckCircle2, FileText, LayoutList } from 'lucide-react';
 
-  const handleChange = () => {
-    navigate(`/${JSON.parse(localStorage.getItem('user'))._id}/profile`)
+const PopOver = ({ PopOver: isOpen, setPop, item, setError }) => {
+  const navigate = useNavigate();
+  const [isApplying, setIsApplying] = useState(false);
+
+  if (!item) return null;
+
+  const handleClose = () => setPop(false);
+
+  const handleNavigateToProfile = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?._id) {
+      navigate(`/${user._id}/profile`);
+    } else {
+      navigate('/login');
+    }
+    handleClose();
   }
-  const handleApply = async (id) =>{
-    const found = localStorage.getItem('token')
-    // setToken(found)
 
-    const response = await ApplyJob(id)
-    console.log(response)
-    setInitial(response)
-    setError(response)
-    setPop(true)
-    handleClose()
+  const handleApply = async (id) => {
+    setIsApplying(true);
+    try {
+      const response = await ApplyJob(id);
+      setError(response);
+      // We could show a success state here
+      setTimeout(() => {
+        setIsApplying(false);
+        handleClose();
+      }, 1500);
+    } catch (err) {
+      setIsApplying(false);
+      console.error(err);
+    }
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg w-[90%] md:w-[50%] lg:w-[40%] p-6 relative">
+    <Dialog open={isOpen} onOpenChange={setPop}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border-none shadow-2xl p-0 overflow-hidden">
+        <div className="bg-gradient-to-r from-green-600 to-green-700 p-8 text-white relative">
+          <DialogHeader>
+            <div className="flex items-center gap-6">
+              <div className="bg-white p-3 rounded-2xl shadow-lg border-4 border-white/20">
+                <img
+                  src={item.logo || "https://github.com/shadcn.png"}
+                  alt={`${item.company} logo`}
+                  className="h-16 w-16 object-contain rounded-xl"
+                />
+              </div>
+              <div className="text-left">
+                <DialogTitle className="text-3xl font-bold tracking-tight text-white mb-2">
+                  {item.jobTitle}
+                </DialogTitle>
+                <div className="flex flex-wrap items-center gap-4 text-green-50 text-sm font-medium">
+                  <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider">
+                    {item.company}
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full border border-white/10 lowercase">
+                    <MapPin size={14} />
+                    {item.location}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </DialogHeader>
+        </div>
 
-        <div className="flex items-center justify-between border-b pb-4">
-          <div className="flex items-center gap-4">
-            <img
-              src={item.logo}
-              alt={`${item.company} logo`}
-              className="h-12 w-12 object-contain rounded-md border"
-            />
-            <div>
-              <h2 className="text-xl font-bold text-gray-800">{item.jobTitle}</h2>
-              <p className="text-sm text-gray-600">{item.company}</p>
+        <div className="p-8 space-y-8 bg-white">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="p-2 bg-green-100 rounded-lg text-green-600">
+                <Clock size={18} />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Type</p>
+                <p className="text-sm font-bold text-slate-700">{item.type}</p>
+              </div>
+            </div>
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
+              <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                <Briefcase size={18} />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Exp.</p>
+                <p className="text-sm font-bold text-slate-700">{item.experience}</p>
+              </div>
+            </div>
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3 col-span-2 md:col-span-1">
+              <div className="p-2 bg-purple-100 rounded-lg text-purple-600">
+                <CheckCircle2 size={18} />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</p>
+                <p className="text-sm font-bold text-slate-700">Accepting</p>
+              </div>
             </div>
           </div>
+
+          <div className="space-y-4">
+            <h3 className="flex items-center gap-2 text-lg font-bold text-slate-900">
+              <FileText size={20} className="text-green-600" />
+              Job Description
+            </h3>
+            <ul className="space-y-3">
+              {item.description.map((desc, index) => (
+                <li key={index} className="flex gap-3 text-slate-600 leading-relaxed text-sm">
+                  <div className="h-1.5 w-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                  {desc}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="flex items-center gap-2 text-lg font-bold text-slate-900">
+                <LayoutList size={20} className="text-blue-600" />
+                Responsibilities
+              </h3>
+              <ul className="space-y-2.5">
+                {item.responsibilities.map((resp, index) => (
+                  <li key={index} className="flex gap-2.5 text-slate-600 text-sm italic">
+                    <span className="text-blue-400 font-bold">•</span>
+                    {resp}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h3 className="flex items-center gap-2 text-lg font-bold text-slate-900">
+                <CheckCircle2 size={20} className="text-purple-600" />
+                Qualifications
+              </h3>
+              <ul className="space-y-2.5">
+                {item.qualifications.map((qual, index) => (
+                  <li key={index} className="flex gap-2.5 text-slate-600 text-sm">
+                    <CheckCircle2 size={14} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                    {qual}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <DialogFooter className="bg-slate-50 p-8 gap-4 border-t border-slate-100 sm:flex-row flex-col">
           <button
-            className="text-gray-500 hover:text-gray-800 text-2xl font-bold"
-            onClick={handleClose}
+            onClick={handleNavigateToProfile}
+            className="flex-1 px-6 py-4 bg-white text-slate-700 font-bold border-2 border-slate-200 rounded-2xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2 shadow-sm"
           >
-            ✕
+            Update My Resume
           </button>
-        </div>
-
-
-        <div className="mt-4 space-y-3">
-          <p className="text-sm text-gray-600">
-            <strong>Type:</strong> {item.type}
-          </p>
-          <p className="text-sm text-gray-600">
-            <strong>Location:</strong> {item.location}
-          </p>
-          <p className="text-sm text-gray-600">
-            <strong>Experience:</strong> {item.experience}
-          </p>
-        </div>
-
-
-        <div className="mt-6">
-          <h3 className="text-md font-semibold text-gray-800">Description</h3>
-          <ul className="list-disc pl-5 text-sm text-gray-600">
-            {item.description.map((desc, index) => (
-              <li key={index}>{desc}</li>
-            ))}
-          </ul>
-        </div>
-
-
-        <div className="mt-6">
-          <h3 className="text-md font-semibold text-gray-800">Responsibilities</h3>
-          <ul className="list-disc pl-5 text-sm text-gray-600">
-            {item.responsibilities.map((responsibility, index) => (
-              <li key={index}>{responsibility}</li>
-            ))}
-          </ul>
-        </div>
-
-        
-        <div className="mt-6">
-          <h3 className="text-md font-semibold text-gray-800">Qualifications</h3>
-          <ul className="list-disc pl-5 text-sm text-gray-600">
-            {item.qualifications.map((qualification, index) => (
-              <li key={index}>{qualification}</li>
-            ))}
-          </ul>
-        </div>
-
-        
-        <div className="mt-6 flex justify-between items-center gap-2">
-      
           <button
             onClick={() => handleApply(item._id)}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            disabled={isApplying}
+            className="flex-[1.5] px-6 py-4 bg-green-600 text-white font-bold rounded-2xl hover:bg-green-700 transition-all shadow-lg shadow-green-600/20 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            Apply
+            {isApplying ? (
+              <span className="flex items-center gap-2">
+                <div className="h-4 w-4 border-2 border-white/50 border-t-white rounded-full animate-spin"></div>
+                Applying...
+              </span>
+            ) : (
+              "Apply for this Position"
+            )}
           </button>
-          <button
-            onClick={() => handleChange()}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 h-10"
-          >
-            Edit/Change My Resume
-          </button>
-        </div>
-      </div>
-    </div>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
