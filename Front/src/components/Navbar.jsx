@@ -49,7 +49,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="nav bg-herobackground flex h-[75px] justify-between items-center w-full">
+    <div className="nav bg-herobackground flex h-[75px] justify-between items-center w-full sticky top-0 z-[100] border-b border-slate-100/50 backdrop-blur-sm">
       <div className="w-full container flex justify-between items-center">
         <div className="flex justify-center items-center">
           <Link to="/">
@@ -96,7 +96,7 @@ const Navbar = () => {
                 <Avatar src="https://github.com/shadcn.png" alt="@shadcn" className="w-10 h-10 rounded-full object-cover" />
 
                 {enter && (
-                  <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10">
+                  <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-2xl p-4 z-[1000] border border-slate-100">
                     {
                       userFromStorage?.role === 'Professional' ? (
                         <Link to={`/${id}/profile`}>
@@ -152,7 +152,7 @@ const Navbar = () => {
                     ) : (
                       <div className="relative flex items-center space-x-4">
 
-                        <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg p-4 z-10 top-1">
+                        <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-2xl p-4 z-[1000] top-1 border border-slate-100">
                           {
                             userFromStorage?.role === 'Professional' ? (
                               <Link to={`/${id}/profile`}>

@@ -80,83 +80,87 @@ const Jobz = () => {
               Post a New Job
             </button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border-none shadow-2xl p-0">
-            <DialogHeader className="p-8 bg-slate-50 border-b border-slate-100">
-              <DialogTitle className="text-2xl font-bold text-slate-800">Job Details</DialogTitle>
-            </DialogHeader>
-            <div className="p-8 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Job Title</label>
+          <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto rounded-[2.5rem] border-none shadow-2xl p-0 bg-white">
+            <div className="p-8 pb-4">
+              <div className="flex items-center gap-4 mb-2">
+                <div className="bg-green-100 p-2.5 rounded-xl">
+                  <Briefcase className="text-green-600" size={20} />
+                </div>
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-extrabold text-slate-900 tracking-tight">Post Opportunity</DialogTitle>
+                  <p className="text-slate-500 text-[11px] font-medium">Define the core requirements for your next hire</p>
+                </DialogHeader>
+              </div>
+            </div>
+
+            <div className="p-8 pt-0 space-y-6">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Job Title</label>
                   <input
                     name="jobTitle"
                     value={data.jobTitle}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl p-2.5 focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                     placeholder="e.g. Senior Product Designer"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Company</label>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Company</label>
                   <input
                     name="company"
                     value={data.company}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl p-2.5 focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                     placeholder="Company Name"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Location</label>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Location / Timezone</label>
                   <input
                     name="location"
                     value={data.location}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all"
-                    placeholder="e.g. San Francisco, CA"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl p-2.5 focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
+                    placeholder="e.g. San Francisco or Remote"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Experience</label>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Seniority Level</label>
                   <select
                     name="experience"
                     value={data.experience}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-green-400 outline-none transition-all appearance-none cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl p-2.5 focus:ring-2 focus:ring-green-400 outline-none transition-all appearance-none cursor-pointer font-medium text-slate-700 text-sm"
                   >
                     <option value="Entry">Entry Level</option>
-                    <option value="Junior">Junior</option>
-                    <option value="Senior">Senior</option>
+                    <option value="Junior">Junior Associate</option>
+                    <option value="Senior">Senior Leadership</option>
+                    <option value="Expert">Subject Expert</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Description (one per line)</label>
-                <textarea
-                  name="description"
-                  onChange={(e) => handleArrayChange(e, "description")}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 h-24 focus:ring-2 focus:ring-green-400 outline-none transition-all"
-                ></textarea>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-1">Responsibilities (one per line)</label>
-                <textarea
-                  name="responsibilities"
-                  onChange={(e) => handleArrayChange(e, "responsibilities")}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 h-24 focus:ring-2 focus:ring-green-400 outline-none transition-all"
-                ></textarea>
+                <div className="col-span-2 space-y-1.5">
+                  <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Role Description (Key Points)</label>
+                  <textarea
+                    name="description"
+                    placeholder="List the main goals of this role..."
+                    onChange={(e) => handleArrayChange(e, "description")}
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl p-3 h-24 focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-600 leading-relaxed text-sm"
+                  ></textarea>
+                </div>
               </div>
             </div>
-            <DialogFooter className="p-8 bg-slate-50 border-t border-slate-100 sm:justify-start">
+
+            <DialogFooter className="p-8 pt-0 bg-white sm:justify-start gap-3">
               <button
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg shadow-green-600/20"
+                className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-10 rounded-xl transition-all shadow-xl shadow-slate-900/10 active:scale-95 flex-1 text-sm"
                 onClick={handleSave}
               >
-                Post Opportunity
+                Go Live with Posting
               </button>
               <button
-                className="bg-white text-slate-500 font-bold py-3 px-8 rounded-xl border border-slate-200 hover:bg-slate-50 transition-all ml-3"
+                className="bg-slate-100 text-slate-500 font-bold py-3.5 px-8 rounded-xl hover:bg-slate-200 transition-all text-sm"
                 onClick={() => setIsOpen(false)}
               >
                 Cancel

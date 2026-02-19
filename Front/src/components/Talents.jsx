@@ -155,65 +155,78 @@ const Talents = () => {
       </div>
 
       <Dialog open={!!selectedTalent} onOpenChange={(open) => !open && setSelectedTalent(null)}>
-        <DialogContent className="max-w-xl rounded-3xl border-none shadow-2xl p-0 overflow-hidden">
+        <DialogContent className="max-w-4xl rounded-[2rem] border-none shadow-2xl p-0 overflow-hidden bg-white">
           {selectedTalent && (
-            <>
-              <div className="bg-slate-900 p-10 text-white relative">
-                <div className="absolute top-10 right-10">
-                  <div className={`px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 border shadow-lg ${getStatusStyle(selectedTalent.status)}`}>
-                    {getStatusIcon(selectedTalent.status)}
-                    {selectedTalent.status || "Pending Review"}
+            <div className="flex flex-col">
+              <div className="p-8 pb-0 flex items-start justify-between">
+                <div className="flex items-center gap-5">
+                  <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-sm">
+                    <User size={32} className="text-slate-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none mb-1">{selectedTalent.name}</h2>
+                    <div className="flex items-center gap-3 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                      <span className="flex items-center gap-1.5"><MapPin size={14} /> {selectedTalent.location}</span>
+                      <span className="text-green-600">Candidate</span>
+                    </div>
                   </div>
                 </div>
-                <h2 className="text-3xl font-extrabold tracking-tight mb-2">{selectedTalent.name}</h2>
-                <div className="flex items-center gap-4 text-slate-400 font-medium">
-                  <span className="flex items-center gap-1.5"><MapPin size={16} /> {selectedTalent.location}</span>
-                  <span className="w-1.5 h-1.5 bg-slate-700 rounded-full"></span>
-                  <span className="flex items-center gap-1.5 text-green-500"><Code2 size={16} /> Candidate</span>
+                <div className={`px-4 py-1.5 rounded-full text-[10px] font-bold flex items-center gap-2 border shadow-sm ${getStatusStyle(selectedTalent.status)}`}>
+                  {getStatusIcon(selectedTalent.status)}
+                  {selectedTalent.status || "Pending Review"}
                 </div>
               </div>
 
-              <div className="p-10 space-y-8 bg-white">
-                <div className="space-y-4">
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Key Professional Skills</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedTalent.skills?.map((skill, i) => (
-                      <span key={i} className="bg-slate-50 text-slate-700 font-bold px-4 py-2 rounded-xl border border-slate-100 text-sm">
-                        {skill}
+              <div className="p-8 space-y-6">
+                <div className="grid grid-cols-2 gap-x-12">
+                  <div className="space-y-4">
+                    <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Expertise & Technical Skills</h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedTalent.skills?.map((skill, i) => (
+                        <span key={i} className="bg-slate-50 text-slate-700 font-bold px-3 py-1.5 rounded-lg border border-slate-100 text-[11px]">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Verification Documents</h3>
+                    <button className="w-full flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-green-400 transition-all group">
+                      <span className="font-bold text-slate-700 text-xs flex items-center gap-3">
+                        <FileText size={16} className="text-slate-400" />
+                        Review Resume.pdf
                       </span>
-                    ))}
+                      <ExternalLink size={16} className="text-slate-300 group-hover:text-green-500 transition-colors" />
+                    </button>
+                    <button className="w-full flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-400 transition-all group">
+                      <span className="font-bold text-slate-700 text-xs flex items-center gap-3">
+                        <Briefcase size={16} className="text-slate-400" />
+                        Portfolio.link
+                      </span>
+                      <ExternalLink size={16} className="text-slate-300 group-hover:text-blue-500 transition-colors" />
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Documentation</h3>
-                  <button className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-green-400 transition-all group">
-                    <span className="font-bold text-slate-700 flex items-center gap-3">
-                      <User className="text-slate-400" />
-                      Full Professional Resume
-                    </span>
-                    <ExternalLink size={20} className="text-slate-300 group-hover:text-green-500 transition-colors" />
-                  </button>
-                </div>
-
-                <div className="pt-6 border-t border-slate-100 grid grid-cols-2 gap-4">
+                <div className="pt-6 border-t border-slate-50 grid grid-cols-2 gap-4">
                   <button
                     onClick={() => handleUpdateStatus(selectedTalent._id || selectedTalent.id, "Rejected")}
-                    className="flex items-center justify-center gap-2 py-4 rounded-2xl border-2 border-slate-100 font-bold text-slate-400 hover:border-red-100 hover:bg-red-50 hover:text-red-600 transition-all"
+                    className="flex items-center justify-center gap-2 py-3.5 rounded-2xl border-2 border-slate-100 font-bold text-slate-400 text-sm hover:border-red-100 hover:bg-red-50 hover:text-red-600 transition-all"
                   >
                     <XCircle size={18} />
                     Reject Application
                   </button>
                   <button
                     onClick={() => handleUpdateStatus(selectedTalent._id || selectedTalent.id, "Approved")}
-                    className="flex items-center justify-center gap-2 py-4 rounded-2xl bg-green-600 font-bold text-white shadow-xl shadow-green-600/20 hover:bg-green-700 transition-all active:scale-[0.98]"
+                    className="flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-slate-900 font-bold text-white text-sm shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all active:scale-[0.98]"
                   >
                     <CheckCircle size={18} />
                     Approve Talent
                   </button>
                 </div>
               </div>
-            </>
+            </div>
           )}
         </DialogContent>
       </Dialog>

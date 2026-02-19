@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListFilter, Search, ArrowLeft } from 'lucide-react';
+import { ListFilter, Search, ArrowLeft, MapPin } from 'lucide-react';
 import PopOver from '../components/PopOver';
 import SkeletonJobCard from '../components/SkeletonJobCard';
 import { jobAsyncThunk } from '../reducers/jobReducer';

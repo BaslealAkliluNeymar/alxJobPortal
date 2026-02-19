@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "./ui/dialog";
+} from "../components/UI/dialog";
 import { ArrowLeft, Search, Filter, Rocket, Star, Users, Briefcase, ChevronRight, Clock, Plus, Lightbulb } from 'lucide-react';
 
 const Project = () => {
@@ -220,46 +220,48 @@ const Project = () => {
 
       {/* Propose Project Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-2xl rounded-[2.5rem] border-none shadow-2xl p-0 overflow-hidden">
-          <div className="bg-slate-900 p-8 text-white relative">
-            <div className="absolute top-8 right-8 bg-green-500/10 p-3 rounded-2xl border border-green-500/20">
-              <Lightbulb className="text-green-400" size={24} />
+        <DialogContent className="max-w-4xl rounded-[2rem] border-none shadow-2xl p-0 overflow-hidden bg-white">
+          <div className="p-8 pb-0">
+            <div className="flex items-center gap-4 mb-2">
+              <div className="bg-green-100 p-2.5 rounded-xl">
+                <Lightbulb className="text-green-600" size={20} />
+              </div>
+              <DialogHeader>
+                <DialogTitle className="text-xl font-bold tracking-tight text-slate-900">Propose Project</DialogTitle>
+                <p className="text-slate-500 text-[11px]">Launch a new community initiative and find collaborators.</p>
+              </DialogHeader>
             </div>
-            <DialogHeader>
-              <DialogTitle className="text-3xl font-bold tracking-tight text-white mb-2">Propose Project</DialogTitle>
-              <p className="text-slate-400">Launch a new community initiative and find collaborators.</p>
-            </DialogHeader>
           </div>
 
-          <form onSubmit={handleCreateProject} className="p-8 space-y-6 bg-white">
-            <div className="grid grid-cols-2 gap-6">
-              <div className="col-span-2 space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Project Title</label>
+          <form onSubmit={handleCreateProject} className="p-8 pt-4 space-y-6">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+              <div className="col-span-2 space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Project Title</label>
                 <input
                   required
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                   placeholder="e.g. AI-driven Campus Marketplace"
                   value={newProject.title}
                   onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
                 />
               </div>
 
-              <div className="col-span-2 space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Description</label>
+              <div className="col-span-2 space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Description</label>
                 <textarea
                   required
-                  rows={3}
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
-                  placeholder="Describe the goals and impact of the project..."
+                  rows={2}
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
+                  placeholder="Describe the goals and impact..."
                   value={newProject.description}
                   onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Category</label>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Category</label>
                 <select
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                   value={newProject.category}
                   onChange={(e) => setNewProject({ ...newProject, category: e.target.value })}
                 >
@@ -267,52 +269,52 @@ const Project = () => {
                 </select>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Reward (Points)</label>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Reward (Points)</label>
                 <input
                   required
                   type="text"
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                   placeholder="e.g. 1500 Legacy Points"
                   value={newProject.rewards}
                   onChange={(e) => setNewProject({ ...newProject, rewards: e.target.value })}
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Required Members</label>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Required Members</label>
                 <input
                   required
                   type="number"
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                   value={newProject.required_candidates}
-                  onChange={(e) => setNewProject({ ...newProject, required_candidates: parseInt(e.target.value) })}
+                  onChange={(e) => setNewProject({ ...newProject, required_candidates: parseInt(e.target.value) || 0 })}
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Deadline Date</label>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-1">Deadline Date</label>
                 <input
                   required
                   type="date"
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700"
+                  className="w-full px-5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-green-400 outline-none transition-all font-medium text-slate-700 text-sm"
                   value={newProject.deadline}
                   onChange={(e) => setNewProject({ ...newProject, deadline: e.target.value })}
                 />
               </div>
             </div>
 
-            <DialogFooter className="pt-6">
+            <DialogFooter className="pt-4">
               <button
                 type="button"
                 onClick={() => setIsDialogOpen(false)}
-                className="px-8 py-4 bg-slate-100 text-slate-500 font-bold rounded-2xl hover:bg-slate-200 transition-all mr-2"
+                className="px-8 py-3 bg-slate-100 text-slate-500 font-bold rounded-xl hover:bg-slate-200 transition-all mr-2 text-sm"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-10 py-4 bg-green-600 text-white font-bold rounded-2xl shadow-xl shadow-green-600/20 hover:bg-green-700 transition-all active:scale-95"
+                className="px-10 py-3 bg-green-600 text-white font-bold rounded-xl shadow-xl shadow-green-600/20 hover:bg-green-700 transition-all active:scale-95 text-sm"
               >
                 Launch Project
               </button>

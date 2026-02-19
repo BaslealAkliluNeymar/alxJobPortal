@@ -1,92 +1,112 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Analytics } from "../services/jobs";
 import DashboardVis from "./DashboardVis";
 
 
+import { LayoutDashboard, Users, Briefcase, CheckCircle2, XCircle, Clock, Search, ArrowUpRight } from 'lucide-react';
+
 const Dashboard = () => {
-  const [stats,setStats] = useState([
-    { title: "Total Users", value:  0, icon: "👤", bgColor: "bg-blue-100", textColor: "text-blue-500" },
-    { title: "Jobs Posted", value:  0, icon: "📄", bgColor: "bg-green-100", textColor: "text-green-500" },
-    { title: "Pending Talents", value: 0, icon: "🌟", bgColor: "bg-yellow-100", textColor: "text-yellow-500" },
-    {title : "Rejected Talents", value: 0, icon: "🌟", bgColor: "bg-red-100", textColor: "text-red-500"},
-    {title : "Approved Talents", value: 0, icon: "🌟", bgColor: "bg-green-100", textColor: "text-green-500"},
-  ])
+  const [stats, setStats] = useState([
+    { title: "Total Users", value: 0, icon: Users, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
+    { title: "Jobs Posted", value: 0, icon: Briefcase, color: "text-green-600", bg: "bg-green-50", border: "border-green-100" },
+    { title: "Pending Review", value: 0, icon: Clock, color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-100" },
+    { title: "Approved", value: 0, icon: CheckCircle2, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
+    { title: "Rejected", value: 0, icon: XCircle, color: "text-red-600", bg: "bg-red-50", border: "border-red-100" },
+  ]);
 
-
-  useEffect(() =>{
-    const fetchAdminJobs = async () =>{
-
-      const data = await Analytics()
-        
-      setStats(prevStat => 
-          (prevStat.map(stat => {
-            if (stat.title === 'Total Users')  return {...stat, value: data.totalStudents || 0} 
-            if (stat.title === 'Jobs Posted')  return {...stat, value: data.totalJobs || 0} 
-            if (stat.title === 'Pending Talents')  return {...stat, value: data.totalPending || 0}
-            if (stat.title === 'Rejected Talents')  return {...stat, value: data.totalRejected || 0}
-            if (stat.title === 'Approved Talents')  return {...stat, value: data.totalApproved || 0}
-          })
-      )
-  )}
-
-    fetchAdminJobs()
-  },[])
-
-
-
+  useEffect(() => {
+    const fetchAdminJobs = async () => {
+      const data = await Analytics();
+      setStats(prevStat =>
+        prevStat.map(stat => {
+          if (stat.title === 'Total Users') return { ...stat, value: data.totalStudents || 0 }
+          if (stat.title === 'Jobs Posted') return { ...stat, value: data.totalJobs || 0 }
+          if (stat.title === 'Pending Review') return { ...stat, value: data.totalPending || 0 }
+          if (stat.title === 'Rejected') return { ...stat, value: data.totalRejected || 0 }
+          if (stat.title === 'Approved') return { ...stat, value: data.totalApproved || 0 }
+          return stat;
+        })
+      );
+    };
+    fetchAdminJobs();
+  }, []);
 
   return (
-    <section className="p-6 bg-gray-50 flex flex-col gap-2">
-      <h1 className="text-2xl font-bold mb-6 text-center">Admin Dashboard</h1>
-
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className={`p-4 rounded-lg shadow-md flex items-center ${stat.bgColor}`}
-          >
-            <span
-              className={`text-3xl font-bold p-4 rounded-full mr-4 ${stat.textColor}`}
-            >
-              {stat.icon}
-            </span>
-            <div>
-              <h2 className="text-lg font-semibold">{stat.title}</h2>
-              <p className="text-2xl font-bold">{stat.value}</p>
-            </div>
-          </div>
-        ))}
+    <section className="space-y-12">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight">Overview</h1>
+          <p className="text-slate-500 font-medium">Real-time performance analytics and system metrics</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button className="bg-slate-50 text-slate-400 p-3 rounded-xl border border-slate-100 hover:text-green-600 transition-colors">
+            <Search size={20} />
+          </button>
+          <button className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-xl shadow-slate-900/10 active:scale-95 transition-all">
+            Generate Report
+          </button>
+        </div>
       </div>
 
-      {/* Recent Activities Section
-      <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold mb-4">Recent Activities</h2>
-        <ul className="divide-y divide-gray-200">
-          {recentActivities.map((activity, index) => (
-            <li key={index} className="py-4 flex items-center justify-between">
-              <div>
-                <h3 className="text-md font-semibold">{activity.user}</h3>
-                <p className="text-sm text-gray-500">{activity.action}</p>
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <div
+              key={index}
+              className={`p-6 rounded-3xl border ${stat.border} ${stat.bg} transition-all hover:scale-[1.02] hover:shadow-lg group cursor-default`}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className={`p-3 rounded-2xl bg-white shadow-sm ${stat.color}`}>
+                  <Icon size={22} />
+                </div>
+                <ArrowUpRight size={14} className="text-slate-300 group-hover:text-slate-500" />
               </div>
-              <p className="text-sm text-gray-400">{activity.time}</p>
-            </li>
-          ))}
-        </ul>
-      </div> */}
-      <DashboardVis data={stats} />
+              <div>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{stat.title}</p>
+                <p className="text-3xl font-black text-slate-900 tracking-tighter">{stat.value}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
+        <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm p-8 flex-1">
+          <div className="flex items-center justify-between mb-8 px-2">
+            <h2 className="text-xl font-bold text-slate-900">Distribution</h2>
+            <select className="bg-slate-50 border-none text-xs font-bold text-slate-500 rounded-lg px-3 py-1.5 outline-none">
+              <option>Last 30 Days</option>
+              <option>Last 7 Days</option>
+            </select>
+          </div>
+          <DashboardVis data={stats} />
+        </div>
 
-      {/* Quick Actions Section */}
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg">
-          Manage Users
-        </button>
-        <button className="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg shadow-lg">
-          View Jobs
-        </button>
-        <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg shadow-lg">
-          Review Talents
-        </button>
+        <div className="space-y-6">
+          <h2 className="text-xl font-bold text-slate-900 px-2 flex items-center gap-2">
+            Quick Management
+            <div className="h-1 flex-1 bg-slate-50 rounded-full ml-4" />
+          </h2>
+          <div className="grid gap-4">
+            {[
+              { label: 'System Users', count: '124 Total', color: 'blue' },
+              { label: 'Verified Talents', count: '89 Active', color: 'green' },
+              { label: 'Job Opportunities', count: '42 Open', color: 'emerald' },
+            ].map((action, i) => (
+              <button key={i} className="flex items-center justify-between p-6 bg-slate-50 rounded-3xl border border-slate-100 hover:bg-white hover:shadow-xl hover:border-green-100 transition-all group group-hover:bg-white">
+                <div className="flex items-center gap-4">
+                  <div className={`w-1.5 h-1.5 rounded-full bg-${action.color}-500 group-hover:scale-150 transition-transform`} />
+                  <div className="text-left font-bold">
+                    <p className="text-sm text-slate-800">{action.label}</p>
+                    <p className="text-[10px] text-slate-400 uppercase tracking-widest">{action.count}</p>
+                  </div>
+                </div>
+                <ArrowUpRight size={20} className="text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
